@@ -14,7 +14,7 @@ This repo is the single source of truth for Clay White's digital product portfol
 3. **Always update `meta.last_updated`** when the file changes.
 4. **Validate the JSON** (parse it) before committing. Never commit a broken tracker.
 5. **After any tracker.json change, regenerate `docs/index.html`** so the dashboard never drifts from the data.
-6. **Commit and push after every update.** Commit message format: `tracker: <short description>` (e.g., `tracker: validation module complete`).
+6. **Commit and push after every update — always directly to `main`. Never use branches or pull requests.** Commit message format: `tracker: <short description>` (e.g., `tracker: validation module complete`).
 7. **Dates are commitments.** Never silently change a due date — if Clay moves one, log the old date and new date in the changelog entry.
 
 ## Status vocabulary

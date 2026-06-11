@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Implementation Tracker — Clay White</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --accent: #4f8ef7;
+      --done: #22c55e;
+      --on-track: #4f8ef7;
+      --in-progress: #a78bfa;
+      --at-risk: #f59e0b;
+      --blocked: #ef4444;
+      --escalation: #f97316;
+      --planning: #64748b;
+      --not-started: #475569;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+    header .meta { font-size: 12px; color: var(--muted); }
+    main { padding: 28px 32px; max-width: 1100px; margin: 0 auto; }
+    section { margin-bottom: 36px; }
+    section h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .card-title { font-weight: 600; font-size: 14px; }
+    .card-title a { color: inherit; text-decoration: none; }
+    .card-title a:hover { color: var(--accent); }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-done       { background: #14532d44; color: var(--done); border: 1px solid #22c55e44; }
+    .badge-on_track   { background: #1e3a6e44; color: var(--on-track); border: 1px solid #4f8ef744; }
+    .badge-in_progress{ background: #3b0764aa; color: var(--in-progress); border: 1px solid #a78bfa44; }
+    .badge-at_risk    { background: #78350f44; color: var(--at-risk); border: 1px solid #f59e0b44; }
+    .badge-blocked    { background: #7f1d1d44; color: var(--blocked); border: 1px solid #ef444444; }
+    .badge-escalation { background: #7c2d1244; color: var(--escalation); border: 1px solid #f9731644; }
+    .badge-planning   { background: #1e293b; color: var(--planning); border: 1px solid #64748b44; }
+    .badge-not_started{ background: #1e293b; color: var(--not-started); border: 1px solid #47556944; }
+    .card-serves { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+    .milestone {
+      font-size: 12px;
+      color: var(--text);
+      background: #ffffff08;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+    }
+    .milestone span { color: var(--muted); }
+    .modules { margin-bottom: 8px; }
+    .module-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 0;
+      font-size: 12px;
+      border-bottom: 1px solid #ffffff08;
+    }
+    .module-row:last-child { border-bottom: none; }
+    .mod-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .mod-dot-done { background: var(--done); }
+    .mod-dot-in_progress { background: var(--in-progress); }
+    .mod-dot-not_started { background: var(--not-started); }
+    .mod-due { color: var(--muted); margin-left: auto; font-size: 11px; }
+    .blockers { margin-top: 8px; }
+    .blocker-item {
+      font-size: 12px;
+      color: var(--blocked);
+      background: #7f1d1d22;
+      border-left: 2px solid var(--blocked);
+      padding: 5px 8px;
+      margin-top: 4px;
+      border-radius: 0 4px 4px 0;
+    }
+    .carry-forward-list { display: flex; flex-direction: column; gap: 10px; }
+    .cf-card {
+      background: var(--surface);
+      border: 1px solid #7f1d1d66;
+      border-left: 3px solid var(--blocked);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .cf-item { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .cf-meta { font-size: 11px; color: var(--muted); }
+    .cf-weeks { color: var(--at-risk); font-weight: 600; }
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .summary-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 16px;
+      text-align: center;
+      min-width: 90px;
+    }
+    .summary-stat .num { font-size: 24px; font-weight: 700; }
+    .summary-stat .label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .updated { font-size: 11px; color: var(--muted); text-align: right; margin-top: 32px; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Product Implementation Tracker</h1>
+    <div class="meta">Clay White &mdash; Director of Product Implementation, VusionGroup</div>
+  </div>
+  <div class="meta">Last updated: 2026-06-11</div>
+</header>
+<main>
+
+  <div class="summary-bar">
+    <div class="summary-stat">
+      <div class="num" style="color:var(--on-track)">2</div>
+      <div class="label">On Track</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num" style="color:var(--blocked)">1</div>
+      <div class="label">Blocked</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num" style="color:var(--planning)">1</div>
+      <div class="label">Planning</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num" style="color:var(--not-started)">1</div>
+      <div class="label">Not Started</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num" style="color:var(--blocked)">3</div>
+      <div class="label">Carry-Forwards</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="project-grid">
+
+      <!-- TopStock Companion App -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <a href="https://claywhite3.github.io/TopstockInstall/" target="_blank">TopStock Companion App</a>
+          </div>
+          <span class="badge badge-on_track">On Track</span>
+        </div>
+        <div class="card-serves">TopStock Rail &mdash; Walmart (5 Gen1 stores, AR/TX)</div>
+        <div class="milestone">
+          Next: <strong>Validation module complete</strong> <span>&mdash; due 2026-06-19</span>
+        </div>
+        <div class="modules">
+          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Install<span class="mod-due">done 6/11</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Guided TopStock Demo<span class="mod-due">done 6/11</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>Validation<span class="mod-due">due 6/19</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-not_started"></span>Maintenance<span class="mod-due">due 7/3</span></div>
+        </div>
+      </div>
+
+      <!-- QC Tool -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">QC Tool — Post-Install Inspection</div>
+          <span class="badge badge-not_started">Not Started</span>
+        </div>
+        <div class="card-serves">TopStock Rail first; multi-product later</div>
+        <div class="milestone">
+          Next: <strong>TopStock version complete</strong> <span>&mdash; due 2026-07-10</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px;">Sequences after Companion App Validation (6/19) and GT v2 (6/26).</div>
+      </div>
+
+      <!-- GT Tool v2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <a href="https://claywhite3.github.io/GT/" target="_blank">GT Tool v2</a>
+          </div>
+          <span class="badge badge-on_track">On Track</span>
+        </div>
+        <div class="card-serves">Captana &mdash; Sainsbury's (4 UK stores)</div>
+        <div class="milestone">
+          Next: <strong>Replace current GT tool with improved v2</strong> <span>&mdash; due 2026-06-26</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px;">v1 live. v2 scope: error-mode isolation (adjacent-slot contamination, slot-boundary confusion).</div>
+      </div>
+
+      <!-- Site Survey Tool -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Site Survey Tool</div>
+          <span class="badge badge-planning">Planning</span>
+        </div>
+        <div class="card-serves">Multi-product, ESL-first</div>
+        <div class="milestone">
+          Next: <strong>Plan + timeline drafted</strong> <span>&mdash; date TBD</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px;">Discovery phase. TopStock Site Survey Documentation session held 6/11.</div>
+      </div>
+
+      <!-- ESL Maintenance App -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">ESL Maintenance App</div>
+          <span class="badge badge-blocked">Blocked</span>
+        </div>
+        <div class="card-serves">ESL service at Sainsbury's</div>
+        <div class="milestone">
+          Next: <strong>Build from framework once data lands</strong> <span>&mdash; target 2026-06-19</span>
+        </div>
+        <div class="blockers">
+          <div class="blocker-item">Waiting on Jessie's ESL data pull — start immediately when received</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Carry-Forwards (3 open)</h2>
+    <div class="carry-forward-list">
+
+      <div class="cf-card">
+        <div class="cf-item">Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)</div>
+        <div class="cf-meta">Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Open</div>
+      </div>
+
+      <div class="cf-card">
+        <div class="cf-item">Blink ID corrective-action follow-up (Sainsbury's)</div>
+        <div class="cf-meta">Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Open</div>
+      </div>
+
+      <div class="cf-card">
+        <div class="cf-item">Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability</div>
+        <div class="cf-meta">Owner: Nick (RMA/escalations) + Clay &nbsp;|&nbsp; Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Active Escalation</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="updated">Generated from tracker.json &mdash; 2026-06-11</div>
+</main>
+</body>
+</html>

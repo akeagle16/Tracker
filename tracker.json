@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "owner": "Clay White — Director of Product Implementation, VusionGroup",
+    "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
+    "last_updated": "2026-06-11",
+    "dashboard_url": "TBD — GitHub Pages dashboard generated from this file"
+  },
+
+  "projects": [
+    {
+      "id": "topstock-companion-app",
+      "name": "TopStock Companion App",
+      "serves": "TopStock Rail (Walmart rollout — 5 Gen1 stores, AR/TX)",
+      "status": "on_track",
+      "owner": "Clay",
+      "supporting": ["Zel (beta testing + Gen1 daily walks owner)"],
+      "link": "https://claywhite3.github.io/TopstockInstall/",
+      "modules": [
+        { "name": "Install", "status": "done", "completed": "2026-06-11" },
+        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-11" },
+        { "name": "Validation (install validation)", "status": "in_progress", "due": "2026-06-19" },
+        { "name": "Maintenance", "status": "not_started", "due": "2026-07-03" }
+      ],
+      "next_milestone": "Validation module complete",
+      "next_milestone_due": "2026-06-19",
+      "blockers": [],
+      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." }
+      ]
+    },
+    {
+      "id": "qc-tool",
+      "name": "QC Tool — Post-Install Inspection",
+      "serves": "TopStock Rail first; multi-product later",
+      "status": "not_started",
+      "owner": "Clay",
+      "supporting": [],
+      "link": null,
+      "next_milestone": "TopStock version complete",
+      "next_milestone_due": "2026-07-10",
+      "blockers": [],
+      "notes": "Build for TopStock first. Sequence after Companion App Validation (6/19) and GT v2 (6/26).",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Committed 7/10 delivery." }
+      ]
+    },
+    {
+      "id": "gt-tool-v2",
+      "name": "GT Tool v2",
+      "serves": "Captana (Sainsbury's pilot — 4 UK stores)",
+      "status": "on_track",
+      "owner": "Clay",
+      "supporting": ["Connor (stakeholder — recent improvements delivered for him)"],
+      "link": "https://claywhite3.github.io/GT/",
+      "next_milestone": "Replace current GT tool with improved v2",
+      "next_milestone_due": "2026-06-26",
+      "blockers": [],
+      "notes": "v1 live and filterable by time, location, camera spacing. v2 = rebuild into something better; scope to be defined against error-mode isolation work (adjacent-slot contamination, slot-boundary confusion).",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." }
+      ]
+    },
+    {
+      "id": "site-survey-tool",
+      "name": "Site Survey Tool",
+      "serves": "Multi-product, ESL-first",
+      "status": "planning",
+      "owner": "Clay",
+      "supporting": ["JB (partner)"],
+      "link": null,
+      "next_milestone": "Plan + timeline drafted (planning work happens in that project; timeline TBD until plan exists)",
+      "next_milestone_due": null,
+      "blockers": [],
+      "notes": "Discovery phase: researching comparable market tools and documenting the current highly manual process before designing a replacement. TopStock Site Survey Documentation session held 6/11.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." }
+      ]
+    },
+    {
+      "id": "esl-maintenance-app",
+      "name": "ESL Maintenance App",
+      "serves": "ESL service at Sainsbury's",
+      "status": "blocked",
+      "owner": "Clay",
+      "supporting": ["Jessie (ESL data pull — gating input)"],
+      "link": null,
+      "next_milestone": "App built from existing framework once Jessie's data lands",
+      "next_milestone_due": "2026-06-19",
+      "blockers": [
+        "Waiting on Jessie's ESL data pull — start immediately when received"
+      ],
+      "notes": "Quick build: copying framework from an existing app. Target end of week of 6/15. Status flips to in_progress the day data arrives.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Blocked on data; target 6/19." }
+      ]
+    }
+  ],
+
+  "carry_forwards": [
+    {
+      "id": "cf-camera-behind-glass",
+      "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "open",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-blink-id-corrective-action",
+      "item": "Blink ID corrective-action follow-up (Sainsbury's)",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "open",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-blink-id-reliability",
+      "item": "Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "open",
+      "owner": "Nick (RMA/escalations) + Clay",
+      "resolution": null,
+      "rule": "Active escalation. Carries forward weekly until resolved."
+    }
+  ],
+
+  "recurring_deliverables": [
+    {
+      "name": "Weekly leadership slide",
+      "standard": "Thaddeus directive: single slide, max 200 words, delete unused boxes, relevance over completeness",
+      "cadence": "weekly"
+    },
+    {
+      "name": "Weekly recap email",
+      "standard": "Subject format: Weekly Recap | [Date] | Product Implementation. SharePoint links left as [LINK] placeholders.",
+      "cadence": "weekly"
+    }
+  ],
+
+  "operating_principles": [
+    "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",
+    "Unresolved gaps carry forward every week without exception, flagged until nauseating"
+  ]
+}

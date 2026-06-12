@@ -13,7 +13,7 @@ This repo is the single source of truth for Clay White's digital product portfol
 2. **Every change to tracker.json gets a changelog entry** on the affected project: `{ "date": "YYYY-MM-DD", "entry": "what changed" }`.
 3. **Always update `meta.last_updated`** when the file changes.
 4. **Validate the JSON** (parse it) before committing. Never commit a broken tracker.
-5. **After any tracker.json change, regenerate `docs/index.html`** so the dashboard never drifts from the data.
+5. **After any tracker.json change, regenerate `docs/index.html`** so the dashboard never drifts from the data. When regenerating: replace ONLY the `TRACKER` constant in the `<script>` block with the current tracker.json contents. Never modify the markup or styles.
 6. **Commit and push after every update — always directly to `main`. Never use branches or pull requests.** Commit message format: `tracker: <short description>` (e.g., `tracker: validation module complete`).
 7. **Dates are commitments.** Never silently change a due date — if Clay moves one, log the old date and new date in the changelog entry.
 

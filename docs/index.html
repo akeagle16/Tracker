@@ -1,297 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product Implementation Tracker — Clay White</title>
-  <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3a;
-      --text: #e2e8f0;
-      --muted: #8892a4;
-      --accent: #4f8ef7;
-      --done: #22c55e;
-      --on-track: #4f8ef7;
-      --in-progress: #a78bfa;
-      --at-risk: #f59e0b;
-      --blocked: #ef4444;
-      --escalation: #f97316;
-      --planning: #64748b;
-      --not-started: #475569;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-    header .meta { font-size: 12px; color: var(--muted); }
-    main { padding: 28px 32px; max-width: 1100px; margin: 0 auto; }
-    section { margin-bottom: 36px; }
-    section h2 {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 14px;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
-      gap: 8px;
-    }
-    .card-title { font-weight: 600; font-size: 14px; }
-    .card-title a { color: inherit; text-decoration: none; }
-    .card-title a:hover { color: var(--accent); }
-    .badge {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-    .badge-done       { background: #14532d44; color: var(--done); border: 1px solid #22c55e44; }
-    .badge-on_track   { background: #1e3a6e44; color: var(--on-track); border: 1px solid #4f8ef744; }
-    .badge-in_progress{ background: #3b0764aa; color: var(--in-progress); border: 1px solid #a78bfa44; }
-    .badge-at_risk    { background: #78350f44; color: var(--at-risk); border: 1px solid #f59e0b44; }
-    .badge-blocked    { background: #7f1d1d44; color: var(--blocked); border: 1px solid #ef444444; }
-    .badge-escalation { background: #7c2d1244; color: var(--escalation); border: 1px solid #f9731644; }
-    .badge-planning   { background: #1e293b; color: var(--planning); border: 1px solid #64748b44; }
-    .badge-not_started{ background: #1e293b; color: var(--not-started); border: 1px solid #47556944; }
-    .card-serves { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
-    .milestone {
-      font-size: 12px;
-      color: var(--text);
-      background: #ffffff08;
-      border-radius: 4px;
-      padding: 6px 10px;
-      margin-bottom: 8px;
-    }
-    .milestone span { color: var(--muted); }
-    .modules { margin-bottom: 8px; }
-    .module-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 3px 0;
-      font-size: 12px;
-      border-bottom: 1px solid #ffffff08;
-    }
-    .module-row:last-child { border-bottom: none; }
-    .mod-dot {
-      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-    }
-    .mod-dot-done { background: var(--done); }
-    .mod-dot-in_progress { background: var(--in-progress); }
-    .mod-dot-not_started { background: var(--not-started); }
-    .mod-due { color: var(--muted); margin-left: auto; font-size: 11px; }
-    .blockers { margin-top: 8px; }
-    .blocker-item {
-      font-size: 12px;
-      color: var(--blocked);
-      background: #7f1d1d22;
-      border-left: 2px solid var(--blocked);
-      padding: 5px 8px;
-      margin-top: 4px;
-      border-radius: 0 4px 4px 0;
-    }
-    .carry-forward-list { display: flex; flex-direction: column; gap: 10px; }
-    .cf-card {
-      background: var(--surface);
-      border: 1px solid #7f1d1d66;
-      border-left: 3px solid var(--blocked);
-      border-radius: 6px;
-      padding: 12px 14px;
-    }
-    .cf-item { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-    .cf-meta { font-size: 11px; color: var(--muted); }
-    .cf-weeks { color: var(--at-risk); font-weight: 600; }
-    .summary-bar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .summary-stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 16px;
-      text-align: center;
-      min-width: 90px;
-    }
-    .summary-stat .num { font-size: 24px; font-weight: 700; }
-    .summary-stat .label { font-size: 11px; color: var(--muted); margin-top: 2px; }
-    .updated { font-size: 11px; color: var(--muted); text-align: right; margin-top: 32px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Implementation Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFBFE; --card:#FFFFFF; --ink:#1A2238; --muted:#5B6478;
+    --grid:#C9D2EE; --soft:#EEF1FA; --banner:#3B5BB5;
+    --ontrack:#2E6FD0; --blocked:#C23B2E; --neutral:#7A8194;
+    --progress:#7C5CC4; --done:#4C8A3F; --today:#C8392B;
+    --cf-bg:#FBF0EE; --cf-line:#E3B7B0;
+    --display:'Archivo','Arial Narrow',Arial,sans-serif;
+    --body:'Inter',system-ui,Arial,sans-serif;
+    --mono:'IBM Plex Mono',Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;padding:28px 32px 48px}
+  .wrap{max-width:1240px;margin:0 auto}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--banner);text-transform:uppercase}
+  h1{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.01em;margin-top:2px}
+  .updated{font-family:var(--mono);font-size:12px;color:var(--muted);padding-bottom:4px}
+
+  /* ---- the wire ---- */
+  .wire{position:relative;margin:34px 0 10px;height:96px;border:1px solid var(--grid);border-radius:10px;background:
+    repeating-linear-gradient(90deg, transparent 0, transparent calc(12.5% - 1px), var(--soft) calc(12.5% - 1px), var(--soft) 12.5%);
+    background-color:#fff}
+  .wire .axis{position:absolute;left:0;right:0;top:58px;height:2px;background:var(--grid)}
+  .wire .tick-label{position:absolute;top:74px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .wire .star{position:absolute;top:50px;transform:translateX(-50%);font-size:17px;color:var(--ink);line-height:1}
+  .wire .star-label{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:var(--ink);white-space:nowrap}
+  .wire .star-label.up{top:30px}
+  .wire .star-label.up2{top:14px}
+  .wire .today-line{position:absolute;top:8px;bottom:8px;width:0;border-left:2px dashed var(--today)}
+  .wire .today-label{position:absolute;top:8px;transform:translateX(4px);font-family:var(--mono);font-size:10px;font-weight:500;color:var(--today)}
+  .wire .wire-title{position:absolute;top:8px;left:12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+
+  /* ---- stats ---- */
+  .stats{display:flex;gap:12px;margin:18px 0 30px;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--grid);border-radius:10px;padding:12px 18px;min-width:118px}
+  .stat b{display:block;font-family:var(--display);font-size:26px;font-weight:700}
+  .stat span{font-size:11.5px;color:var(--muted)}
+  .stat.alert b{color:var(--blocked)}
+  .stat.ok b{color:var(--ontrack)}
+
+  /* ---- projects ---- */
+  .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:36px}
+  .card{background:var(--card);border:1px solid var(--grid);border-radius:12px;padding:18px 20px}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .card h2{font-family:var(--display);font-weight:700;font-size:17px}
+  .chip{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;padding:3px 9px;border-radius:99px;border:1px solid var(--ink);white-space:nowrap}
+  .chip.on_track{background:#E7F0FD;color:var(--ontrack);border-color:var(--ontrack)}
+  .chip.blocked{background:#FBEAE8;color:var(--blocked);border-color:var(--blocked)}
+  .chip.planning,.chip.not_started{background:var(--soft);color:var(--neutral);border-color:var(--neutral)}
+  .chip.in_progress{background:#F1ECFB;color:var(--progress);border-color:var(--progress)}
+  .serves{font-size:12.5px;color:var(--muted);margin:4px 0 12px}
+  .next{background:var(--soft);border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+  .next .due{font-family:var(--mono);font-weight:500}
+  .modules{list-style:none}
+  .modules li{display:flex;align-items:center;gap:9px;padding:4px 0;font-size:13px}
+  .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .dot.done{background:var(--done)} .dot.in_progress{background:var(--progress)}
+  .dot.not_started{background:#C2C8D6}
+  .modules .when{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .blocker{margin-top:12px;background:var(--cf-bg);border:1px solid var(--cf-line);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--blocked)}
+  .notes{margin-top:10px;font-size:12.5px;color:var(--muted)}
+
+  /* ---- carry-forwards ---- */
+  .cf{background:var(--cf-bg);border:1px solid var(--cf-line);border-radius:10px;padding:13px 16px;display:flex;gap:14px;align-items:baseline;margin-bottom:10px;flex-wrap:wrap}
+  .cf .item{flex:1 1 480px;font-size:13.5px}
+  .cf .meta{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+  .cf .state{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--blocked)}
+
+  footer{margin-top:34px;border-top:1px solid var(--grid);padding-top:14px;font-size:12px;font-style:italic;color:var(--muted)}
+
+  @media (prefers-reduced-motion:no-preference){
+    .card,.stat,.wire{animation:rise .35s ease both}
+    @keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+  @media (max-width:640px){body{padding:18px 14px}.wire .star-label{display:none}}
+</style>
 </head>
 <body>
-<header>
-  <div>
-    <h1>Product Implementation Tracker</h1>
-    <div class="meta">Clay White &mdash; Director of Product Implementation, VusionGroup</div>
-  </div>
-  <div class="meta">Last updated: 2026-06-12</div>
-</header>
-<main>
-
-  <div class="summary-bar">
-    <div class="summary-stat">
-      <div class="num" style="color:var(--on-track)">2</div>
-      <div class="label">On Track</div>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Clay White — Product Implementation, VusionGroup</div>
+      <h1>Product Implementation Tracker</h1>
     </div>
-    <div class="summary-stat">
-      <div class="num" style="color:var(--blocked)">1</div>
-      <div class="label">Blocked</div>
-    </div>
-    <div class="summary-stat">
-      <div class="num" style="color:var(--planning)">1</div>
-      <div class="label">Planning</div>
-    </div>
-    <div class="summary-stat">
-      <div class="num" style="color:var(--not-started)">1</div>
-      <div class="label">Not Started</div>
-    </div>
-    <div class="summary-stat">
-      <div class="num" style="color:var(--blocked)">3</div>
-      <div class="label">Carry-Forwards</div>
-    </div>
-  </div>
+    <div class="updated" id="updated"></div>
+  </header>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project-grid">
+  <div class="wire" id="wire"><span class="wire-title">Committed dates — Jun 8 to Jul 27</span></div>
 
-      <!-- TopStock Companion App -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">
-            <a href="https://claywhite3.github.io/TopstockInstall/" target="_blank">TopStock Companion App</a>
-          </div>
-          <span class="badge badge-on_track">On Track</span>
-        </div>
-        <div class="card-serves">TopStock Rail &mdash; Walmart (5 Gen1 stores, AR/TX)</div>
-        <div class="milestone">
-          Next: <strong>Validation module complete</strong> <span>&mdash; due 2026-06-19</span>
-        </div>
-        <div class="modules">
-          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Install<span class="mod-due">done 6/11</span></div>
-          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Guided TopStock Demo<span class="mod-due">done 6/11</span></div>
-          <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>Validation<span class="mod-due">due 6/19</span></div>
-          <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>Maintenance<span class="mod-due">due 7/3</span></div>
-        </div>
-      </div>
+  <div class="stats" id="stats"></div>
 
-      <!-- QC Tool -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">QC Tool — Post-Install Inspection</div>
-          <span class="badge badge-not_started">Not Started</span>
-        </div>
-        <div class="card-serves">TopStock Rail first; multi-product later</div>
-        <div class="milestone">
-          Next: <strong>TopStock version complete</strong> <span>&mdash; due 2026-07-10</span>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:6px;">Sequences after Companion App Validation (6/19) and GT v2 (6/26).</div>
-      </div>
+  <div class="section-label">Projects</div>
+  <div class="grid" id="projects"></div>
 
-      <!-- GT Tool v2 -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">
-            <a href="https://claywhite3.github.io/GT/" target="_blank">GT Tool v2</a>
-          </div>
-          <span class="badge badge-on_track">On Track</span>
-        </div>
-        <div class="card-serves">Captana &mdash; Sainsbury's (4 UK stores)</div>
-        <div class="milestone">
-          Next: <strong>Replace current GT tool with improved v2</strong> <span>&mdash; due 2026-06-26</span>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:6px;">v1 live. v2 scope: error-mode isolation (adjacent-slot contamination, slot-boundary confusion).</div>
-      </div>
+  <div class="section-label" id="cf-label">Carry-Forwards</div>
+  <div id="cfs"></div>
 
-      <!-- Site Survey Tool -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Site Survey Tool</div>
-          <span class="badge badge-planning">Planning</span>
-        </div>
-        <div class="card-serves">Multi-product, ESL-first</div>
-        <div class="milestone">
-          Next: <strong>Plan + timeline drafted</strong> <span>&mdash; date TBD</span>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:6px;">Discovery phase. TopStock Site Survey Documentation session held 6/11.</div>
-      </div>
+  <footer id="principles"></footer>
+</div>
 
-      <!-- ESL Maintenance App -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">ESL Maintenance App</div>
-          <span class="badge badge-blocked">Blocked</span>
-        </div>
-        <div class="card-serves">ESL service at Sainsbury's</div>
-        <div class="milestone">
-          Next: <strong>Build from framework once data lands</strong> <span>&mdash; target 2026-06-19</span>
-        </div>
-        <div class="blockers">
-          <div class="blocker-item">Waiting on Jessie's ESL data pull — start immediately when received</div>
-        </div>
-      </div>
+<script>
+/* ============================================================
+   TRACKER DATA — Claude Code: when regenerating this dashboard,
+   replace ONLY the TRACKER constant below with the current
+   contents of tracker.json. Do not modify markup or styles.
+   ============================================================ */
+const TRACKER = {
+  "meta": {
+    "owner": "Clay White — Director of Product Implementation, VusionGroup",
+    "last_updated": "2026-06-12"
+  },
+  "projects": [
+    {
+      "id": "topstock-companion-app",
+      "name": "TopStock Companion App",
+      "serves": "TopStock Rail — Walmart (5 Gen1 stores, AR/TX)",
+      "status": "on_track",
+      "modules": [
+        { "name": "Install", "status": "done", "completed": "2026-06-11" },
+        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-11" },
+        { "name": "Validation", "status": "in_progress", "due": "2026-06-19" },
+        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-03" }
+      ],
+      "next_milestone": "Validation module complete",
+      "next_milestone_due": "2026-06-19",
+      "blockers": [],
+      "notes": "Training video v1 filmed in Dallas; v2 pending install feedback. Validation flow: severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending); Run Test buttons at aisle and section level."
+    },
+    {
+      "id": "qc-tool",
+      "name": "QC Tool — Post-Install Inspection",
+      "serves": "TopStock Rail first; multi-product later",
+      "status": "not_started",
+      "modules": [],
+      "next_milestone": "TopStock version complete",
+      "next_milestone_due": "2026-07-10",
+      "blockers": [],
+      "notes": "Sequenced after Companion App Validation (6/19) and GT v2 (6/26)."
+    },
+    {
+      "id": "gt-tool-v2",
+      "name": "GT Tool v2",
+      "serves": "Captana — Sainsbury's (4 UK stores)",
+      "status": "on_track",
+      "modules": [],
+      "next_milestone": "Replace current GT tool with improved v2",
+      "next_milestone_due": "2026-06-26",
+      "blockers": [],
+      "notes": "v1 live. v2 scope: error-mode isolation (adjacent-slot contamination, slot-boundary confusion)."
+    },
+    {
+      "id": "site-survey-tool",
+      "name": "Site Survey Tool",
+      "serves": "Multi-product, ESL-first",
+      "status": "planning",
+      "modules": [],
+      "next_milestone": "Plan + timeline drafted",
+      "next_milestone_due": null,
+      "blockers": [],
+      "notes": "Discovery with JB. TopStock Site Survey Documentation session held 6/11."
+    },
+    {
+      "id": "esl-maintenance-app",
+      "name": "ESL Maintenance App",
+      "serves": "ESL service at Sainsbury's",
+      "status": "blocked",
+      "modules": [],
+      "next_milestone": "Build from framework once data lands",
+      "next_milestone_due": "2026-06-19",
+      "blockers": ["Waiting on Jessie's ESL data pull — start immediately when received"],
+      "notes": "Quick build: copying framework from an existing app."
+    }
+  ],
+  "carry_forwards": [
+    { "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)", "owner": "Clay", "opened": null, "status": "Open" },
+    { "item": "Blink ID corrective-action follow-up (Sainsbury's)", "owner": "Clay", "opened": null, "status": "Open" },
+    { "item": "Blink ID reliability — random, non-reproducible ESL misses; no command ack, retry, or event-level traceability", "owner": "Nick + Clay", "opened": null, "status": "Active escalation" }
+  ],
+  "operating_principles": [
+    "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",
+    "Unresolved gaps carry forward every week without exception"
+  ]
+};
+/* ================== END TRACKER DATA ====================== */
 
-    </div>
-  </section>
+const $ = id => document.getElementById(id);
+const fmt = d => { const [y,m,day] = d.split("-"); return `${+m}/${+day}`; };
+const STATUS_LABEL = {on_track:"ON TRACK",blocked:"BLOCKED",planning:"PLANNING",not_started:"NOT STARTED",in_progress:"IN PROGRESS",done:"DONE",at_risk:"AT RISK",escalation:"ESCALATION"};
 
-  <section>
-    <h2>Carry-Forwards (3 open)</h2>
-    <div class="carry-forward-list">
+$("updated").textContent = "last updated " + TRACKER.meta.last_updated;
 
-      <div class="cf-card">
-        <div class="cf-item">Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)</div>
-        <div class="cf-meta">Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Open</div>
-      </div>
+/* ---- the wire ---- */
+(function wire(){
+  const start = new Date("2026-06-08T00:00:00"), end = new Date("2026-07-27T00:00:00");
+  const span = end - start;
+  const pos = d => Math.min(98, Math.max(2, ((new Date(d+"T00:00:00") - start) / span) * 100));
+  const w = $("wire");
+  w.insertAdjacentHTML("beforeend", `<div class="axis"></div>`);
+  ["2026-06-08","2026-06-15","2026-06-22","2026-06-29","2026-07-06","2026-07-13","2026-07-20","2026-07-27"]
+    .forEach(d => w.insertAdjacentHTML("beforeend", `<span class="tick-label" style="left:${pos(d)}%">${fmt(d)}</span>`));
 
-      <div class="cf-card">
-        <div class="cf-item">Blink ID corrective-action follow-up (Sainsbury's)</div>
-        <div class="cf-meta">Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Open</div>
-      </div>
+  const miles = [];
+  TRACKER.projects.forEach(p => {
+    if (p.next_milestone_due) miles.push({ d: p.next_milestone_due, label: p.name.split("—")[0].trim() });
+    (p.modules||[]).forEach(m => {
+      if (m.due && m.status !== "done" && m.due !== p.next_milestone_due)
+        miles.push({ d: m.due, label: m.name });
+    });
+  });
+  miles.sort((a,b)=>a.d.localeCompare(b.d));
+  let lastPos = -100, level = 0;
+  miles.forEach(m => {
+    const x = pos(m.d);
+    level = (x - lastPos < 9) ? (level+1)%2 : 0;
+    lastPos = x;
+    w.insertAdjacentHTML("beforeend",
+      `<span class="star" style="left:${x}%">★</span>
+       <span class="star-label ${level? "up2":"up"}" style="left:${x}%">${m.label} · ${fmt(m.d)}</span>`);
+  });
 
-      <div class="cf-card">
-        <div class="cf-item">Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability</div>
-        <div class="cf-meta">Owner: Nick (RMA/escalations) + Clay &nbsp;|&nbsp; Opened: <span class="cf-weeks">TBD — backfill date</span> &nbsp;|&nbsp; Status: Active Escalation</div>
-      </div>
+  const today = new Date();
+  if (today >= start && today <= end){
+    const t = ((today - start)/span)*100;
+    w.insertAdjacentHTML("beforeend",
+      `<div class="today-line" style="left:${t}%"></div>
+       <span class="today-label" style="left:${t}%">TODAY</span>`);
+  }
+})();
 
-    </div>
-  </section>
+/* ---- stats ---- */
+(function stats(){
+  const c = s => TRACKER.projects.filter(p=>p.status===s).length;
+  const items = [
+    {n:c("on_track"),l:"On Track",cls:"ok"},
+    {n:c("blocked")+c("escalation"),l:"Blocked",cls:"alert"},
+    {n:c("planning"),l:"Planning",cls:""},
+    {n:c("not_started"),l:"Not Started",cls:""},
+    {n:TRACKER.carry_forwards.filter(x=>x.status!=="Resolved").length,l:"Carry-Forwards",cls:"alert"},
+  ];
+  $("stats").innerHTML = items.map(i=>`<div class="stat ${i.cls}"><b>${i.n}</b><span>${i.l}</span></div>`).join("");
+})();
 
-  <div class="updated">Generated from tracker.json &mdash; 2026-06-12</div>
-</main>
+/* ---- projects ---- */
+$("projects").innerHTML = TRACKER.projects.map(p => `
+  <div class="card">
+    <div class="card-top"><h2>${p.name}</h2><span class="chip ${p.status}">${STATUS_LABEL[p.status]||p.status}</span></div>
+    <div class="serves">${p.serves}</div>
+    <div class="next"><b>Next:</b> ${p.next_milestone}${p.next_milestone_due ? ` — <span class="due">due ${fmt(p.next_milestone_due)}</span>` : ` — <span class="due">date TBD</span>`}</div>
+    ${(p.modules&&p.modules.length)? `<ul class="modules">${p.modules.map(m=>`
+      <li><span class="dot ${m.status}"></span>${m.name}
+      <span class="when">${m.status==="done" ? "done "+fmt(m.completed) : "due "+fmt(m.due)}</span></li>`).join("")}</ul>` : ""}
+    ${(p.blockers&&p.blockers.length)? p.blockers.map(b=>`<div class="blocker">${b}</div>`).join("") : ""}
+    ${p.notes? `<div class="notes">${p.notes}</div>` : ""}
+  </div>`).join("");
+
+/* ---- carry-forwards ---- */
+const openCfs = TRACKER.carry_forwards.filter(x=>x.status!=="Resolved");
+$("cf-label").textContent = `Carry-Forwards — ${openCfs.length} open (flagged weekly until resolved)`;
+$("cfs").innerHTML = openCfs.map(c => {
+  let weeks = "date TBD";
+  if (c.opened){ weeks = Math.floor((new Date() - new Date(c.opened+"T00:00:00"))/(7*864e5)) + " wks open"; }
+  return `<div class="cf"><div class="item">${c.item}</div>
+    <span class="meta">${c.owner||"—"} · opened ${c.opened?fmt(c.opened):"TBD"} · ${weeks}</span>
+    <span class="state">${c.status.toUpperCase()}</span></div>`;
+}).join("");
+
+$("principles").textContent = "Operating principles: " + TRACKER.operating_principles.join(" · ");
+</script>
 </body>
 </html>

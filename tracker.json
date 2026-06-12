@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-11",
+    "last_updated": "2026-06-12",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -24,10 +24,11 @@
       "next_milestone": "Validation module complete",
       "next_milestone_due": "2026-06-19",
       "blockers": [],
-      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing.",
+      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing. Validation flow uses a severity model across overview/zone/aisle pages — red = confirmed test failure, orange = section flagged awaiting supervisor, yellow = installed/test pending — with on-demand Run Test buttons at aisle and section level. rail_detail page untouched.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
-        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." }
+        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
+        { "date": "2026-06-12", "entry": "Validation flow severity model implemented across overview/zone/aisle pages (red=confirmed test failure, orange=flagged awaiting supervisor, yellow=installed/test pending); added on-demand Run Test buttons at aisle and section level. rail_detail untouched; due 6/19 unchanged, Validation on track." }
       ]
     },
     {

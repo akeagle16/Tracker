@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-12",
+    "last_updated": "2026-06-15",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -105,8 +105,9 @@
       "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)",
       "opened": "TBD — backfill actual open date",
       "weeks_open": null,
-      "status": "open",
-      "resolution": null,
+      "status": "resolved",
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
       "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
     },
     {
@@ -114,8 +115,9 @@
       "item": "Blink ID corrective-action follow-up (Sainsbury's)",
       "opened": "TBD — backfill actual open date",
       "weeks_open": null,
-      "status": "open",
-      "resolution": null,
+      "status": "resolved",
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
       "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
     },
     {
@@ -123,9 +125,10 @@
       "item": "Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability",
       "opened": "TBD — backfill actual open date",
       "weeks_open": null,
-      "status": "open",
+      "status": "resolved",
       "owner": "Nick (RMA/escalations) + Clay",
-      "resolution": null,
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
       "rule": "Active escalation. Carries forward weekly until resolved."
     }
   ],

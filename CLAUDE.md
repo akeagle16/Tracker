@@ -1,6 +1,6 @@
 # CLAUDE.md — Project Tracker Repo
 
-This repo is the single source of truth for Clay White's digital product portfolio (Director of Product Implementation, VusionGroup). `tracker.json` holds all project state. Every Claude Code session in this repo follows the rules below.
+This repo is the single source of truth for Clay White's digital product portfolio. Clay is **Product Manager of the Digital Tools Portfolio** at VusionGroup — accountable for owners, commitments, and outcomes across workstreams, and one IC among several on hands-on work (select UI), not the default owner of every line. Track timelines by owner / commitment / outcome. The delivery team: **Eric** (backend / data pipeline), **Cristina** (frontend), **Zel** (beta + physical inspection), with Clay as PM. `tracker.json` holds all project state. Every Claude Code session in this repo follows the rules below.
 
 ## What lives here
 
@@ -51,7 +51,10 @@ Add a project object following the existing schema. Ask only for: due date (if a
 
 - **Thaddeus** — SVP Product; sets leadership comms standards (the 200-word slide rule)
 - **Nick** — Clay's direct manager; owns RMA/escalations (Blink ID)
-- **Zel** — Companion App beta + Gen1 daily walks owner
+- **Eric** — backend / data pipeline; owns the Validation pipeline (hardware-state → UI) and the QC data pull. His pipeline + post-6/22 bandwidth is the biggest shared portfolio dependency.
+- **Cristina** — frontend; owns the Companion App add/delete Sections build
+- **Titouan** — meets with Eric 6/16 re the Validation pipeline fix
+- **Zel** — Companion App beta + physical inspection (Gen1 daily walks)
 - **JB** — Site Survey Tool partner
 - **Connor** — GT tool stakeholder; **Sean** — cross-functional
 - **Jessie** — ESL data pull (gates ESL Maintenance App); **Emmanuel Amy, Rafael** — parallel Sainsbury's touchpoints

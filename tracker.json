@@ -1,7 +1,14 @@
 {
   "meta": {
-    "owner": "Clay White — Director of Product Implementation, VusionGroup",
+    "owner": "Clay White — Product Manager, Digital Tools Portfolio, VusionGroup",
+    "role_note": "Clay is PM of the digital-tools portfolio — accountable for owners, commitments, and outcomes across workstreams, not the default IC on every line. He is one IC among several on hands-on work (select UI).",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
+    "team": [
+      "Clay White — PM (and IC on select UI work)",
+      "Eric — backend / data pipeline",
+      "Cristina — frontend",
+      "Zel — beta testing + physical inspection / Gen1 daily walks"
+    ],
     "last_updated": "2026-06-15",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
@@ -11,56 +18,75 @@
       "id": "topstock-companion-app",
       "name": "TopStock Companion App",
       "serves": "TopStock Rail (Walmart rollout — 5 Gen1 stores, AR/TX)",
-      "status": "on_track",
-      "owner": "Clay",
-      "supporting": ["Zel (beta testing + Gen1 daily walks owner)"],
+      "status": "at_risk",
+      "owner": "Clay (PM)",
+      "supporting": [
+        "Eric (backend — Validation pipeline, hardware-state → UI)",
+        "Cristina (frontend — add/delete Sections)",
+        "Zel (beta testing + physical inspection)"
+      ],
       "link": "https://claywhite3.github.io/TopstockInstall/",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
-        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-11" },
-        { "name": "Validation (install validation)", "status": "in_progress", "due": "2026-06-19" },
-        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-03" }
+        { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
+        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-06-22" },
+        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "Validation module complete",
-      "next_milestone_due": "2026-06-19",
-      "blockers": [],
-      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing. Validation flow uses a severity model across overview/zone/aisle pages — red = confirmed test failure, orange = section flagged awaiting supervisor, yellow = installed/test pending — with on-demand Run Test buttons at aisle and section level. rail_detail page untouched.",
+      "next_milestone": "Validation live on the 100-rail test install",
+      "next_milestone_due": "2026-06-22",
+      "blockers": [
+        "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan meeting 6/16; Eric's wall is Fri 6/19 midday CT.",
+        "Cristina — add/delete Sections build; ETA pending.",
+        "Supervisor RBAC — installers → Install, supervisors → Validation."
+      ],
+      "notes": "Real deadline is the 100-rail test install Mon 6/22 (6/19 was a proxy). Gen2 can't run on Gen1, so the 100-rail test site is the validation opportunity. Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) that produces the digital QC record; Zel does the physical inspection. No-weekend rule: Sat/Sun 6/20–21 are parachute-only — all cross-team work done by Fri 6/19. Wed 6/17 is the go/no-go checkpoint. Demo: built but unvalidated, needs a HW/SW integration test (a working Demo also confirms rail function) — lead domino, do early week. Maintenance UI is delivered/done (Clay's part, has user feedback); remaining monitoring & alerting system is net-new backend/integration being scoped as a separate project, with a real deadline that likely tracks rail deployment rather than 7/10. Validation severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending) with Run Test buttons at aisle and section level remains in place; rail_detail untouched.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
         { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
-        { "date": "2026-06-12", "entry": "Validation flow severity model implemented across overview/zone/aisle pages (red=confirmed test failure, orange=flagged awaiting supervisor, yellow=installed/test pending); added on-demand Run Test buttons at aisle and section level. rail_detail untouched; due 6/19 unchanged, Validation on track." }
+        { "date": "2026-06-12", "entry": "Validation flow severity model implemented across overview/zone/aisle pages (red=confirmed test failure, orange=flagged awaiting supervisor, yellow=installed/test pending); added on-demand Run Test buttons at aisle and section level. rail_detail untouched; due 6/19 unchanged, Validation on track." },
+        { "date": "2026-06-15", "entry": "Validation re-anchored from 6/19 to 6/22 — the 100-rail test install Mon 6/22 is the real deadline; 6/19 was a proxy. Project status → at_risk. Validation defined as the supervisor labor-state board producing the digital QC record (Zel does physical inspection). Blockers added: Eric Validation pipeline fix (hardware-state→UI; pending Titouan mtg 6/16; wall Fri 6/19 midday CT); Cristina add/delete Sections (ETA pending); Supervisor RBAC. No-weekend rule (6/20–21 parachute-only, cross-team done by Fri 6/19); Wed 6/17 go/no-go." },
+        { "date": "2026-06-15", "entry": "Demo reopened to in_progress — built but unvalidated, needs HW/SW integration test (also confirms rail function); lead domino, early week (target 6/17)." },
+        { "date": "2026-06-15", "entry": "Maintenance UI delivered/done (has user feedback). Date slipped 7/3 → 7/10 due to production delays (not Clay's scope). Remaining monitoring & alerting system = net-new backend/integration, being scoped as a separate project; real deadline likely tracks rail deployment, not 7/10." }
       ]
     },
     {
       "id": "qc-tool",
       "name": "QC Tool — Post-Install Inspection",
-      "serves": "TopStock Rail first; multi-product later",
+      "serves": "TopStock Rail / Walmart first; multi-product later",
       "status": "not_started",
-      "owner": "Clay",
-      "supporting": [],
+      "owner": "Clay (PM)",
+      "supporting": ["Eric (backend — data pull reuses his pipeline)"],
       "link": null,
-      "next_milestone": "TopStock version complete",
-      "next_milestone_due": "2026-07-10",
+      "modules": [
+        { "name": "v1 (Working)", "status": "not_started", "due": "2026-07-15" },
+        { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
+      ],
+      "next_milestone": "v1 (Working) complete",
+      "next_milestone_due": "2026-07-15",
       "blockers": [],
-      "notes": "Build for TopStock first. Sequence after Companion App Validation (6/19) and GT v2 (6/26).",
+      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (Working, 7/15) = one UI (designed to hold images) + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is an estimate, gated on the image-storage decision; images are a fast-follow staged into the same UI. Starts after the 6/22 test install. Build happens in its own project. Outcome = a reliable post-install QC record for TopStock.",
       "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. Committed 7/10 delivery." }
+        { "date": "2026-06-11", "entry": "Tracker initialized. Committed 7/10 delivery." },
+        { "date": "2026-06-15", "entry": "v1 (Working) target set 7/15 (was 7/10). Scope defined: single image-ready UI + Eric-pipeline data pull + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 fast-follow, gated on image-storage decision. Starts after the 6/22 test install." }
       ]
     },
     {
       "id": "gt-tool-v2",
       "name": "GT Tool v2",
       "serves": "Captana (Sainsbury's pilot — 4 UK stores)",
-      "status": "on_track",
-      "owner": "Clay",
+      "status": "blocked",
+      "owner": "Clay (PM)",
       "supporting": ["Connor (stakeholder — recent improvements delivered for him)"],
       "link": "https://claywhite3.github.io/GT/",
-      "next_milestone": "Replace current GT tool with improved v2",
-      "next_milestone_due": "2026-06-26",
-      "blockers": [],
-      "notes": "v1 live and filterable by time, location, camera spacing. v2 = rebuild into something better; scope to be defined against error-mode isolation work (adjacent-slot contamination, slot-boundary confusion).",
+      "next_milestone": "Scope decision: build v2 vs adopt/adapt existing France tool",
+      "next_milestone_due": "2026-06-16",
+      "blockers": [
+        "Parked pending France lead reply (expected 6/16) — France may already run a tool in use; v2 may become adopt/adapt rather than build."
+      ],
+      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push; lower priority (Walmart always wins). Prior 6/26 build target is on hold pending the scope decision. v1 live and filterable by time, location, camera spacing. Outcome = eliminate manual image-checking.",
       "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." }
+        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." },
+        { "date": "2026-06-15", "entry": "GT v2 parked pending France lead reply (expected 6/16) — possible adopt/adapt vs build. Decoupled from Sainsbury's; deprioritized (Walmart priority). Prior 6/26 build target on hold. Status → blocked. Outcome framed: eliminate manual image-checking." }
       ]
     },
     {
@@ -148,6 +174,18 @@
 
   "operating_principles": [
     "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",
-    "Unresolved gaps carry forward every week without exception, flagged until nauseating"
+    "Unresolved gaps carry forward every week without exception, flagged until nauseating",
+    "Track timelines by owner, commitment, and outcome — not by who is nominally in charge"
+  ],
+
+  "portfolio_risks": [
+    {
+      "id": "risk-eric-pipeline-bandwidth",
+      "risk": "Eric's data pipeline plus his post-6/22 bandwidth is the shared dependency across Companion Validation, QC Tool data pull, and Maintenance monitoring/alerting.",
+      "impact": "Single biggest portfolio risk — manage Eric's queue deliberately.",
+      "owner": "Clay (PM)",
+      "opened": "2026-06-15",
+      "status": "open"
+    }
   ]
 }

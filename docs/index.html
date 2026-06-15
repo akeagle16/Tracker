@@ -125,39 +125,48 @@ const TRACKER = {
       "id": "topstock-companion-app",
       "name": "TopStock Companion App",
       "serves": "TopStock Rail — Walmart (5 Gen1 stores, AR/TX)",
-      "status": "on_track",
+      "status": "at_risk",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
-        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-11" },
-        { "name": "Validation", "status": "in_progress", "due": "2026-06-19" },
-        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-03" }
+        { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
+        { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-06-22" },
+        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "Validation module complete",
-      "next_milestone_due": "2026-06-19",
-      "blockers": [],
-      "notes": "Training video v1 filmed in Dallas; v2 pending install feedback. Validation flow: severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending); Run Test buttons at aisle and section level."
+      "next_milestone": "Validation live on the 100-rail test install",
+      "next_milestone_due": "2026-06-22",
+      "blockers": [
+        "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan mtg 6/16; Eric's wall is Fri 6/19 midday CT.",
+        "Cristina — add/delete Sections build; ETA pending.",
+        "Supervisor RBAC — installers → Install, supervisors → Validation."
+      ],
+      "notes": "Real deadline is the 100-rail test install Mon 6/22 (6/19 was a proxy; Gen2 can't run on Gen1, so the test site is the validation opportunity). Validation = supervisor labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does physical inspection. No-weekend rule: 6/20–21 parachute-only, cross-team work done by Fri 6/19. Wed 6/17 go/no-go. Demo built but unvalidated — needs HW/SW integration test (also confirms rail function), lead domino early week. Maintenance UI delivered; remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment."
     },
     {
       "id": "qc-tool",
       "name": "QC Tool — Post-Install Inspection",
-      "serves": "TopStock Rail first; multi-product later",
+      "serves": "TopStock Rail / Walmart first; multi-product later",
       "status": "not_started",
-      "modules": [],
-      "next_milestone": "TopStock version complete",
-      "next_milestone_due": "2026-07-10",
+      "modules": [
+        { "name": "v1 (Working)", "status": "not_started", "due": "2026-07-15" },
+        { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
+      ],
+      "next_milestone": "v1 (Working) complete",
+      "next_milestone_due": "2026-07-15",
       "blockers": [],
-      "notes": "Sequenced after Companion App Validation (6/19) and GT v2 (6/26)."
+      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (7/15) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is gated on the image-storage decision (fast-follow into the same UI). Starts after the 6/22 test install; build in its own project."
     },
     {
       "id": "gt-tool-v2",
       "name": "GT Tool v2",
       "serves": "Captana — Sainsbury's (4 UK stores)",
-      "status": "on_track",
+      "status": "blocked",
       "modules": [],
-      "next_milestone": "Replace current GT tool with improved v2",
-      "next_milestone_due": "2026-06-26",
-      "blockers": [],
-      "notes": "v1 live. v2 scope: error-mode isolation (adjacent-slot contamination, slot-boundary confusion)."
+      "next_milestone": "Scope decision: build v2 vs adopt/adapt France tool",
+      "next_milestone_due": "2026-06-16",
+      "blockers": [
+        "Parked pending France lead reply (expected 6/16) — France may already run a tool; v2 may become adopt/adapt rather than build."
+      ],
+      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push (Walmart always wins). Prior 6/26 build target on hold pending scope decision. v1 live. Outcome = eliminate manual image-checking."
     },
     {
       "id": "site-survey-tool",
@@ -189,7 +198,8 @@ const TRACKER = {
   ],
   "operating_principles": [
     "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",
-    "Unresolved gaps carry forward every week without exception"
+    "Unresolved gaps carry forward every week without exception",
+    "Track timelines by owner, commitment, and outcome — not by who is nominally in charge"
   ]
 };
 /* ================== END TRACKER DATA ====================== */

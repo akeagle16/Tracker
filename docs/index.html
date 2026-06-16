@@ -118,7 +118,7 @@
 const TRACKER = {
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
-    "last_updated": "2026-06-15"
+    "last_updated": "2026-06-16"
   },
   "projects": [
     {
@@ -145,15 +145,15 @@ const TRACKER = {
       "id": "qc-tool",
       "name": "QC Tool — Post-Install Inspection",
       "serves": "TopStock Rail / Walmart first; multi-product later",
-      "status": "not_started",
+      "status": "in_progress",
       "modules": [
-        { "name": "v1 (Working)", "status": "not_started", "due": "2026-07-15" },
+        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-15" },
         { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
       ],
       "next_milestone": "v1 (Working) complete",
       "next_milestone_due": "2026-07-15",
       "blockers": [],
-      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (7/15) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is gated on the image-storage decision (fast-follow into the same UI). Starts after the 6/22 test install; build in its own project."
+      "notes": "v1 (7/15) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Build underway against mock data ahead of real ingest (lands after 6/22). Data model v0.1 frozen as the build contract; store-100 parser expands 8-ft sections into 1,081 L/R rails (8 zones) behind dataService.js. Sample plan ±7% = 167 rails, proportional by zone, adapter targets 85/10/5 fill-as-you-go. Frontend: login, store selector, flow picker, audit home, adapter picker (soft quota), camera scanner (BarcodeDetector + ZXing, Scandit-ready). Backend hosting (Azure vs Supabase) still open."
     },
     {
       "id": "gt-tool-v2",
@@ -194,7 +194,8 @@ const TRACKER = {
   "carry_forwards": [
     { "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)", "owner": "Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
     { "item": "Blink ID corrective-action follow-up (Sainsbury's)", "owner": "Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
-    { "item": "Blink ID reliability — random, non-reproducible ESL misses; no command ack, retry, or event-level traceability", "owner": "Nick + Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." }
+    { "item": "Blink ID reliability — random, non-reproducible ESL misses; no command ack, retry, or event-level traceability", "owner": "Nick + Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
+    { "item": "QC inspection-checklist wording (Warehouse + Wire Frame) provisional — pending team/engineering; Standard confirmed 6/16; third adapter unreleased", "owner": "Clay + team/eng", "opened": "2026-06-16", "status": "Open" }
   ],
   "operating_principles": [
     "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",

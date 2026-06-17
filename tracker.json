@@ -104,16 +104,31 @@
       "id": "site-survey-tool",
       "name": "Site Survey Tool",
       "serves": "Multi-product, ESL-first",
-      "status": "planning",
-      "owner": "Clay",
+      "status": "at_risk",
+      "owner": "Clay (PM)",
       "supporting": ["JB (partner)"],
       "link": null,
-      "next_milestone": "Plan + timeline drafted (planning work happens in that project; timeline TBD until plan exists)",
-      "next_milestone_due": null,
-      "blockers": [],
-      "notes": "Discovery phase: researching comparable market tools and documenting the current highly manual process before designing a replacement. TopStock Site Survey Documentation session held 6/11.",
+      "next_milestone": "Measurement-proof validation results (present Wed AM 6/24)",
+      "next_milestone_due": "2026-06-23",
+      "blockers": [
+        "Work MacBook locked — gating the MeshWalk build; one IT ticket chases unlock + Xcode install + personal-Apple-ID signing. Mitigation: Polycam + Apple Measure staged on the phone as a no-Mac fallback (same ARKit + LiDAR stack), so Friday store capture proceeds regardless."
+      ],
+      "notes": "Moved from discovery into a hands-on measurement-proof sprint. Capture framework settled: build directly on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (RoomPlan's furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we want to own the interpretation step). Hardware dependency accepted: usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android) — per-device cost trivial vs solution-architect time. Direction deck (7 slides, RF Slate palette) + working v0.0.01 demo presented to the technical group; well received; key challenge = prove the tool measures fixtures to the accuracy we need. Validation methodology: ground truth (tape) vs tool across shelf bay width, shelf height, gondola length/depth, aisle width, reported as error bands vs a ±0.5 inch target with honest pass/fail; tiered Tier 0 methodology → Tier 1 dimensional accuracy (controlled/fallback) → Tier 2 real store aisle → Tier 3 derived counts (facings, adaptors) if dimensions pass. Tooling: MeshWalk minimal mesh-viewer (iPhone 16 Pro + M4 MacBook Air) to walk an aisle, visualize the mesh, spot-check vs tape; Polycam + Apple Measure staged as a no-Mac fallback. Capture-screen animation fixed (walk-to-dot rides the perspective line to the aisle vanishing point; perspective easing; DOT_START/DOT_PERSP tunable). Plan to the Wed-AM 6/24 presentation: Wed clear blockers, Thu build/fallback, Fri real store aisle capture + ground-truth sheet (critical day), Mon analyze, Tue build validation deck. Risk: Friday capture is the single fragile point — proceeds with Polycam regardless if the Mac unlock slips, because the question is the sensor, not the code.",
       "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." }
+        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." },
+        { "date": "2026-06-17", "entry": "Capture-screen walk-to-dot animation fixed — dot now rides the perspective line from the centered reticle out to the aisle's vanishing point (off-screen right, near eye level), no longer floating on the wrong shelf." },
+        { "date": "2026-06-17", "entry": "Per-dot drift corrected — added perspective easing (dot hangs back when far, rushes in on arrival like a fixed world point), shortened per-dot travel, re-anchored stops to their landing frame so the last dot lands in-frame; DOT_START and DOT_PERSP exposed as tunable constants." },
+        { "date": "2026-06-17", "entry": "Rebuilt the 7-slide direction deck in the RF Slate palette; reframed the capture flow from concept to working v0.0.01; added phone-screenshot drop slots on the capture slide for device mockups; built to stand alone if distributed." },
+        { "date": "2026-06-17", "entry": "Capture framework settled — build directly on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (RoomPlan's furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we want to own the interpretation step)." },
+        { "date": "2026-06-17", "entry": "Hardware dependency confirmed — usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android); stated as a deliberate, accepted tradeoff (per-device cost trivial vs solution-architect time)." },
+        { "date": "2026-06-17", "entry": "Presented the direction deck + v0.0.01 demo to the technical group; both well received; key challenge raised = proving the tool actually measures the fixtures we need to the accuracy we need." },
+        { "date": "2026-06-17", "entry": "Committed to a hands-on ARKit LiDAR capture test (iPhone 16 Pro + M4 MacBook Air); built a minimal mesh-viewer app (MeshWalk) to walk an aisle, visualize the scene mesh, and spot-check measurements against a tape measure." },
+        { "date": "2026-06-17", "entry": "BLOCKER: work MacBook locked, gating the MeshWalk build; chasing IT unlock + Xcode install + personal-Apple-ID signing on one ticket. Polycam + Apple Measure staged on the phone as a no-Mac fallback (same ARKit + LiDAR stack)." },
+        { "date": "2026-06-17", "entry": "Defined the measurement-validation methodology: ground truth (tape) vs tool across fixture dimensions (shelf bay width, shelf height, gondola length/depth, aisle width), reported as error bands against a ±0.5 inch target, with honest pass/fail rather than a polished claim." },
+        { "date": "2026-06-17", "entry": "Validation structured in tiers: Tier 0 methodology (no dependencies), Tier 1 dimensional accuracy on a controlled/fallback capture, Tier 2 real store aisle, Tier 3 derived counts (facings, adaptors) if dimensions pass." },
+        { "date": "2026-06-17", "entry": "Day-by-day plan to a Wed-AM presentation: Wed clear blockers (IT ticket + install fallback apps), Thu build MeshWalk or fall back to Polycam, Fri first real store aisle capture + ground-truth sheet (critical day), Mon analyze into an error table + optional second pass, Tue build the validation deck with real data." },
+        { "date": "2026-06-17", "entry": "DATE: measurement-proof / validation results due Tuesday night 6/23, presenting first thing Wednesday morning 6/24 (first committed Site Survey date)." },
+        { "date": "2026-06-17", "entry": "RISK: the plan has one fragile point — store capture must happen Friday 6/19; if the Mac unlock slips, capture proceeds Friday with Polycam regardless, because the validation question is about the sensor, not our code." }
       ]
     },
     {

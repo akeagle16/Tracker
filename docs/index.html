@@ -118,7 +118,7 @@
 const TRACKER = {
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
-    "last_updated": "2026-06-16"
+    "last_updated": "2026-06-17"
   },
   "projects": [
     {
@@ -147,13 +147,13 @@ const TRACKER = {
       "serves": "TopStock Rail / Walmart first; multi-product later",
       "status": "in_progress",
       "modules": [
-        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-15" },
+        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-10" },
         { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
       ],
       "next_milestone": "v1 (Working) complete",
-      "next_milestone_due": "2026-07-15",
+      "next_milestone_due": "2026-07-10",
       "blockers": [],
-      "notes": "v1 (7/15) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Build underway against mock data ahead of real ingest (lands after 6/22). Data model v0.1 frozen as the build contract; store-100 parser expands 8-ft sections into 1,081 L/R rails (8 zones) behind dataService.js. Sample plan ±7% = 167 rails, proportional by zone, adapter targets 85/10/5 fill-as-you-go. Frontend: login, store selector, flow picker, audit home, adapter picker (soft quota), camera scanner (BarcodeDetector + ZXing, Scandit-ready). Backend hosting (Azure vs Supabase) still open."
+      "notes": "v1 (7/10) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Full audit loop works end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home counts advance live. audit_questions = adapter checks + shared rail checks + ESL three-way (Correct/Wrong Location/No Image). Scanner: manual entry XXXX-XXXX gated on 8-char ID, duplicates warn-and-overwrite (latest wins), confirm-location modal no longer opens on load. Sampling locked ±7% = 167 rails (8 zones, zone = leading alpha of section code), 85/10/5 fill-as-you-go. Open: derived_severity rules, View Data dashboard, Warehouse/Wire Frame wording, third adapter, Azure-vs-Supabase backend decision."
     },
     {
       "id": "gt-tool-v2",
@@ -195,7 +195,10 @@ const TRACKER = {
     { "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)", "owner": "Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
     { "item": "Blink ID corrective-action follow-up (Sainsbury's)", "owner": "Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
     { "item": "Blink ID reliability — random, non-reproducible ESL misses; no command ack, retry, or event-level traceability", "owner": "Nick + Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
-    { "item": "QC inspection-checklist wording (Warehouse + Wire Frame) provisional — pending team/engineering; Standard confirmed 6/16; third adapter unreleased", "owner": "Clay + team/eng", "opened": "2026-06-16", "status": "Open" }
+    { "item": "QC inspection-checklist wording (Warehouse + Wire Frame) provisional — pending team/engineering; Standard confirmed 6/16; third adapter unreleased", "owner": "Clay + team/eng", "opened": "2026-06-16", "status": "Open" },
+    { "item": "QC derived_severity rules undefined — answer-to-severity mapping not yet specified", "owner": "Clay", "opened": "2026-06-17", "status": "Open" },
+    { "item": "QC View Data dashboard not built — read/review surface over saved sessions", "owner": "Clay", "opened": "2026-06-17", "status": "Open" },
+    { "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer — gates the 'hosted' part of v1", "owner": "Clay", "opened": "2026-06-16", "status": "Open" }
   ],
   "operating_principles": [
     "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",

@@ -9,7 +9,7 @@
       "Cristina — frontend",
       "Zel — beta testing + physical inspection / Gen1 daily walks"
     ],
-    "last_updated": "2026-06-16",
+    "last_updated": "2026-06-17",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -58,13 +58,13 @@
       "supporting": ["Eric (backend — data pull reuses his pipeline)"],
       "link": null,
       "modules": [
-        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-15" },
+        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-10" },
         { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
       ],
       "next_milestone": "v1 (Working) complete",
-      "next_milestone_due": "2026-07-15",
+      "next_milestone_due": "2026-07-10",
       "blockers": [],
-      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (Working, 7/15) = one UI (designed to hold images) + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is an estimate, gated on the image-storage decision; images are a fast-follow staged into the same UI. Build happens in its own project; underway against mock data ahead of real-data integration (real ingest lands after the 6/22 test install). Data model v0.1 is the frozen, versioned build contract (entities, conditional per-adapter inspection items, sample plan). Store-100 ingest parser expands 8-ft sections into L/R rails (1,081 rails across 8 letter-zones) as the mock dataset behind dataService.js. Sample plan: ±7% margin = 167 rails, proportional by zone, adapter targets 85% standard / 10% warehouse / 5% wire frame, fill-as-you-go. Frontend started: login, store selector, flow picker, audit home (sampling hub), adapter picker (soft quota warning), camera scanner (BarcodeDetector + ZXing fallback, Scandit-ready) with morph-to-button and confirm-location modal. Backend hosting decision (Azure vs Supabase) still open — no resource-group answer yet. Outcome = a reliable post-install QC record for TopStock.",
+      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (Working, 7/10) = one UI (designed to hold images) + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is an estimate, gated on the image-storage decision; images are a fast-follow staged into the same UI. Build happens in its own project; underway against mock store 100. Full audit loop works end-to-end (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home progress/zone/adapter counts advance live. audit_questions.html = 3 steps (adapter checks varying by type, shared rail checks, ESL three-way Correct/Wrong Location/No Image). Scanner: manual entry auto-formats to XXXX-XXXX with Continue gated on a valid 8-char ID; duplicate-rail scans warn-and-overwrite (latest wins per session); location-confirm 'No' keeps the adapter choice; confirm-location modal no longer opens on page load. Sampling locked: ±7% margin = 167 rails for store 100, proportional across 8 letter-zones (zone = leading alpha of the section code), adapter targets 85% standard / 10% warehouse / 5% wire frame, fill-as-you-go. Open gaps tracked as carry-forwards: derived_severity rules undefined, View Data dashboard not built, Warehouse/Wire Frame wording provisional, third adapter unreleased, Azure-vs-Supabase backend decision pending the Azure tenant answer. Outcome = a reliable post-install QC record for TopStock.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Committed 7/10 delivery." },
         { "date": "2026-06-15", "entry": "v1 (Working) target set 7/15 (was 7/10). Scope defined: single image-ready UI + Eric-pipeline data pull + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 fast-follow, gated on image-storage decision. Starts after the 6/22 test install." },
@@ -72,7 +72,13 @@
         { "date": "2026-06-16", "entry": "Store-100 ingest parser built — expands 8-ft sections into L/R rails (1,081 rails across 8 letter-zones) as the mock dataset behind dataService.js." },
         { "date": "2026-06-16", "entry": "Sample size set at ±7% margin = 167 rails, proportional by zone, with adapter targets (85% standard / 10% warehouse / 5% wire frame) as fill-as-you-go." },
         { "date": "2026-06-16", "entry": "Frontend build started against mock data: login, store selector, flow picker, audit home (sampling hub), adapter picker (soft quota warning), camera scanner (BarcodeDetector + ZXing fallback, Scandit-ready) with morph-to-button and confirm-location modal. Status → in_progress." },
-        { "date": "2026-06-16", "entry": "Inspection-checklist blocker cleared for Standard adapter (rivet/flat/tight checks confirmed verbally + via user guide); Warehouse + Wire Frame wording still provisional pending team/engineering, third adapter unreleased — narrowed to carry-forward cf-qc-inspection-checklist." }
+        { "date": "2026-06-16", "entry": "Inspection-checklist blocker cleared for Standard adapter (rivet/flat/tight checks confirmed verbally + via user guide); Warehouse + Wire Frame wording still provisional pending team/engineering, third adapter unreleased — narrowed to carry-forward cf-qc-inspection-checklist." },
+        { "date": "2026-06-17", "entry": "Full audit loop working end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails write to IndexedDB and home progress/zone/adapter counts advance live." },
+        { "date": "2026-06-17", "entry": "Built audit_questions.html (3 steps: adapter checks varying by type, shared rail checks, ESL three-way Correct/Wrong Location/No Image) and wired the save-session flow." },
+        { "date": "2026-06-17", "entry": "Scanner fixes: manual entry auto-formats to XXXX-XXXX with Continue gated on a valid 8-char ID; duplicate-rail scans warn-and-overwrite (latest wins per session); location-confirm 'No' keeps the adapter choice; confirm-location modal no longer opens on page load." },
+        { "date": "2026-06-17", "entry": "Sampling locked at ±7% margin = 167 rails for store 100, proportional across 8 letter-zones (zone = leading alpha of the section code), adapter targets 85/10/5 as fill-as-you-go." },
+        { "date": "2026-06-17", "entry": "Date reconciled: v1 (Working) due corrected 7/15 → 7/10 to match Clay's restated commitment (7/10 unchanged); Complete-with-images ~7/25 estimate unchanged." },
+        { "date": "2026-06-17", "entry": "Logged open QC carry-forwards (flagged to carry weekly): derived_severity rules undefined (cf-qc-derived-severity), View Data dashboard not built (cf-qc-view-data), Azure-vs-Supabase backend decision pending Azure tenant answer (cf-qc-backend-decision)." }
       ]
     },
     {
@@ -169,6 +175,36 @@
       "weeks_open": 0,
       "status": "open",
       "owner": "Clay (PM) + team/engineering",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-derived-severity",
+      "item": "QC derived_severity rules undefined — the logic mapping inspection answers to a severity outcome is not yet specified.",
+      "opened": "2026-06-17",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-view-data",
+      "item": "QC View Data dashboard not built — the read/review surface over saved inspection sessions.",
+      "opened": "2026-06-17",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-backend-decision",
+      "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer (resource-group/tenant). Gates the 'hosted' part of v1 scope.",
+      "opened": "2026-06-16",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
       "resolution": null,
       "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
     }

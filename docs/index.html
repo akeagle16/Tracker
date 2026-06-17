@@ -129,17 +129,17 @@ const TRACKER = {
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
         { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
-        { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-06-22" },
+        { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-06-23" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "Validation live on the 100-rail test install",
-      "next_milestone_due": "2026-06-22",
+      "next_milestone": "First-store deployment — 100 rails (Validation live)",
+      "next_milestone_due": "2026-06-23",
       "blockers": [
         "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan mtg 6/16; Eric's wall is Fri 6/19 midday CT.",
         "Cristina — add/delete Sections build; ETA pending.",
         "Supervisor RBAC — installers → Install, supervisors → Validation."
       ],
-      "notes": "Real deadline is the 100-rail test install Mon 6/22 (6/19 was a proxy; Gen2 can't run on Gen1, so the test site is the validation opportunity). Validation = supervisor labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does physical inspection. No-weekend rule: 6/20–21 parachute-only, cross-team work done by Fri 6/19. Wed 6/17 go/no-go. Demo built but unvalidated — needs HW/SW integration test (also confirms rail function), lead domino early week. Maintenance UI delivered; remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment. Access enablement underway (async): account setup, VPN, vCloud — productive meeting 6/17."
+      "notes": "Real deadline is the first-store deployment Tue 6/23 — 100 rails (moved from 6/22; Gen2 can't run on Gen1, so the test site is the validation opportunity). Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — from Salvador, translated to Eric's format. Validation = supervisor labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does physical inspection. No-weekend rule: 6/20–21 parachute-only, cross-team work done by Fri 6/19. Wed 6/17 go/no-go. Demo built but unvalidated — needs HW/SW integration test (also confirms rail function), lead domino early week. Maintenance UI delivered; remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment. Access enablement underway (async): account setup, VPN, vCloud — productive meeting 6/17."
     },
     {
       "id": "qc-tool",

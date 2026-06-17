@@ -23,23 +23,24 @@
       "supporting": [
         "Eric (backend — Validation pipeline, hardware-state → UI)",
         "Cristina (frontend — add/delete Sections)",
-        "Zel (beta testing + physical inspection)"
+        "Zel (beta testing + physical inspection)",
+        "Salvador (source of the rail IDs for the first-store deployment)"
       ],
       "link": "https://claywhite3.github.io/TopstockInstall/",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
         { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
-        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-06-22" },
+        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-06-23" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "Validation live on the 100-rail test install",
-      "next_milestone_due": "2026-06-22",
+      "next_milestone": "First-store deployment — 100 rails (Validation live)",
+      "next_milestone_due": "2026-06-23",
       "blockers": [
         "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan meeting 6/16; Eric's wall is Fri 6/19 midday CT.",
         "Cristina — add/delete Sections build; ETA pending.",
         "Supervisor RBAC — installers → Install, supervisors → Validation."
       ],
-      "notes": "Real deadline is the 100-rail test install Mon 6/22 (6/19 was a proxy). Gen2 can't run on Gen1, so the 100-rail test site is the validation opportunity. Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) that produces the digital QC record; Zel does the physical inspection. No-weekend rule: Sat/Sun 6/20–21 are parachute-only — all cross-team work done by Fri 6/19. Wed 6/17 is the go/no-go checkpoint. Demo: built but unvalidated, needs a HW/SW integration test (a working Demo also confirms rail function) — lead domino, do early week. Maintenance UI is delivered/done (Clay's part, has user feedback); remaining monitoring & alerting system is net-new backend/integration being scoped as a separate project, with a real deadline that likely tracks rail deployment rather than 7/10. Validation severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending) with Run Test buttons at aisle and section level remains in place; rail_detail untouched. Access enablement (for install/test): taking work async to define the how-to for (1) account setup, (2) VPN access, (3) vCloud access — productive meeting 6/17.",
+      "notes": "Real deadline is the first-store deployment Tue 6/23 — 100 rails (moved from 6/22; 6/19 was an earlier proxy). Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format. Gen2 can't run on Gen1, so the test site is the validation opportunity. Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) that produces the digital QC record; Zel does the physical inspection. No-weekend rule: Sat/Sun 6/20–21 are parachute-only — all cross-team work done by Fri 6/19. Wed 6/17 is the go/no-go checkpoint. Demo: built but unvalidated, needs a HW/SW integration test (a working Demo also confirms rail function) — lead domino, do early week. Maintenance UI is delivered/done (Clay's part, has user feedback); remaining monitoring & alerting system is net-new backend/integration being scoped as a separate project, with a real deadline that likely tracks rail deployment rather than 7/10. Validation severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending) with Run Test buttons at aisle and section level remains in place; rail_detail untouched. Access enablement (for install/test): taking work async to define the how-to for (1) account setup, (2) VPN access, (3) vCloud access — productive meeting 6/17.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
         { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
@@ -47,7 +48,9 @@
         { "date": "2026-06-15", "entry": "Validation re-anchored from 6/19 to 6/22 — the 100-rail test install Mon 6/22 is the real deadline; 6/19 was a proxy. Project status → at_risk. Validation defined as the supervisor labor-state board producing the digital QC record (Zel does physical inspection). Blockers added: Eric Validation pipeline fix (hardware-state→UI; pending Titouan mtg 6/16; wall Fri 6/19 midday CT); Cristina add/delete Sections (ETA pending); Supervisor RBAC. No-weekend rule (6/20–21 parachute-only, cross-team done by Fri 6/19); Wed 6/17 go/no-go." },
         { "date": "2026-06-15", "entry": "Demo reopened to in_progress — built but unvalidated, needs HW/SW integration test (also confirms rail function); lead domino, early week (target 6/17)." },
         { "date": "2026-06-15", "entry": "Maintenance UI delivered/done (has user feedback). Date slipped 7/3 → 7/10 due to production delays (not Clay's scope). Remaining monitoring & alerting system = net-new backend/integration, being scoped as a separate project; real deadline likely tracks rail deployment, not 7/10." },
-        { "date": "2026-06-17", "entry": "Access: productive meeting on access enablement; taking work async to define the how-to for (1) setting up an account, (2) getting VPN access, (3) getting vCloud access." }
+        { "date": "2026-06-17", "entry": "Access: productive meeting on access enablement; taking work async to define the how-to for (1) setting up an account, (2) getting VPN access, (3) getting vCloud access." },
+        { "date": "2026-06-17", "entry": "DATE: first-store deployment set for Tue 6/23 — 100 rails (moved from 6/22). next_milestone reframed to the first-store deployment / Validation live." },
+        { "date": "2026-06-17", "entry": "Deliverable: Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format." }
       ]
     },
     {

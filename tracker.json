@@ -82,7 +82,8 @@
         { "date": "2026-06-17", "entry": "Scanner fixes: manual entry auto-formats to XXXX-XXXX with Continue gated on a valid 8-char ID; duplicate-rail scans warn-and-overwrite (latest wins per session); location-confirm 'No' keeps the adapter choice; confirm-location modal no longer opens on page load." },
         { "date": "2026-06-17", "entry": "Sampling locked at ±7% margin = 167 rails for store 100, proportional across 8 letter-zones (zone = leading alpha of the section code), adapter targets 85/10/5 as fill-as-you-go." },
         { "date": "2026-06-17", "entry": "Date reconciled: v1 (Working) due corrected 7/15 → 7/10 to match Clay's restated commitment (7/10 unchanged); Complete-with-images ~7/25 estimate unchanged." },
-        { "date": "2026-06-17", "entry": "Logged open QC carry-forwards (flagged to carry weekly): derived_severity rules undefined (cf-qc-derived-severity), View Data dashboard not built (cf-qc-view-data), Azure-vs-Supabase backend decision pending Azure tenant answer (cf-qc-backend-decision)." }
+        { "date": "2026-06-17", "entry": "Logged open QC carry-forwards (flagged to carry weekly): derived_severity rules undefined (cf-qc-derived-severity), View Data dashboard not built (cf-qc-view-data), Azure-vs-Supabase backend decision pending Azure tenant answer (cf-qc-backend-decision)." },
+        { "date": "2026-06-17", "entry": "Removed all visible 'provisional' tags from the adapter picker and question screens (flag retained in data only); audit flow now reads as final to the auditor. Underlying Warehouse/Wire Frame wording remains provisional per cf-qc-inspection-checklist." }
       ]
     },
     {

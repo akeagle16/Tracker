@@ -11,7 +11,7 @@
     --paper:#FAFBFE; --card:#FFFFFF; --ink:#1A2238; --muted:#5B6478;
     --grid:#C9D2EE; --soft:#EEF1FA; --banner:#3B5BB5;
     --ontrack:#2E6FD0; --blocked:#C23B2E; --neutral:#7A8194;
-    --progress:#7C5CC4; --done:#4C8A3F; --today:#C8392B;
+    --progress:#7C5CC4; --done:#4C8A3F; --today:#C8392B; --atrisk:#D9892B;
     --cf-bg:#FBF0EE; --cf-line:#E3B7B0;
     --display:'Archivo','Arial Narrow',Arial,sans-serif;
     --body:'Inter',system-ui,Arial,sans-serif;
@@ -47,6 +47,7 @@
   .stat span{font-size:11.5px;color:var(--muted)}
   .stat.alert b{color:var(--blocked)}
   .stat.ok b{color:var(--ontrack)}
+  .stat.warn b{color:var(--atrisk)}
 
   /* ---- projects ---- */
   .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
@@ -58,15 +59,16 @@
   .chip.on_track{background:#E7F0FD;color:var(--ontrack);border-color:var(--ontrack)}
   .chip.blocked{background:#FBEAE8;color:var(--blocked);border-color:var(--blocked)}
   .chip.planning,.chip.not_started{background:var(--soft);color:var(--neutral);border-color:var(--neutral)}
-  .chip.in_progress{background:#F1ECFB;color:var(--progress);border-color:var(--progress)}
+  .chip.in_progress{background:#E7F0FD;color:var(--ontrack);border-color:var(--ontrack)}
+  .chip.at_risk{background:#FBF1E4;color:var(--atrisk);border-color:var(--atrisk)}
   .serves{font-size:12.5px;color:var(--muted);margin:4px 0 12px}
   .next{background:var(--soft);border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:12px}
   .next .due{font-family:var(--mono);font-weight:500}
   .modules{list-style:none}
   .modules li{display:flex;align-items:center;gap:9px;padding:4px 0;font-size:13px}
   .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-  .dot.done{background:var(--done)} .dot.in_progress{background:var(--progress)}
-  .dot.not_started{background:#C2C8D6}
+  .dot.done{background:var(--done)} .dot.in_progress{background:var(--ontrack)}
+  .dot.not_started{background:#C2C8D6} .dot.at_risk{background:var(--atrisk)}
   .modules .when{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
   .blocker{margin-top:12px;background:var(--cf-bg);border:1px solid var(--cf-line);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--blocked)}
   .notes{margin-top:10px;font-size:12.5px;color:var(--muted)}
@@ -243,13 +245,18 @@ $("updated").textContent = "last updated " + TRACKER.meta.last_updated;
 /* ---- stats ---- */
 (function stats(){
   const c = s => TRACKER.projects.filter(p=>p.status===s).length;
-  const items = [
+  // status buckets — only render the ones with a non-zero count so empty
+  // statuses don't clutter the bar (every active status now has a bucket)
+  const statuses = [
     {n:c("on_track"),l:"On Track",cls:"ok"},
+    {n:c("in_progress"),l:"In Progress",cls:"ok"},
+    {n:c("at_risk"),l:"At Risk",cls:"warn"},
     {n:c("blocked")+c("escalation"),l:"Blocked",cls:"alert"},
     {n:c("planning"),l:"Planning",cls:""},
     {n:c("not_started"),l:"Not Started",cls:""},
-    {n:TRACKER.carry_forwards.filter(x=>x.status!=="Resolved").length,l:"Carry-Forwards",cls:"alert"},
-  ];
+  ].filter(i=>i.n>0);
+  const cf = {n:TRACKER.carry_forwards.filter(x=>x.status!=="Resolved").length,l:"Carry-Forwards",cls:"alert"};
+  const items = [...statuses, cf];
   $("stats").innerHTML = items.map(i=>`<div class="stat ${i.cls}"><b>${i.n}</b><span>${i.l}</span></div>`).join("");
 })();
 

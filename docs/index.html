@@ -153,7 +153,7 @@ const TRACKER = {
       "next_milestone": "v1 (Working) complete",
       "next_milestone_due": "2026-07-10",
       "blockers": [],
-      "notes": "v1 (7/10) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Full audit loop works end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home counts advance live. audit_questions = adapter checks + shared rail checks + ESL three-way (Correct/Wrong Location/No Image). Scanner: manual entry XXXX-XXXX gated on 8-char ID, duplicates warn-and-overwrite (latest wins), confirm-location modal no longer opens on load. Sampling locked ±7% = 167 rails (8 zones, zone = leading alpha of section code), 85/10/5 fill-as-you-go. Open: derived_severity rules, View Data dashboard, Warehouse/Wire Frame wording, third adapter, Azure-vs-Supabase backend decision."
+      "notes": "v1 (7/10) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Full audit loop works end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home counts advance live. audit_questions = adapter checks + shared rail checks + ESL three-way (Correct/Wrong Location/No Image). Scanner: manual entry XXXX-XXXX gated on 8-char ID, duplicates warn-and-overwrite (latest wins), confirm-location modal no longer opens on load. Sampling locked ±7% = 167 rails (8 zones, zone = leading alpha of section code), 85/10/5 fill-as-you-go. View-Data/PC dashboard built (data_dashboard.html): cross-filter donuts (all/adapter/rail), per-adapter cards, completion bar, store/zone/adapter filters, CSV export; reads all records across sessions; store-stamped saves; in-memory demo mode (off by default); nav reordered (activity before store pick); auto-save-per-rail. Open: derived_severity rules, Warehouse/Wire Frame wording, third adapter, Azure-vs-Supabase backend decision."
     },
     {
       "id": "gt-tool-v2",
@@ -199,7 +199,7 @@ const TRACKER = {
     { "item": "Blink ID reliability — random, non-reproducible ESL misses; no command ack, retry, or event-level traceability", "owner": "Nick + Clay", "opened": null, "status": "Resolved", "resolution": "Closed per Clay 6/15 — taken off Clay's plate." },
     { "item": "QC inspection-checklist wording (Warehouse + Wire Frame) provisional — pending team/engineering; Standard confirmed 6/16; third adapter unreleased", "owner": "Clay + team/eng", "opened": "2026-06-16", "status": "Open" },
     { "item": "QC derived_severity rules undefined — answer-to-severity mapping not yet specified", "owner": "Clay", "opened": "2026-06-17", "status": "Open" },
-    { "item": "QC View Data dashboard not built — read/review surface over saved sessions", "owner": "Clay", "opened": "2026-06-17", "status": "Open" },
+    { "item": "QC View Data dashboard not built — read/review surface over saved sessions", "owner": "Clay", "opened": "2026-06-17", "status": "Resolved", "resolution": "Built data_dashboard.html (View-Data dashboard)." },
     { "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer — gates the 'hosted' part of v1", "owner": "Clay", "opened": "2026-06-16", "status": "Open" }
   ],
   "operating_principles": [

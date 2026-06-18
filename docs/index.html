@@ -118,7 +118,7 @@
 const TRACKER = {
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
-    "last_updated": "2026-06-17"
+    "last_updated": "2026-06-18"
   },
   "projects": [
     {
@@ -128,7 +128,7 @@ const TRACKER = {
       "status": "at_risk",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
-        { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
+        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-18" },
         { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-06-23" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
@@ -164,9 +164,9 @@ const TRACKER = {
       "next_milestone": "Measurement-proof validation results (present Wed AM 6/24)",
       "next_milestone_due": "2026-06-23",
       "blockers": [
-        "Work MacBook locked — gating the MeshWalk build (IT ticket: unlock + Xcode + Apple-ID signing). Mitigation: Polycam + Apple Measure staged on the phone (same ARKit + LiDAR stack), so Friday capture proceeds regardless."
+        "AisleMeasure delivered as a sideloadable Xcode project (free-Apple-ID signing guide); now gated on iPhone 16 Pro arrival → Xcode build (expect compile errors to clear) before the first store walk. Polycam + Apple Measure remain staged as a no-Mac fallback so store capture proceeds regardless."
       ],
-      "notes": "Moved from discovery into a measurement-proof sprint. Framework settled: build on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (its furniture taxonomy + ~2,000 sq ft single-scan ceiling don't fit retail at store scale; own the interpretation step). Hardware: usable LiDAR + ARKit only on iPhone Pro / iPad Pro — accepted tradeoff. Direction deck (7 slides, RF Slate) + v0.0.01 demo presented to the technical group, well received; key challenge = prove accuracy. Validation: tape vs tool across shelf bay width, shelf height, gondola length/depth, aisle width, error bands vs ±0.5 inch, honest pass/fail; tiered (T0 methodology → T1 controlled accuracy → T2 real aisle → T3 derived counts). MeshWalk mesh-viewer (iPhone 16 Pro + M4 MBA); Polycam fallback. Plan to 6/24: Fri 6/19 real store aisle capture is the critical day. Risk: capture proceeds Friday with Polycam regardless — the question is the sensor, not the code. Build sequence (post-proof): 1 Capture spine → 2 Data + RF → 3 Derived outputs → 4 Demo store; backlog tracked in tracker.json (OCR label normalization, privacy/imagery, cart-mount design, degradation modes, RF-derived anchor placement). Build base = raw ARKit, not an existing scanner engine (export-only / not embeddable) — interpretation + capture UX stay in-house; Polycam is a validation fallback only."
+      "notes": "Moved from discovery into a measurement-proof sprint. Framework settled: build on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (its furniture taxonomy + ~2,000 sq ft single-scan ceiling don't fit retail at store scale; own the interpretation step). Hardware: usable LiDAR + ARKit only on iPhone Pro / iPad Pro — accepted tradeoff. Direction deck (7 slides, RF Slate) + v0.0.01 demo presented to the technical group, well received; key challenge = prove accuracy. Validation: tape vs tool across shelf bay width, shelf height, gondola length/depth, aisle width, error bands vs ±0.5 inch, honest pass/fail; tiered (T0 methodology → T1 controlled accuracy → T2 real aisle → T3 derived counts). Built AisleMeasure (native ARKit + LiDAR): tap-to-measure validation (labeled measurements, CSV error-table export) + walk-the-aisle auto-capture (Vision ESL tag counting w/ 3D dedup, LiDAR-mesh shelf detection, per-section width/shelf/tag breakdown, drift estimate, CSV). Section segmentation (bay-boundary detection) is the first area flagged for iteration — v1 infers boundaries from tag-density gaps, under-segments butted bays (cf-sitesurvey-segmentation). Expectation-vs-reality validation workbook mirrors both CSV exports (pre-walk thresholds, auto error + pass/fail, per-failure-mode cause: Vision/mesh/segmentation/tracking). Ships as a sideloadable Xcode project (free-Apple-ID signing); gated on iPhone 16 Pro arrival → Xcode build before the first store walk. Polycam + Apple Measure fallback retained. Build sequence (post-proof): 1 Capture spine → 2 Data + RF → 3 Derived outputs → 4 Demo store; backlog tracked in tracker.json. Build base = raw ARKit, not an existing scanner engine (export-only / not embeddable) — interpretation + capture UX stay in-house."
     },
     {
       "id": "esl-maintenance-app",
@@ -187,7 +187,8 @@ const TRACKER = {
     { "item": "QC inspection-checklist wording (Warehouse + Wire Frame) provisional — pending team/engineering; Standard confirmed 6/16; third adapter unreleased", "owner": "Clay + team/eng", "opened": "2026-06-16", "status": "Open" },
     { "item": "QC derived_severity rules undefined — answer-to-severity mapping not yet specified", "owner": "Clay", "opened": "2026-06-17", "status": "Open" },
     { "item": "QC View Data dashboard not built — read/review surface over saved sessions", "owner": "Clay", "opened": "2026-06-17", "status": "Resolved", "resolution": "Built data_dashboard.html (View-Data dashboard)." },
-    { "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer — gates the 'hosted' part of v1", "owner": "Clay", "opened": "2026-06-16", "status": "Open" }
+    { "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer — gates the 'hosted' part of v1", "owner": "Clay", "opened": "2026-06-16", "status": "Open" },
+    { "item": "Site Survey AisleMeasure — section segmentation (bay-boundary detection) needs iteration; v1 infers boundaries from tag-density gaps and under-segments butted bays", "owner": "Clay", "opened": "2026-06-18", "status": "Open" }
   ],
   "operating_principles": [
     "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",

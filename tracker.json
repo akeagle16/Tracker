@@ -9,7 +9,7 @@
       "Cristina — frontend",
       "Zel — beta testing + physical inspection / Gen1 daily walks"
     ],
-    "last_updated": "2026-06-17",
+    "last_updated": "2026-06-18",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -29,7 +29,7 @@
       "link": "https://claywhite3.github.io/TopstockInstall/",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
-        { "name": "Guided TopStock Demo", "status": "in_progress", "due": "2026-06-17" },
+        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-18" },
         { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-06-23" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
@@ -50,7 +50,8 @@
         { "date": "2026-06-15", "entry": "Maintenance UI delivered/done (has user feedback). Date slipped 7/3 → 7/10 due to production delays (not Clay's scope). Remaining monitoring & alerting system = net-new backend/integration, being scoped as a separate project; real deadline likely tracks rail deployment, not 7/10." },
         { "date": "2026-06-17", "entry": "Access: productive meeting on access enablement; taking work async to define the how-to for (1) setting up an account, (2) getting VPN access, (3) getting vCloud access." },
         { "date": "2026-06-17", "entry": "DATE: first-store deployment set for Tue 6/23 — 100 rails (moved from 6/22). next_milestone reframed to the first-store deployment / Validation live." },
-        { "date": "2026-06-17", "entry": "Deliverable: Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format." }
+        { "date": "2026-06-17", "entry": "Deliverable: Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format." },
+        { "date": "2026-06-18", "entry": "Guided TopStock Demo flow marked done — HW/SW integration test confirmed (a working Demo also confirms rail function); this was the lead-domino early-week item. Clears the past-due milestone from the timeline." }
       ]
     },
     {
@@ -103,9 +104,9 @@
       "next_milestone": "Measurement-proof validation results (present Wed AM 6/24)",
       "next_milestone_due": "2026-06-23",
       "blockers": [
-        "Work MacBook locked — gating the MeshWalk build; one IT ticket chases unlock + Xcode install + personal-Apple-ID signing. Mitigation: Polycam + Apple Measure staged on the phone as a no-Mac fallback (same ARKit + LiDAR stack), so Friday store capture proceeds regardless."
+        "AisleMeasure delivered as a sideloadable Xcode project (free-Apple-ID signing guide included); now gated on iPhone 16 Pro arrival → Xcode build (expect compile errors to clear) before the first store walk. Polycam + Apple Measure remain staged on the phone as a no-Mac fallback (same ARKit + LiDAR stack) so store capture can proceed regardless."
       ],
-      "notes": "Moved from discovery into a hands-on measurement-proof sprint. Capture framework settled: build directly on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (RoomPlan's furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we want to own the interpretation step). Hardware dependency accepted: usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android) — per-device cost trivial vs solution-architect time. Direction deck (7 slides, RF Slate palette) + working v0.0.01 demo presented to the technical group; well received; key challenge = prove the tool measures fixtures to the accuracy we need. Validation methodology: ground truth (tape) vs tool across shelf bay width, shelf height, gondola length/depth, aisle width, reported as error bands vs a ±0.5 inch target with honest pass/fail; tiered Tier 0 methodology → Tier 1 dimensional accuracy (controlled/fallback) → Tier 2 real store aisle → Tier 3 derived counts (facings, adaptors) if dimensions pass. Tooling: MeshWalk minimal mesh-viewer (iPhone 16 Pro + M4 MacBook Air) to walk an aisle, visualize the mesh, spot-check vs tape; Polycam + Apple Measure staged as a no-Mac fallback. Capture-screen animation fixed (walk-to-dot rides the perspective line to the aisle vanishing point; perspective easing; DOT_START/DOT_PERSP tunable). Plan to the Wed-AM 6/24 presentation: Wed clear blockers, Thu build/fallback, Fri real store aisle capture + ground-truth sheet (critical day), Mon analyze, Tue build validation deck. Risk: Friday capture is the single fragile point — proceeds with Polycam regardless if the Mac unlock slips, because the question is the sensor, not the code. Build sequence (post-proof): 1 Capture spine → 2 Data + RF → 3 Derived outputs → 4 Demo store; backlog tracked separately. Build base = raw ARKit, not an existing scanner engine (Polycam et al. are export-only / not embeddable) — interpretation + capture UX stay in-house; Polycam is a validation fallback only.",
+      "notes": "Moved from discovery into a hands-on measurement-proof sprint. Capture framework settled: build directly on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (RoomPlan's furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we want to own the interpretation step). Hardware dependency accepted: usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android) — per-device cost trivial vs solution-architect time. Direction deck (7 slides, RF Slate palette) + working v0.0.01 demo presented to the technical group; well received; key challenge = prove the tool measures fixtures to the accuracy we need. Validation methodology: ground truth (tape) vs tool across shelf bay width, shelf height, gondola length/depth, aisle width, reported as error bands vs a ±0.5 inch target with honest pass/fail; tiered Tier 0 methodology → Tier 1 dimensional accuracy (controlled/fallback) → Tier 2 real store aisle → Tier 3 derived counts (facings, adaptors) if dimensions pass. Tooling: built AisleMeasure — a native ARKit + LiDAR app with (a) a tap-to-measure validation mode (labeled measurements, CSV error-table export against the ±0.5 inch target) and (b) a walk-the-aisle auto-capture mode (Vision-based ESL tag counting with 3D dedup, LiDAR-mesh shelf-level detection, per-section width/shelf/tag breakdown, drift estimate, CSV export). Section segmentation (bay-boundary detection) is the first area flagged for iteration — v1 infers boundaries from tag-density gaps and will under-segment butted bays (tracked as cf-sitesurvey-segmentation). Paired with an expectation-vs-reality validation workbook mirroring both CSV exports: pre-walk conditions/thresholds set before the walk, auto-computed error + pass/fail, per-failure-mode cause tracking (Vision / mesh / segmentation / tracking). AisleMeasure ships as a sideloadable Xcode project with a free-Apple-ID signing guide; gated on iPhone 16 Pro arrival → Xcode build before the first store walk. (MeshWalk was the earlier minimal mesh-viewer prototype.) Polycam + Apple Measure staged as a no-Mac fallback. Capture-screen animation fixed (walk-to-dot rides the perspective line to the aisle vanishing point; perspective easing; DOT_START/DOT_PERSP tunable). Plan to the Wed-AM 6/24 presentation: Wed clear blockers, Thu build/fallback, Fri real store aisle capture + ground-truth sheet (critical day), Mon analyze, Tue build validation deck. Risk: Friday capture is the single fragile point — proceeds with Polycam regardless if the Mac unlock slips, because the question is the sensor, not the code. Build sequence (post-proof): 1 Capture spine → 2 Data + RF → 3 Derived outputs → 4 Demo store; backlog tracked separately. Build base = raw ARKit, not an existing scanner engine (Polycam et al. are export-only / not embeddable) — interpretation + capture UX stay in-house; Polycam is a validation fallback only.",
       "roadmap": [
         { "step": 1, "name": "Capture spine", "detail": "ARKit scene-reconstruction mesh, cart-mount pose stability, frame + dot-stitch loop" },
         { "step": 2, "name": "Data + RF", "detail": "observation/interpretation schema, BLE + WiFi sampling on the pose, checkpoint + confidence pass" },
@@ -136,7 +137,12 @@
         { "date": "2026-06-17", "entry": "RISK: the plan has one fragile point — store capture must happen Friday 6/19; if the Mac unlock slips, capture proceeds Friday with Polycam regardless, because the validation question is about the sensor, not our code." },
         { "date": "2026-06-17", "entry": "ROADMAP build sequence set (4 steps): 1) Capture spine — ARKit mesh, cart-mount pose stability, frame+dot-stitch loop; 2) Data + RF — observation/interpretation schema, BLE+WiFi sampling on the pose, checkpoint+confidence pass; 3) Derived outputs — fixture geometry→counts, semantic aisle labeling v1, Studio Evo Maps export path; 4) Demo store — end-to-end run in one store, ground-truth error check, polish capture UX." },
         { "date": "2026-06-17", "entry": "BACKLOG/future logged: semantic-OCR aisle-label normalization across languages/vernaculars; retailer privacy + interior-imagery handling; passive cart-mount physical design (possibly 3D-printable); graceful degradation (non-grid layouts, multi-level, blocked aisles, reflective freezer runs, resumable sessions); anchor-tag placement left deliberately undefined, to be settled empirically by the tool's own RF data." },
-        { "date": "2026-06-17", "entry": "Build-vs-buy settled: build on raw ARKit, not an existing scanner engine (e.g. Polycam). Existing scanners are export-only / not embeddable — routing capture through one would impose their UX + interpretation on a retail-survey job, lose the single-walk geometry+RF capture, and make a consumer app's pricing/format/existence a load-bearing dependency. Same Apple sensor + pose either way; interpretation and capture UX are the actual product and stay in-house. Polycam remains only a no-Mac validation fallback." }
+        { "date": "2026-06-17", "entry": "Build-vs-buy settled: build on raw ARKit, not an existing scanner engine (e.g. Polycam). Existing scanners are export-only / not embeddable — routing capture through one would impose their UX + interpretation on a retail-survey job, lose the single-walk geometry+RF capture, and make a consumer app's pricing/format/existence a load-bearing dependency. Same Apple sensor + pose either way; interpretation and capture UX are the actual product and stay in-house. Polycam remains only a no-Mac validation fallback." },
+        { "date": "2026-06-18", "entry": "Built AisleMeasure — a native ARKit + LiDAR tap-to-measure validation app for fixture dimensional-accuracy testing against the ±0.5 inch target, with labeled measurements and CSV error-table export." },
+        { "date": "2026-06-18", "entry": "Extended AisleMeasure with a walk-the-aisle auto-capture mode: Vision-based ESL tag counting with 3D dedup, LiDAR-mesh shelf-level detection, per-section width/shelf/tag breakdown, a drift estimate, and CSV export." },
+        { "date": "2026-06-18", "entry": "Flagged section segmentation (bay-boundary detection) as the first area needing iteration — v1 infers boundaries from tag-density gaps and will under-segment butted bays. Logged as carry-forward cf-sitesurvey-segmentation." },
+        { "date": "2026-06-18", "entry": "Built an expectation-vs-reality validation workbook mirroring both AisleMeasure CSV exports — pre-walk conditions/thresholds set before the walk, auto-computed error and pass/fail, and per-failure-mode cause tracking (Vision / mesh / segmentation / tracking)." },
+        { "date": "2026-06-18", "entry": "Delivery: AisleMeasure packaged as a sideloadable Xcode project with a free-Apple-ID signing guide; now awaiting iPhone 16 Pro arrival, then an Xcode build (expect compile errors to clear) before the first store walk. Blocker reframed from the locked MacBook to device arrival + build; Polycam fallback retained." }
       ]
     },
     {
@@ -226,6 +232,16 @@
       "id": "cf-qc-backend-decision",
       "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer (resource-group/tenant). Gates the 'hosted' part of v1 scope.",
       "opened": "2026-06-16",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-sitesurvey-segmentation",
+      "item": "Site Survey AisleMeasure — section segmentation (bay-boundary detection) is the first area needing iteration. v1 infers boundaries from tag-density gaps and will under-segment butted bays; affects per-section width/shelf/tag breakdowns.",
+      "opened": "2026-06-18",
       "weeks_open": 0,
       "status": "open",
       "owner": "Clay (PM)",

@@ -93,25 +93,6 @@
       ]
     },
     {
-      "id": "gt-tool-v2",
-      "name": "GT Tool v2",
-      "serves": "Captana (Sainsbury's pilot — 4 UK stores)",
-      "status": "blocked",
-      "owner": "Clay (PM)",
-      "supporting": ["Connor (stakeholder — recent improvements delivered for him)"],
-      "link": "https://claywhite3.github.io/GT/",
-      "next_milestone": "Scope decision: build v2 vs adopt/adapt existing France tool",
-      "next_milestone_due": "2026-06-16",
-      "blockers": [
-        "Parked pending France lead reply (expected 6/16) — France may already run a tool in use; v2 may become adopt/adapt rather than build."
-      ],
-      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push; lower priority (Walmart always wins). Prior 6/26 build target is on hold pending the scope decision. v1 live and filterable by time, location, camera spacing. Outcome = eliminate manual image-checking.",
-      "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." },
-        { "date": "2026-06-15", "entry": "GT v2 parked pending France lead reply (expected 6/16) — possible adopt/adapt vs build. Decoupled from Sainsbury's; deprioritized (Walmart priority). Prior 6/26 build target on hold. Status → blocked. Outcome framed: eliminate manual image-checking." }
-      ]
-    },
-    {
       "id": "site-survey-tool",
       "name": "Site Survey Tool",
       "serves": "Multi-product, ESL-first",
@@ -280,6 +261,31 @@
       "owner": "Clay (PM)",
       "opened": "2026-06-15",
       "status": "open"
+    }
+  ],
+
+  "archived_projects": [
+    {
+      "id": "gt-tool-v2",
+      "name": "GT Tool v2",
+      "serves": "Captana (Sainsbury's pilot — 4 UK stores)",
+      "status": "withdrawn",
+      "owner": "Clay (PM)",
+      "supporting": ["Connor (stakeholder — recent improvements delivered for him)"],
+      "link": "https://claywhite3.github.io/GT/",
+      "next_milestone": "Scope decision: build v2 vs adopt/adapt existing France tool",
+      "next_milestone_due": "2026-06-16",
+      "blockers": [
+        "Parked pending France lead reply (expected 6/16) — France may already run a tool in use; v2 may become adopt/adapt rather than build."
+      ],
+      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push; lower priority (Walmart always wins). Prior 6/26 build target is on hold pending the scope decision. v1 live and filterable by time, location, camera spacing. Outcome = eliminate manual image-checking.",
+      "archived_date": "2026-06-17",
+      "archived_reason": "Request withdrawn — dropped from active tracker; archived for the record.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." },
+        { "date": "2026-06-15", "entry": "GT v2 parked pending France lead reply (expected 6/16) — possible adopt/adapt vs build. Decoupled from Sainsbury's; deprioritized (Walmart priority). Prior 6/26 build target on hold. Status → blocked. Outcome framed: eliminate manual image-checking." },
+        { "date": "2026-06-17", "entry": "Project withdrawn — request withdrawn. Dropped from active tracker and dashboard; archived here for the record." }
+      ]
     }
   ]
 }

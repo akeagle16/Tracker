@@ -156,19 +156,6 @@ const TRACKER = {
       "notes": "v1 (7/10) = one image-ready UI + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 gated on the image-storage decision. Full audit loop works end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home counts advance live. audit_questions = adapter checks + shared rail checks + ESL three-way (Correct/Wrong Location/No Image). Scanner: manual entry XXXX-XXXX gated on 8-char ID, duplicates warn-and-overwrite (latest wins), confirm-location modal no longer opens on load. Sampling locked ±7% = 167 rails (8 zones, zone = leading alpha of section code), 85/10/5 fill-as-you-go. View-Data/PC dashboard built (data_dashboard.html): cross-filter donuts (all/adapter/rail), per-adapter cards, completion bar, store/zone/adapter filters, CSV export; reads all records across sessions; store-stamped saves; in-memory demo mode (off by default); nav reordered (activity before store pick); auto-save-per-rail. Open: derived_severity rules, Warehouse/Wire Frame wording, third adapter, Azure-vs-Supabase backend decision."
     },
     {
-      "id": "gt-tool-v2",
-      "name": "GT Tool v2",
-      "serves": "Captana — Sainsbury's (4 UK stores)",
-      "status": "blocked",
-      "modules": [],
-      "next_milestone": "Scope decision: build v2 vs adopt/adapt France tool",
-      "next_milestone_due": "2026-06-16",
-      "blockers": [
-        "Parked pending France lead reply (expected 6/16) — France may already run a tool; v2 may become adopt/adapt rather than build."
-      ],
-      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push (Walmart always wins). Prior 6/26 build target on hold pending scope decision. v1 live. Outcome = eliminate manual image-checking."
-    },
-    {
       "id": "site-survey-tool",
       "name": "Site Survey Tool",
       "serves": "Multi-product, ESL-first",

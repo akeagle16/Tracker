@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-11",
+    "last_updated": "2026-06-18",
     "dashboard_url": "TBD — GitHub Pages dashboard generated from this file"
   },
 
@@ -13,7 +13,11 @@
       "serves": "TopStock Rail (Walmart rollout — 5 Gen1 stores, AR/TX)",
       "status": "on_track",
       "owner": "Clay",
-      "supporting": ["Zel (beta testing + Gen1 daily walks owner)"],
+      "supporting": [
+        "Zel (beta testing + Gen1 daily walks owner)",
+        "Yair (testing owner — FAE team, placeholder)",
+        "Jeremy (import-file answers — gates 1-ft modular BE)"
+      ],
       "link": "https://claywhite3.github.io/TopstockInstall/",
       "modules": [
         { "name": "Install", "status": "done", "completed": "2026-06-11" },
@@ -21,13 +25,47 @@
         { "name": "Validation (install validation)", "status": "in_progress", "due": "2026-06-19" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-03" }
       ],
-      "next_milestone": "Validation module complete",
-      "next_milestone_due": "2026-06-19",
-      "blockers": [],
-      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing.",
+      "working_deck": {
+        "structure": "Uniform feature-stage grid: Design → FE → BE → Test → Deploy, owner + commit date per card, sorted by deploy date",
+        "stages": ["Design", "FE", "BE", "Test", "Deploy"],
+        "color_system": {
+          "green": "done",
+          "blue": "in progress",
+          "grey": "not started",
+          "orange": "flag / attention",
+          "red": "cliff"
+        }
+      },
+      "deploy_windows": [
+        { "date": "2026-06-23", "label": "Deploy window 1 (Tue)", "gate": "Needs Walmart approval", "owner": "Clay" },
+        { "date": "2026-07-03", "label": "Deploy window 2 (Fri)", "gate": "Ahead of 7/5 install", "owner": "Clay" }
+      ],
+      "features": [
+        { "name": "4-ft modular", "stage": "Deploy", "status": "done", "note": "Install live" },
+        { "name": "Guided TopStock", "stage": "Deploy", "status": "done", "note": "Working" },
+        { "name": "8-ft modular", "stage": "FE/BE", "status": "in_progress", "design": "done", "target_deploy": "2026-07-03" },
+        { "name": "1-ft modular", "stage": "BE", "status": "blocked", "design": "done", "target_deploy": "2026-07-03", "blocker": "BE blocked on Jeremy's import-file answers — expected Mon 6/22" }
+      ],
+      "contractor_access": {
+        "owner": "Clay",
+        "model": "Cross-team working group",
+        "arc": [
+          { "date": "2026-06-22", "milestone": "Names identified (Mon)" },
+          { "date": "2026-06-23", "milestone": "Begin adding access (Tue)" },
+          { "date": "2026-06-24", "milestone": "Access tested by EOD (Wed)" },
+          { "date": "2026-06-26", "milestone": "Full chain tested" }
+        ]
+      },
+      "next_milestone": "Deploy window 1 — Walmart approval gate (Clay owns)",
+      "next_milestone_due": "2026-06-23",
+      "blockers": [
+        "1-ft modular BE blocked on Jeremy's import-file answers — expected Mon 6/22"
+      ],
+      "notes": "Weekly working deck restructured to uniform feature-stage grid (Design→FE→BE→Test→Deploy, owner + commit date per card, sorted by deploy date); color system locked (green=done, blue=in progress, grey=not started, orange=flag, red=cliff). Design done across all features. Two deploy windows confirmed: 6/23 (Walmart approval gate, Clay owns) and 7/3 (ahead of 7/5 install). Wins: install live on 4-ft modulars, Guided TopStock working. 8-ft + 1-ft modulars targeting 7/3. SteerCo single slide built on Vusion template (Wins / What's Next / Ask). Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
-        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." }
+        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
+        { "date": "2026-06-18", "entry": "Weekly working deck restructured to uniform feature-stage grid (Design→FE→BE→Test→Deploy) with locked color system. Two deploy windows confirmed: 6/23 (Walmart approval gate) and 7/3 (ahead of 7/5 install); next_milestone moved to 6/23 approval gate. Wins: install live on 4-ft modulars, Guided TopStock working. 8-ft + 1-ft modulars targeting 7/3. New blocker: 1-ft modular BE on Jeremy's import-file answers (expected 6/22). Contractor-access arc dated 6/22→6/26 (Clay owns). Testing owner = Yair (FAE, placeholder). SteerCo single slide built on Vusion template." }
       ]
     },
     {

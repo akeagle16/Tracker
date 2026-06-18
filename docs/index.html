@@ -112,7 +112,27 @@
     .mod-dot-done { background: var(--done); }
     .mod-dot-in_progress { background: var(--in-progress); }
     .mod-dot-not_started { background: var(--not-started); }
+    .mod-dot-blocked { background: var(--blocked); }
     .mod-due { color: var(--muted); margin-left: auto; font-size: 11px; }
+    .deploy-windows { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+    .deploy-win {
+      font-size: 11px;
+      background: #1e3a6e44;
+      border: 1px solid #4f8ef744;
+      color: var(--on-track);
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    .deploy-win span { color: var(--muted); }
+    .sub-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 10px 0 4px;
+    }
+    .arc-note { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
     .blockers { margin-top: 8px; }
     .blocker-item {
       font-size: 12px;
@@ -159,7 +179,7 @@
     <h1>Product Implementation Tracker</h1>
     <div class="meta">Clay White &mdash; Director of Product Implementation, VusionGroup</div>
   </div>
-  <div class="meta">Last updated: 2026-06-11</div>
+  <div class="meta">Last updated: 2026-06-18</div>
 </header>
 <main>
 
@@ -200,13 +220,30 @@
         </div>
         <div class="card-serves">TopStock Rail &mdash; Walmart (5 Gen1 stores, AR/TX)</div>
         <div class="milestone">
-          Next: <strong>Validation module complete</strong> <span>&mdash; due 2026-06-19</span>
+          Next: <strong>Deploy window 1 &mdash; Walmart approval gate (Clay owns)</strong> <span>&mdash; 2026-06-23</span>
         </div>
+        <div class="deploy-windows">
+          <div class="deploy-win">Tue 6/23 <span>&mdash; needs Walmart approval</span></div>
+          <div class="deploy-win">Fri 7/3 <span>&mdash; ahead of 7/5 install</span></div>
+        </div>
+        <div class="sub-label">Feature grid (by deploy)</div>
         <div class="modules">
-          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Install<span class="mod-due">done 6/11</span></div>
-          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Guided TopStock Demo<span class="mod-due">done 6/11</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-done"></span>4-ft modular<span class="mod-due">install live</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-done"></span>Guided TopStock<span class="mod-due">working</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>8-ft modular<span class="mod-due">target 7/3</span></div>
+          <div class="module-row"><span class="mod-dot mod-dot-blocked"></span>1-ft modular<span class="mod-due">target 7/3</span></div>
+        </div>
+        <div class="sub-label">Modules</div>
+        <div class="modules">
           <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>Validation<span class="mod-due">due 6/19</span></div>
           <div class="module-row"><span class="mod-dot mod-dot-in_progress"></span>Maintenance<span class="mod-due">due 7/3</span></div>
+        </div>
+        <div class="blockers">
+          <div class="blocker-item">1-ft modular BE blocked on Jeremy's import-file answers — expected Mon 6/22</div>
+        </div>
+        <div class="arc-note">
+          Design done across all features. Testing owner: Yair (FAE, placeholder).<br />
+          Contractor access (Clay owns): names 6/22 &rarr; adding 6/23 &rarr; tested EOD 6/24 &rarr; full chain by 6/26.
         </div>
       </div>
 
@@ -291,7 +328,7 @@
     </div>
   </section>
 
-  <div class="updated">Generated from tracker.json &mdash; 2026-06-11</div>
+  <div class="updated">Generated from tracker.json &mdash; 2026-06-18</div>
 </main>
 </body>
 </html>

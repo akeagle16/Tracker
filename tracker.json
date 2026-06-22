@@ -161,7 +161,8 @@
         { "date": "2026-06-18", "entry": "Built a standalone timeline drill-down (matches the QC/GT Gantt format); new deck element: orange diamond = go/no-go checkpoint." },
         { "date": "2026-06-18", "entry": "ARKit go/no-go ~7/3 flagged as the highest-leverage decision point — gates both downstream phases and the entire internal-build-vs-buy thesis." },
         { "date": "2026-06-18", "entry": "Dev/test environment set: primary device = iPhone 15 Pro (LiDAR-equipped) on iOS 26.4, building against the Xcode iOS 26.5 SDK. Settles the device question — build proceeds on the iPhone 15 Pro on hand; supersedes the earlier 'awaiting iPhone 16 Pro arrival' note." },
-        { "date": "2026-06-18", "entry": "AisleMeasure now building AND running on the iPhone 15 Pro via free Apple ID signing (7-day provisioning profile; re-run from Xcode to renew). $99/yr Apple Developer account + TestFlight flagged as the trigger to distribute to additional testers, pulled once the tool is validated." }
+        { "date": "2026-06-18", "entry": "AisleMeasure now building AND running on the iPhone 15 Pro via free Apple ID signing (7-day provisioning profile; re-run from Xcode to renew). $99/yr Apple Developer account + TestFlight flagged as the trigger to distribute to additional testers, pulled once the tool is validated." },
+        { "date": "2026-06-18", "entry": "Known issue logged: the tag detector currently counts any tag-shaped rectangle, so it will false-positive on barcodes, shelf-talkers, and signage. Deferred to a detection-refinement pass after the core framework (plane gating, segmentation, walk-and-count) is validated. Tracked as carry-forward cf-sitesurvey-tag-detector." }
       ]
     },
     {
@@ -260,6 +261,16 @@
     {
       "id": "cf-sitesurvey-segmentation",
       "item": "Site Survey AisleMeasure — section segmentation (bay-boundary detection) is the first area needing iteration. v1 infers boundaries from tag-density gaps and will under-segment butted bays; affects per-section width/shelf/tag breakdowns.",
+      "opened": "2026-06-18",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-sitesurvey-tag-detector",
+      "item": "Site Survey AisleMeasure — tag detector currently counts any tag-shaped rectangle, so it will false-positive on barcodes, shelf-talkers, and signage. Deferred to a detection-refinement pass after the core framework (plane gating, segmentation, walk-and-count) is validated.",
       "opened": "2026-06-18",
       "weeks_open": 0,
       "status": "open",

@@ -9,7 +9,7 @@
       "Cristina — frontend",
       "Zel — beta testing + physical inspection / Gen1 daily walks"
     ],
-    "last_updated": "2026-06-18",
+    "last_updated": "2026-06-25",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -28,16 +28,20 @@
       ],
       "link": "https://claywhite3.github.io/TopstockInstall/",
       "modules": [
-        { "name": "Install", "status": "done", "completed": "2026-06-11" },
+        { "name": "Installation (WMPC)", "status": "done", "completed": "2026-06-25", "note": "All five lifecycle stages green (Design/FE/BE/Test/Deploy)" },
         { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-18" },
-        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-06-23" },
+        { "name": "Sections Build (add/delete Sections; absorbs 1-Foot Modular)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Add Torch (registering flow)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Escape Button (registering page)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-07-03" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "First-store deployment — 100 rails (Validation live)",
-      "next_milestone_due": "2026-06-23",
+      "next_milestone": "Deploy wall — all features (Walmart approval gates the deploy column)",
+      "next_milestone_due": "2026-07-03",
       "blockers": [
-        "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan meeting 6/16; Eric's wall is Fri 6/19 midday CT.",
-        "Cristina — add/delete Sections build; ETA pending.",
+        "Walmart approval gates the deploy column — the Fri 7/3 deploy wall can't release without it.",
+        "Cristina — Sections Build FE reopened to absorb the 1-Foot Modular rework (now a design input, no longer standalone); deploy 7/3.",
+        "Eric — Validation pipeline fix (hardware-state → UI). [Earlier checkpoints: Titouan 6/16, Eric's wall Fri 6/19 — both now past; status unrefreshed this week.]",
         "Supervisor RBAC — installers → Install, supervisors → Validation."
       ],
       "action_items": [
@@ -49,13 +53,25 @@
           "priority": "top",
           "summary": "Status roll-up inconsistency across Zone → Aisle → Section → Rail",
           "detail": "Status is computed independently per level instead of rolled up, so a parent can show trouble while a child shows good (and vice versa). Breaks user trust: false negatives hide real problems; false positives train people to ignore warnings.",
+          "defined_logic": "'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared; only then does it resolve to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining). Flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble.",
           "owner": "Dev (Eric / Cristina) — gate-vs-display decision TBD",
           "flagged_by": "Clay (flagging only)",
           "commit": "2026-07-03",
           "status": "open"
         }
       ],
-      "notes": "Real deadline is the first-store deployment Tue 6/23 — 100 rails (moved from 6/22; 6/19 was an earlier proxy). TOP-PRIORITY BUG (commit Fri 7/3, owned by dev — Eric/Cristina, gate-vs-display TBD; Clay flagging only): status roll-up inconsistency across Zone → Aisle → Section → Rail — status is computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa; breaks user trust (false negatives hide real problems, false positives train people to ignore warnings). Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format. Open action item: Clay to write the instructions for the warehouse adapters (adapter-specific install/inspection guidance). Gen2 can't run on Gen1, so the test site is the validation opportunity. Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) that produces the digital QC record; Zel does the physical inspection. No-weekend rule: Sat/Sun 6/20–21 are parachute-only — all cross-team work done by Fri 6/19. Wed 6/17 is the go/no-go checkpoint. Demo: built but unvalidated, needs a HW/SW integration test (a working Demo also confirms rail function) — lead domino, do early week. Maintenance UI is delivered/done (Clay's part, has user feedback); remaining monitoring & alerting system is net-new backend/integration being scoped as a separate project, with a real deadline that likely tracks rail deployment rather than 7/10. Validation severity model (red=confirmed failure, orange=flagged awaiting supervisor, yellow=installed/test pending) with Run Test buttons at aisle and section level remains in place; rail_detail untouched. Access enablement (for install/test): taking work async to define the how-to for (1) account setup, (2) VPN access, (3) vCloud access — productive meeting 6/17.",
+      "feature_stages": {
+        "as_of": "2026-06-25",
+        "deploy_wall": "2026-07-03 — Walmart approval gates the deploy column",
+        "features": [
+          { "name": "Installation (WMPC)", "Design": "done", "FE": "done", "BE": "done", "Test": "done", "Deploy": "done", "note": "Fully complete — all five stages green" },
+          { "name": "Sections Build", "Design": "done", "FE": "in_progress", "BE": "in_progress", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03", "owner": "Cristina (FE)", "note": "FE reopened to absorb the 1-Foot Modular rework (now a design input, no longer standalone)" },
+          { "name": "Add Torch (registering flow)", "Design": "done", "FE": "not_started", "BE": "not_started", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03" },
+          { "name": "Escape Button (registering page)", "Design": "done", "FE": "not_started", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03", "note": "Needs UI" },
+          { "name": "First Users MS Account", "status": "done", "note": "Contractor access provisioning chain — complete" }
+        ]
+      },
+      "notes": "TOP-PRIORITY BUG (fix by Fri 7/3, owned by dev — Eric/Cristina, gate-vs-display TBD; Clay flagging only): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa; breaks user trust (false negatives hide real problems, false positives train people to ignore warnings). DEFINED LOGIC: 'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared, then resolves to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining); flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble. DEPLOY WALL confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. Feature-stage grid (Design→FE→BE→Test→Deploy): Installation (WMPC) fully complete, all five stages green; Sections Build FE reopened to absorb the 1-Foot Modular (resolved with Jeremy, now a design input — no longer a standalone item), deploy 7/3; Add Torch (registering flow) design done, FE not started, deploy 7/3; Escape Button (registering page) design done, needs UI / FE not started, deploy 7/3. First Users MS Account complete (contractor access provisioning chain). Open action item: Clay to write the warehouse-adapter instructions (adapter-specific install/inspection guidance). Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does the physical inspection. Maintenance UI delivered/done (Clay's part, has user feedback); remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment rather than 7/10. Weekly deck (TSC_Weekly) rebuilt to 6/24: Slide 2 (Feature Stages) regenerated via build_slide2.js with a priority-callout banner + 6-row grid; Slide 3 MS Account cell grey → green; title date 6/17 → 6/24. CARRY-OVER CONTEXT: the first-store test deployment was targeted Tue 6/23 (100 rails; Clay owed Eric the 100 rail-ID file from Salvador) — that 6/23 outcome is not yet recorded here, and Eric's Validation-pipeline blocker (6/16/6/19 checkpoints) predates this week and is unrefreshed.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
         { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
@@ -68,7 +84,15 @@
         { "date": "2026-06-17", "entry": "Deliverable: Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format." },
         { "date": "2026-06-18", "entry": "Guided TopStock Demo flow marked done — HW/SW integration test confirmed (a working Demo also confirms rail function); this was the lead-domino early-week item. Clears the past-due milestone from the timeline." },
         { "date": "2026-06-18", "entry": "Action item logged: Clay to write the instructions for the warehouse adapters (adapter-specific install/inspection guidance). Owner Clay; due date TBD." },
-        { "date": "2026-06-18", "entry": "TOP-PRIORITY BUG logged (bug-status-rollup): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa. Breaks user trust (false negatives hide real problems; false positives train people to ignore warnings). Owned by dev (Eric/Cristina; gate-vs-display TBD), Clay flagging only; commit target Fri 7/3. Companion App remains at_risk." }
+        { "date": "2026-06-18", "entry": "TOP-PRIORITY BUG logged (bug-status-rollup): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa. Breaks user trust (false negatives hide real problems; false positives train people to ignore warnings). Owned by dev (Eric/Cristina; gate-vs-display TBD), Clay flagging only; commit target Fri 7/3. Companion App remains at_risk." },
+        { "date": "2026-06-25", "entry": "Installation Module on WMPC fully complete — all five lifecycle stages green (Design/FE/BE/Test/Deploy)." },
+        { "date": "2026-06-25", "entry": "1-Foot Modular resolved with Jeremy and folded into Sections Build as a design input (no longer a standalone item). Cristina's Sections Build FE reopened to absorb the rework (FE → in_progress). Sections Build deploy 7/3." },
+        { "date": "2026-06-25", "entry": "New feature Add Torch (registering flow): design done, FE not started, deploy 7/3." },
+        { "date": "2026-06-25", "entry": "New feature Escape Button (registering page): design done, needs UI / FE not started, deploy 7/3." },
+        { "date": "2026-06-25", "entry": "First Users MS Account complete (contractor access provisioning chain)." },
+        { "date": "2026-06-25", "entry": "TOP-PRIORITY bug-status-rollup logic defined: 'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared, then resolves to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining); flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble. Fix by Fri 7/3. Companion App stays at_risk." },
+        { "date": "2026-06-25", "entry": "DATE: deploy wall confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. next_milestone moved from the 6/23 first-store deployment to the 7/3 deploy wall; Validation re-anchored 6/23 → 7/3 to the wall (6/23 first-store-deployment outcome not yet recorded — pending confirmation)." },
+        { "date": "2026-06-25", "entry": "Weekly deck TSC_Weekly rebuilt to 6/24: Slide 2 (Feature Stages) regenerated via build_slide2.js with a priority-callout banner + 6-row grid; Slide 3 MS Account cell grey → green; title date 6/17 → 6/24." }
       ]
     },
     {

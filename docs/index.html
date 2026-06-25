@@ -120,7 +120,7 @@
 const TRACKER = {
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
-    "last_updated": "2026-06-18"
+    "last_updated": "2026-06-25"
   },
   "projects": [
     {
@@ -129,19 +129,23 @@ const TRACKER = {
       "serves": "TopStock Rail — Walmart (5 Gen1 stores, AR/TX)",
       "status": "at_risk",
       "modules": [
-        { "name": "Install", "status": "done", "completed": "2026-06-11" },
+        { "name": "Installation (WMPC)", "status": "done", "completed": "2026-06-25" },
         { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-18" },
-        { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-06-23" },
+        { "name": "Sections Build (absorbs 1-ft Modular)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Add Torch (registering flow)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Escape Button (registering page)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Validation (labor-state board)", "status": "in_progress", "due": "2026-07-03" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
       ],
-      "next_milestone": "First-store deployment — 100 rails (Validation live)",
-      "next_milestone_due": "2026-06-23",
+      "next_milestone": "Deploy wall — all features (Walmart approval gates the deploy column)",
+      "next_milestone_due": "2026-07-03",
       "blockers": [
-        "Eric — Validation pipeline fix (hardware-state → UI). Pending Titouan mtg 6/16; Eric's wall is Fri 6/19 midday CT.",
-        "Cristina — add/delete Sections build; ETA pending.",
+        "Walmart approval gates the deploy column — the Fri 7/3 deploy wall can't release without it.",
+        "Cristina — Sections Build FE reopened to absorb the 1-Foot Modular rework (now a design input, no longer standalone); deploy 7/3.",
+        "Eric — Validation pipeline fix (hardware-state → UI). [6/16/6/19 checkpoints now past; status unrefreshed this week.]",
         "Supervisor RBAC — installers → Install, supervisors → Validation."
       ],
-      "notes": "TOP-PRIORITY BUG (commit Fri 7/3, owned by dev — Eric/Cristina, gate-vs-display TBD; Clay flagging only): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa; breaks user trust (false negatives hide real problems, false positives train people to ignore warnings). Real deadline is the first-store deployment Tue 6/23 — 100 rails (moved from 6/22; Gen2 can't run on Gen1, so the test site is the validation opportunity). Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — from Salvador, translated to Eric's format. Open action item: Clay to write the warehouse-adapter instructions (adapter-specific install/inspection guidance). Validation = supervisor labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does physical inspection. No-weekend rule: 6/20–21 parachute-only, cross-team work done by Fri 6/19. Wed 6/17 go/no-go. Demo built but unvalidated — needs HW/SW integration test (also confirms rail function), lead domino early week. Maintenance UI delivered; remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment. Access enablement underway (async): account setup, VPN, vCloud — productive meeting 6/17."
+      "notes": "TOP-PRIORITY BUG (fix by Fri 7/3, owned by dev — Eric/Cristina, gate-vs-display TBD; Clay flagging only): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa; breaks user trust (false negatives hide real problems, false positives train people to ignore warnings). DEFINED LOGIC: 'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending cleared, then resolves to Complete (all pass) or Trouble (any Has-Issues / any Flag remaining); flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble. DEPLOY WALL confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. Feature grid: Installation (WMPC) fully complete (all 5 stages green); Sections Build FE reopened to absorb the 1-Foot Modular (resolved with Jeremy, now a design input), deploy 7/3; Add Torch (registering flow) design done / FE not started, deploy 7/3; Escape Button (registering page) design done / needs UI, deploy 7/3. First Users MS Account complete (contractor access chain). Open action item: Clay to write the warehouse-adapter instructions. Validation = supervisor labor-state board producing the digital QC record; Zel does physical inspection. Maintenance UI delivered; remaining monitoring & alerting is net-new backend, scoped separately. Weekly deck TSC_Weekly rebuilt to 6/24 (Slide 2 Feature Stages regenerated w/ priority-callout banner + 6-row grid; Slide 3 MS Account grey→green; title 6/17→6/24). Carry-over: 6/23 first-store-deployment outcome not yet recorded; Eric's Validation-pipeline blocker unrefreshed this week."
     },
     {
       "id": "qc-tool",

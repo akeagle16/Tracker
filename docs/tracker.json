@@ -263,37 +263,6 @@
 
   "carry_forwards": [
     {
-      "id": "cf-camera-behind-glass",
-      "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)",
-      "opened": "TBD — backfill actual open date",
-      "weeks_open": null,
-      "status": "resolved",
-      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
-      "resolution_date": "2026-06-15",
-      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
-    },
-    {
-      "id": "cf-blink-id-corrective-action",
-      "item": "Blink ID corrective-action follow-up (Sainsbury's)",
-      "opened": "TBD — backfill actual open date",
-      "weeks_open": null,
-      "status": "resolved",
-      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
-      "resolution_date": "2026-06-15",
-      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
-    },
-    {
-      "id": "cf-blink-id-reliability",
-      "item": "Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability",
-      "opened": "TBD — backfill actual open date",
-      "weeks_open": null,
-      "status": "resolved",
-      "owner": "Nick (RMA/escalations) + Clay",
-      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
-      "resolution_date": "2026-06-15",
-      "rule": "Active escalation. Carries forward weekly until resolved."
-    },
-    {
       "id": "cf-qc-inspection-checklist",
       "item": "QC inspection-checklist wording for Warehouse + Wire Frame adapters provisional — pending team/engineering confirmation (third adapter unreleased). Standard adapter checks confirmed 6/16.",
       "opened": "2026-06-16",

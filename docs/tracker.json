@@ -242,20 +242,21 @@
     },
     {
       "id": "esl-maintenance-app",
-      "name": "ESL Maintenance App",
+      "name": "ESL RCA and Documentation Updates",
       "serves": "ESL service at Sainsbury's",
-      "status": "blocked",
+      "status": "in_progress",
       "owner": "Clay",
-      "supporting": ["Jessie (ESL data pull — gating input)"],
+      "supporting": ["Jessie (ESL data pull)"],
       "link": null,
-      "next_milestone": "App built from existing framework once Jessie's data lands",
-      "next_milestone_due": "2026-06-19",
-      "blockers": [
-        "Waiting on Jessie's ESL data pull — start immediately when received"
-      ],
-      "notes": "Quick build: copying framework from an existing app. Target end of week of 6/15. Status flips to in_progress the day data arrives.",
+      "next_milestone": "Dashboard available; 1st-round RCA/repair process runs one week, then feeds documentation updates",
+      "next_milestone_due": "2026-06-29",
+      "blockers": [],
+      "notes": "Renamed from 'ESL Maintenance App' — scope pivoted from a quick app build to RCA (root-cause analysis) and documentation updates for the ESL service at Sainsbury's. Dashboard expected available Monday 6/29. 1st-round RCA and repair process established; it runs one week, after which the process input feeds documentation updates and a potential future RCA tool. (id kept as esl-maintenance-app for continuity.)",
       "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. Blocked on data; target 6/19." }
+        { "date": "2026-06-11", "entry": "Tracker initialized. Blocked on data; target 6/19." },
+        { "date": "2026-06-25", "entry": "Renamed 'ESL Maintenance App' → 'ESL RCA and Documentation Updates' to reflect the scope pivot from a quick app build to root-cause analysis + documentation updates. Status blocked → in_progress (RCA/repair process now active); cleared the 'waiting on Jessie's ESL data pull' blocker as it no longer gates this scope. next_milestone reframed from the 6/19 app-build target to the dashboard / RCA-process runway." },
+        { "date": "2026-06-25", "entry": "Dashboard expected available Monday 6/29; next_milestone_due set to 6/29 (was 6/19)." },
+        { "date": "2026-06-25", "entry": "1st-round RCA and repair process established; runs one week, then the process input feeds documentation updates and a potential future RCA tool." }
       ]
     }
   ],

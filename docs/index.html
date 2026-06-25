@@ -205,92 +205,123 @@ const TRACKER = {
 /* ================== END TRACKER DATA ====================== */
 
 const $ = id => document.getElementById(id);
-const fmt = d => { const [y,m,day] = d.split("-"); return `${+m}/${+day}`; };
+const fmt = d => { const [y,m,day] = String(d).split("-"); return `${+m}/${+day}`; };
+const isDate = s => /^\d{4}-\d{2}-\d{2}$/.test(s);
+const isOpen = x => String(x && x.status || "").toLowerCase() !== "resolved";
 const STATUS_LABEL = {on_track:"ON TRACK",blocked:"BLOCKED",planning:"PLANNING",not_started:"NOT STARTED",in_progress:"IN PROGRESS",done:"DONE",at_risk:"AT RISK",escalation:"ESCALATION"};
 
-$("updated").textContent = "last updated " + TRACKER.meta.last_updated;
+/* Load the live tracker.json (single source of truth). Fall back to the
+   embedded TRACKER snapshot above ONLY if the fetch fails, so the page can
+   never go blank. The "regenerate" step is now just: copy tracker.json to
+   docs/tracker.json — content and the date below both come from the data. */
+(async function init(){
+  let data = TRACKER;
+  try {
+    const res = await fetch("tracker.json", {cache:"no-store"});
+    if (res.ok) data = await res.json();
+  } catch (e) { /* offline / file missing → use embedded fallback */ }
+  render(data);
+})();
 
-/* ---- the wire ---- */
-(function wire(){
-  const start = new Date("2026-06-08T00:00:00"), end = new Date("2026-07-27T00:00:00");
-  const span = end - start;
-  const pos = d => Math.min(98, Math.max(2, ((new Date(d+"T00:00:00") - start) / span) * 100));
-  const w = $("wire");
-  w.insertAdjacentHTML("beforeend", `<div class="axis"></div>`);
-  ["2026-06-08","2026-06-15","2026-06-22","2026-06-29","2026-07-06","2026-07-13","2026-07-20","2026-07-27"]
-    .forEach(d => w.insertAdjacentHTML("beforeend", `<span class="tick-label" style="left:${pos(d)}%">${fmt(d)}</span>`));
+/* "last updated" is DERIVED from the newest changelog date anywhere in the
+   data — every change adds a changelog entry, so this can never go stale. */
+function latestDate(data){
+  let max = (data.meta && data.meta.last_updated) || "";
+  (data.projects||[]).forEach(p => (p.changelog||[]).forEach(c => {
+    if (c.date && isDate(c.date) && c.date > max) max = c.date;
+  }));
+  return max;
+}
 
-  const miles = [];
-  TRACKER.projects.forEach(p => {
-    if (p.next_milestone_due) miles.push({ d: p.next_milestone_due, label: p.name.split("—")[0].trim() });
-    (p.modules||[]).forEach(m => {
-      if (m.due && m.status !== "done" && m.due !== p.next_milestone_due)
-        miles.push({ d: m.due, label: m.name });
+function render(data){
+  const projects = data.projects || [];
+  const cfs = data.carry_forwards || [];
+  $("updated").textContent = "last updated " + latestDate(data);
+
+  /* ---- the wire ---- */
+  (function wire(){
+    const start = new Date("2026-06-08T00:00:00"), end = new Date("2026-07-27T00:00:00");
+    const span = end - start;
+    const pos = d => Math.min(98, Math.max(2, ((new Date(d+"T00:00:00") - start) / span) * 100));
+    const w = $("wire");
+    w.insertAdjacentHTML("beforeend", `<div class="axis"></div>`);
+    ["2026-06-08","2026-06-15","2026-06-22","2026-06-29","2026-07-06","2026-07-13","2026-07-20","2026-07-27"]
+      .forEach(d => w.insertAdjacentHTML("beforeend", `<span class="tick-label" style="left:${pos(d)}%">${fmt(d)}</span>`));
+
+    const miles = [];
+    projects.forEach(p => {
+      if (p.next_milestone_due) miles.push({ d: p.next_milestone_due, label: p.name.split("—")[0].trim() });
+      (p.modules||[]).forEach(m => {
+        if (m.due && m.status !== "done" && m.due !== p.next_milestone_due)
+          miles.push({ d: m.due, label: m.name });
+      });
     });
-  });
-  miles.sort((a,b)=>a.d.localeCompare(b.d));
-  let lastPos = -100, level = 0;
-  miles.forEach(m => {
-    const x = pos(m.d);
-    level = (x - lastPos < 9) ? (level+1)%2 : 0;
-    lastPos = x;
-    w.insertAdjacentHTML("beforeend",
-      `<span class="star" style="left:${x}%">★</span>
-       <span class="star-label ${level? "up2":"up"}" style="left:${x}%">${m.label} · ${fmt(m.d)}</span>`);
-  });
+    miles.sort((a,b)=>a.d.localeCompare(b.d));
+    let lastPos = -100, level = 0;
+    miles.forEach(m => {
+      const x = pos(m.d);
+      level = (x - lastPos < 9) ? (level+1)%2 : 0;
+      lastPos = x;
+      w.insertAdjacentHTML("beforeend",
+        `<span class="star" style="left:${x}%">★</span>
+         <span class="star-label ${level? "up2":"up"}" style="left:${x}%">${m.label} · ${fmt(m.d)}</span>`);
+    });
 
-  const today = new Date();
-  if (today >= start && today <= end){
-    const t = ((today - start)/span)*100;
-    w.insertAdjacentHTML("beforeend",
-      `<div class="today-line" style="left:${t}%"></div>
-       <span class="today-label" style="left:${t}%">TODAY</span>`);
-  }
-})();
+    const today = new Date();
+    if (today >= start && today <= end){
+      const t = ((today - start)/span)*100;
+      w.insertAdjacentHTML("beforeend",
+        `<div class="today-line" style="left:${t}%"></div>
+         <span class="today-label" style="left:${t}%">TODAY</span>`);
+    }
+  })();
 
-/* ---- stats ---- */
-(function stats(){
-  const c = s => TRACKER.projects.filter(p=>p.status===s).length;
-  // status buckets — only render the ones with a non-zero count so empty
-  // statuses don't clutter the bar (every active status now has a bucket)
-  const statuses = [
-    {n:c("on_track"),l:"On Track",cls:"ok"},
-    {n:c("in_progress"),l:"In Progress",cls:"ok"},
-    {n:c("at_risk"),l:"At Risk",cls:"warn"},
-    {n:c("blocked")+c("escalation"),l:"Blocked",cls:"alert"},
-    {n:c("planning"),l:"Planning",cls:""},
-    {n:c("not_started"),l:"Not Started",cls:""},
-  ].filter(i=>i.n>0);
-  const cf = {n:TRACKER.carry_forwards.filter(x=>x.status!=="Resolved").length,l:"Carry-Forwards",cls:"alert"};
-  const items = [...statuses, cf];
-  $("stats").innerHTML = items.map(i=>`<div class="stat ${i.cls}"><b>${i.n}</b><span>${i.l}</span></div>`).join("");
-})();
+  /* ---- stats ---- */
+  (function stats(){
+    const c = s => projects.filter(p=>p.status===s).length;
+    // status buckets — only render the ones with a non-zero count so empty
+    // statuses don't clutter the bar (every active status now has a bucket)
+    const statuses = [
+      {n:c("on_track"),l:"On Track",cls:"ok"},
+      {n:c("in_progress"),l:"In Progress",cls:"ok"},
+      {n:c("at_risk"),l:"At Risk",cls:"warn"},
+      {n:c("blocked")+c("escalation"),l:"Blocked",cls:"alert"},
+      {n:c("planning"),l:"Planning",cls:""},
+      {n:c("not_started"),l:"Not Started",cls:""},
+    ].filter(i=>i.n>0);
+    const cf = {n:cfs.filter(isOpen).length,l:"Carry-Forwards",cls:"alert"};
+    const items = [...statuses, cf];
+    $("stats").innerHTML = items.map(i=>`<div class="stat ${i.cls}"><b>${i.n}</b><span>${i.l}</span></div>`).join("");
+  })();
 
-/* ---- projects ---- */
-$("projects").innerHTML = TRACKER.projects.map(p => `
-  <div class="card">
-    <div class="card-top"><h2>${p.name}</h2><span class="chip ${p.status}">${STATUS_LABEL[p.status]||p.status}</span></div>
-    <div class="serves">${p.serves}</div>
-    <div class="next"><b>Next:</b> ${p.next_milestone}${p.next_milestone_due ? ` — <span class="due">due ${fmt(p.next_milestone_due)}</span>` : ` — <span class="due">date TBD</span>`}</div>
-    ${(p.modules&&p.modules.length)? `<ul class="modules">${p.modules.map(m=>`
-      <li><span class="dot ${m.status}"></span>${m.name}
-      <span class="when">${m.status==="done" ? "done "+fmt(m.completed) : "due "+fmt(m.due)}</span></li>`).join("")}</ul>` : ""}
-    ${(p.blockers&&p.blockers.length)? p.blockers.map(b=>`<div class="blocker">${b}</div>`).join("") : ""}
-    ${p.notes? `<div class="notes">${p.notes}</div>` : ""}
-  </div>`).join("");
+  /* ---- projects ---- */
+  $("projects").innerHTML = projects.map(p => `
+    <div class="card">
+      <div class="card-top"><h2>${p.name}</h2><span class="chip ${p.status}">${STATUS_LABEL[p.status]||p.status}</span></div>
+      <div class="serves">${p.serves}</div>
+      <div class="next"><b>Next:</b> ${p.next_milestone}${p.next_milestone_due ? ` — <span class="due">due ${fmt(p.next_milestone_due)}</span>` : ` — <span class="due">date TBD</span>`}</div>
+      ${(p.modules&&p.modules.length)? `<ul class="modules">${p.modules.map(m=>`
+        <li><span class="dot ${m.status}"></span>${m.name}
+        <span class="when">${m.status==="done" ? "done "+fmt(m.completed) : "due "+fmt(m.due)}</span></li>`).join("")}</ul>` : ""}
+      ${(p.blockers&&p.blockers.length)? p.blockers.map(b=>`<div class="blocker">${b}</div>`).join("") : ""}
+      ${p.notes? `<div class="notes">${p.notes}</div>` : ""}
+    </div>`).join("");
 
-/* ---- carry-forwards ---- */
-const openCfs = TRACKER.carry_forwards.filter(x=>x.status!=="Resolved");
-$("cf-label").textContent = `Carry-Forwards — ${openCfs.length} open (flagged weekly until resolved)`;
-$("cfs").innerHTML = openCfs.map(c => {
-  let weeks = "date TBD";
-  if (c.opened){ weeks = Math.floor((new Date() - new Date(c.opened+"T00:00:00"))/(7*864e5)) + " wks open"; }
-  return `<div class="cf"><div class="item">${c.item}</div>
-    <span class="meta">${c.owner||"—"} · opened ${c.opened?fmt(c.opened):"TBD"} · ${weeks}</span>
-    <span class="state">${c.status.toUpperCase()}</span></div>`;
-}).join("");
+  /* ---- carry-forwards ---- */
+  const openCfs = cfs.filter(isOpen);
+  $("cf-label").textContent = `Carry-Forwards — ${openCfs.length} open (flagged weekly until resolved)`;
+  const now = new Date();
+  $("cfs").innerHTML = openCfs.map(c => {
+    let weeks = "date TBD";
+    if (isDate(c.opened)) weeks = Math.floor((now - new Date(c.opened+"T00:00:00"))/(7*864e5)) + " wks open";
+    return `<div class="cf"><div class="item">${c.item}</div>
+      <span class="meta">${c.owner||"—"} · opened ${isDate(c.opened)?fmt(c.opened):"TBD"} · ${weeks}</span>
+      <span class="state">${String(c.status).toUpperCase()}</span></div>`;
+  }).join("");
 
-$("principles").textContent = "Operating principles: " + TRACKER.operating_principles.join(" · ");
+  $("principles").textContent = "Operating principles: " + (data.operating_principles||[]).join(" · ");
+}
+
 </script>
 </body>
 </html>

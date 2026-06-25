@@ -1,0 +1,422 @@
+{
+  "meta": {
+    "owner": "Clay White — Product Manager, Digital Tools Portfolio, VusionGroup",
+    "role_note": "Clay is PM of the digital-tools portfolio — accountable for owners, commitments, and outcomes across workstreams, not the default IC on every line. He is one IC among several on hands-on work (select UI).",
+    "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
+    "team": [
+      "Clay White — PM (and IC on select UI work)",
+      "Eric — backend / data pipeline",
+      "Cristina — frontend",
+      "Zel — beta testing + physical inspection / Gen1 daily walks"
+    ],
+    "last_updated": "2026-06-25",
+    "dashboard_url": "https://akeagle16.github.io/Tracker/"
+  },
+
+  "projects": [
+    {
+      "id": "topstock-companion-app",
+      "name": "TopStock Companion App",
+      "serves": "TopStock Rail (Walmart rollout — 5 Gen1 stores, AR/TX)",
+      "status": "at_risk",
+      "owner": "Clay (PM)",
+      "supporting": [
+        "Eric (backend — Validation pipeline, hardware-state → UI)",
+        "Cristina (frontend — add/delete Sections)",
+        "Zel (beta testing + physical inspection)",
+        "Salvador (source of the rail IDs for the first-store deployment)"
+      ],
+      "link": "https://claywhite3.github.io/TopstockInstall/",
+      "modules": [
+        { "name": "Installation (WMPC)", "status": "done", "completed": "2026-06-25", "note": "All five lifecycle stages green (Design/FE/BE/Test/Deploy)" },
+        { "name": "Guided TopStock Demo", "status": "done", "completed": "2026-06-18" },
+        { "name": "Sections Build (add/delete Sections; absorbs 1-Foot Modular)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Add Torch (registering flow)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Escape Button (registering page)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Validation (supervisor labor-state board)", "status": "in_progress", "due": "2026-07-03" },
+        { "name": "Maintenance", "status": "in_progress", "due": "2026-07-10" }
+      ],
+      "next_milestone": "Deploy wall — all features (Walmart approval gates the deploy column)",
+      "next_milestone_due": "2026-07-03",
+      "blockers": [
+        "Walmart approval gates the deploy column — the Fri 7/3 deploy wall can't release without it.",
+        "Cristina — Sections Build FE reopened to absorb the 1-Foot Modular rework (now a design input, no longer standalone); deploy 7/3.",
+        "Eric — Validation pipeline fix (hardware-state → UI). [Earlier checkpoints: Titouan 6/16, Eric's wall Fri 6/19 — both now past; status unrefreshed this week.]",
+        "Supervisor RBAC — installers → Install, supervisors → Validation."
+      ],
+      "action_items": [
+        { "item": "Write the instructions for the warehouse adapters (adapter-specific install/inspection guidance).", "owner": "Clay", "status": "open", "opened": "2026-06-18", "due": null }
+      ],
+      "bugs": [
+        {
+          "id": "bug-status-rollup",
+          "priority": "top",
+          "summary": "Status roll-up inconsistency across Zone → Aisle → Section → Rail",
+          "detail": "Status is computed independently per level instead of rolled up, so a parent can show trouble while a child shows good (and vice versa). Breaks user trust: false negatives hide real problems; false positives train people to ignore warnings.",
+          "defined_logic": "'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared; only then does it resolve to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining). Flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble.",
+          "owner": "Dev (Eric / Cristina) — gate-vs-display decision TBD",
+          "flagged_by": "Clay (flagging only)",
+          "commit": "2026-07-03",
+          "status": "open"
+        }
+      ],
+      "feature_stages": {
+        "as_of": "2026-06-25",
+        "deploy_wall": "2026-07-03 — Walmart approval gates the deploy column",
+        "features": [
+          { "name": "Installation (WMPC)", "Design": "done", "FE": "done", "BE": "done", "Test": "done", "Deploy": "done", "note": "Fully complete — all five stages green" },
+          { "name": "Sections Build", "Design": "done", "FE": "in_progress", "BE": "in_progress", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03", "owner": "Cristina (FE)", "note": "FE reopened to absorb the 1-Foot Modular rework (now a design input, no longer standalone)" },
+          { "name": "Add Torch (registering flow)", "Design": "done", "FE": "not_started", "BE": "not_started", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03" },
+          { "name": "Escape Button (registering page)", "Design": "done", "FE": "not_started", "Test": "not_started", "Deploy": "not_started", "deploy_due": "2026-07-03", "note": "Needs UI" },
+          { "name": "First Users MS Account", "status": "done", "note": "Contractor access provisioning chain — complete" }
+        ]
+      },
+      "notes": "TOP-PRIORITY BUG (fix by Fri 7/3, owned by dev — Eric/Cristina, gate-vs-display TBD; Clay flagging only): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa; breaks user trust (false negatives hide real problems, false positives train people to ignore warnings). DEFINED LOGIC: 'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared, then resolves to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining); flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble. DEPLOY WALL confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. Feature-stage grid (Design→FE→BE→Test→Deploy): Installation (WMPC) fully complete, all five stages green; Sections Build FE reopened to absorb the 1-Foot Modular (resolved with Jeremy, now a design input — no longer a standalone item), deploy 7/3; Add Torch (registering flow) design done, FE not started, deploy 7/3; Escape Button (registering page) design done, needs UI / FE not started, deploy 7/3. First Users MS Account complete (contractor access provisioning chain). Open action item: Clay to write the warehouse-adapter instructions (adapter-specific install/inspection guidance). Validation = supervisor-facing labor-state board (not-yet-installed → installed-not-tested → tested-not-passed → passed) producing the digital QC record; Zel does the physical inspection. Maintenance UI delivered/done (Clay's part, has user feedback); remaining monitoring & alerting is net-new backend, scoped separately, real deadline tracks rail deployment rather than 7/10. Weekly deck (TSC_Weekly) rebuilt to 6/24: Slide 2 (Feature Stages) regenerated via build_slide2.js with a priority-callout banner + 6-row grid; Slide 3 MS Account cell grey → green; title date 6/17 → 6/24. CARRY-OVER CONTEXT: the first-store test deployment was targeted Tue 6/23 (100 rails; Clay owed Eric the 100 rail-ID file from Salvador) — that 6/23 outcome is not yet recorded here, and Eric's Validation-pipeline blocker (6/16/6/19 checkpoints) predates this week and is unrefreshed.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
+        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
+        { "date": "2026-06-12", "entry": "Validation flow severity model implemented across overview/zone/aisle pages (red=confirmed test failure, orange=flagged awaiting supervisor, yellow=installed/test pending); added on-demand Run Test buttons at aisle and section level. rail_detail untouched; due 6/19 unchanged, Validation on track." },
+        { "date": "2026-06-15", "entry": "Validation re-anchored from 6/19 to 6/22 — the 100-rail test install Mon 6/22 is the real deadline; 6/19 was a proxy. Project status → at_risk. Validation defined as the supervisor labor-state board producing the digital QC record (Zel does physical inspection). Blockers added: Eric Validation pipeline fix (hardware-state→UI; pending Titouan mtg 6/16; wall Fri 6/19 midday CT); Cristina add/delete Sections (ETA pending); Supervisor RBAC. No-weekend rule (6/20–21 parachute-only, cross-team done by Fri 6/19); Wed 6/17 go/no-go." },
+        { "date": "2026-06-15", "entry": "Demo reopened to in_progress — built but unvalidated, needs HW/SW integration test (also confirms rail function); lead domino, early week (target 6/17)." },
+        { "date": "2026-06-15", "entry": "Maintenance UI delivered/done (has user feedback). Date slipped 7/3 → 7/10 due to production delays (not Clay's scope). Remaining monitoring & alerting system = net-new backend/integration, being scoped as a separate project; real deadline likely tracks rail deployment, not 7/10." },
+        { "date": "2026-06-17", "entry": "Access: productive meeting on access enablement; taking work async to define the how-to for (1) setting up an account, (2) getting VPN access, (3) getting vCloud access." },
+        { "date": "2026-06-17", "entry": "DATE: first-store deployment set for Tue 6/23 — 100 rails (moved from 6/22). next_milestone reframed to the first-store deployment / Validation live." },
+        { "date": "2026-06-17", "entry": "Deliverable: Clay owes Eric an output file of all 100 rail IDs by Thu 6/18 — sourcing the IDs from Salvador and translating them to Eric's required format." },
+        { "date": "2026-06-18", "entry": "Guided TopStock Demo flow marked done — HW/SW integration test confirmed (a working Demo also confirms rail function); this was the lead-domino early-week item. Clears the past-due milestone from the timeline." },
+        { "date": "2026-06-18", "entry": "Action item logged: Clay to write the instructions for the warehouse adapters (adapter-specific install/inspection guidance). Owner Clay; due date TBD." },
+        { "date": "2026-06-18", "entry": "TOP-PRIORITY BUG logged (bug-status-rollup): status roll-up inconsistency across Zone → Aisle → Section → Rail — status computed independently per level instead of rolled up, so a parent can show trouble while a child shows good and vice versa. Breaks user trust (false negatives hide real problems; false positives train people to ignore warnings). Owned by dev (Eric/Cristina; gate-vs-display TBD), Clay flagging only; commit target Fri 7/3. Companion App remains at_risk." },
+        { "date": "2026-06-25", "entry": "Installation Module on WMPC fully complete — all five lifecycle stages green (Design/FE/BE/Test/Deploy)." },
+        { "date": "2026-06-25", "entry": "1-Foot Modular resolved with Jeremy and folded into Sections Build as a design input (no longer a standalone item). Cristina's Sections Build FE reopened to absorb the rework (FE → in_progress). Sections Build deploy 7/3." },
+        { "date": "2026-06-25", "entry": "New feature Add Torch (registering flow): design done, FE not started, deploy 7/3." },
+        { "date": "2026-06-25", "entry": "New feature Escape Button (registering page): design done, needs UI / FE not started, deploy 7/3." },
+        { "date": "2026-06-25", "entry": "First Users MS Account complete (contractor access provisioning chain)." },
+        { "date": "2026-06-25", "entry": "TOP-PRIORITY bug-status-rollup logic defined: 'In Progress' is a GATE, not a health verdict — a parent stays In Progress until every descendant is installed AND all Test-Pending are cleared, then resolves to Complete (all pass) or Trouble (any Has-Issues, or any Flag remaining); flagged installation blockers hold In Progress until everything else clears, then escalate to Trouble. Fix by Fri 7/3. Companion App stays at_risk." },
+        { "date": "2026-06-25", "entry": "DATE: deploy wall confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. next_milestone moved from the 6/23 first-store deployment to the 7/3 deploy wall; Validation re-anchored 6/23 → 7/3 to the wall (6/23 first-store-deployment outcome not yet recorded — pending confirmation)." },
+        { "date": "2026-06-25", "entry": "Weekly deck TSC_Weekly rebuilt to 6/24: Slide 2 (Feature Stages) regenerated via build_slide2.js with a priority-callout banner + 6-row grid; Slide 3 MS Account cell grey → green; title date 6/17 → 6/24." }
+      ]
+    },
+    {
+      "id": "qc-tool",
+      "name": "QC Tool — Post-Install Inspection",
+      "serves": "TopStock Rail / Walmart first; multi-product later",
+      "status": "in_progress",
+      "owner": "Clay (PM)",
+      "supporting": ["Eric (backend — data pull reuses his pipeline)"],
+      "link": null,
+      "modules": [
+        { "name": "v1 (Working)", "status": "in_progress", "due": "2026-07-10" },
+        { "name": "Complete w/ images", "status": "not_started", "due": "2026-07-25" }
+      ],
+      "next_milestone": "v1 (Working) complete",
+      "next_milestone_due": "2026-07-10",
+      "blockers": [],
+      "notes": "Post-install inspection, TopStock/Walmart priority. v1 (Working, 7/10) = one UI (designed to hold images) + data pull reusing Eric's pipeline + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 is an estimate, gated on the image-storage decision; images are a fast-follow staged into the same UI. Build happens in its own project; underway against mock store 100. Full audit loop works end-to-end (adapter picker → scanner → 3-step questions → save → home); completed rails persist to IndexedDB and home progress/zone/adapter counts advance live. audit_questions.html = 3 steps (adapter checks varying by type, shared rail checks, ESL three-way Correct/Wrong Location/No Image). Scanner: manual entry auto-formats to XXXX-XXXX with Continue gated on a valid 8-char ID; duplicate-rail scans warn-and-overwrite (latest wins per session); location-confirm 'No' keeps the adapter choice; confirm-location modal no longer opens on page load. Sampling locked: ±7% margin = 167 rails for store 100, proportional across 8 letter-zones (zone = leading alpha of the section code), adapter targets 85% standard / 10% warehouse / 5% wire frame, fill-as-you-go. View-Data/PC dashboard built (data_dashboard.html): columnar cross-filter view — 3 defect donuts (all/adapter/rail), per-adapter breakdown cards, filter-aware blue completion bar, store/zone/adapter filters, store-aware CSV export; reads all audit records across sessions (getAllAuditRecords), store-stamped saves (untagged legacy → Store 100), in-memory demo mode (Demo Store 1/2/3, never persisted, off by default, amber toggle + banner); nav reordered so activity precedes store pick (login→flow_pick, audit→store→audit_home, view→dashboard), auto-save-per-rail replaces the old Save-session button. Open gaps tracked as carry-forwards: derived_severity rules undefined, Warehouse/Wire Frame wording provisional, third adapter unreleased, Azure-vs-Supabase backend decision pending the Azure tenant answer. Outcome = a reliable post-install QC record for TopStock.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Committed 7/10 delivery." },
+        { "date": "2026-06-15", "entry": "v1 (Working) target set 7/15 (was 7/10). Scope defined: single image-ready UI + Eric-pipeline data pull + text deficiencies + hosted + internal-only RBAC. Complete-with-images ~7/25 fast-follow, gated on image-storage decision. Starts after the 6/22 test install." },
+        { "date": "2026-06-16", "entry": "Data model v0.1 drafted and finalized as the build contract — entities, conditional per-adapter inspection items, frozen+versioned sample plan; date unchanged." },
+        { "date": "2026-06-16", "entry": "Store-100 ingest parser built — expands 8-ft sections into L/R rails (1,081 rails across 8 letter-zones) as the mock dataset behind dataService.js." },
+        { "date": "2026-06-16", "entry": "Sample size set at ±7% margin = 167 rails, proportional by zone, with adapter targets (85% standard / 10% warehouse / 5% wire frame) as fill-as-you-go." },
+        { "date": "2026-06-16", "entry": "Frontend build started against mock data: login, store selector, flow picker, audit home (sampling hub), adapter picker (soft quota warning), camera scanner (BarcodeDetector + ZXing fallback, Scandit-ready) with morph-to-button and confirm-location modal. Status → in_progress." },
+        { "date": "2026-06-16", "entry": "Inspection-checklist blocker cleared for Standard adapter (rivet/flat/tight checks confirmed verbally + via user guide); Warehouse + Wire Frame wording still provisional pending team/engineering, third adapter unreleased — narrowed to carry-forward cf-qc-inspection-checklist." },
+        { "date": "2026-06-17", "entry": "Full audit loop working end-to-end against mock store 100 (adapter picker → scanner → 3-step questions → save → home); completed rails write to IndexedDB and home progress/zone/adapter counts advance live." },
+        { "date": "2026-06-17", "entry": "Built audit_questions.html (3 steps: adapter checks varying by type, shared rail checks, ESL three-way Correct/Wrong Location/No Image) and wired the save-session flow." },
+        { "date": "2026-06-17", "entry": "Scanner fixes: manual entry auto-formats to XXXX-XXXX with Continue gated on a valid 8-char ID; duplicate-rail scans warn-and-overwrite (latest wins per session); location-confirm 'No' keeps the adapter choice; confirm-location modal no longer opens on page load." },
+        { "date": "2026-06-17", "entry": "Sampling locked at ±7% margin = 167 rails for store 100, proportional across 8 letter-zones (zone = leading alpha of the section code), adapter targets 85/10/5 as fill-as-you-go." },
+        { "date": "2026-06-17", "entry": "Date reconciled: v1 (Working) due corrected 7/15 → 7/10 to match Clay's restated commitment (7/10 unchanged); Complete-with-images ~7/25 estimate unchanged." },
+        { "date": "2026-06-17", "entry": "Logged open QC carry-forwards (flagged to carry weekly): derived_severity rules undefined (cf-qc-derived-severity), View Data dashboard not built (cf-qc-view-data), Azure-vs-Supabase backend decision pending Azure tenant answer (cf-qc-backend-decision)." },
+        { "date": "2026-06-17", "entry": "Removed all visible 'provisional' tags from the adapter picker and question screens (flag retained in data only); audit flow now reads as final to the auditor. Underlying Warehouse/Wire Frame wording remains provisional per cf-qc-inspection-checklist." },
+        { "date": "2026-06-17", "entry": "Built data_dashboard.html (View-Data/PC side): columnar dashboard — 3 cross-filtered defect donuts (all/adapter/rail), per-adapter breakdown cards, filter-aware blue completion bar, store/zone/adapter filters, store-aware CSV export." },
+        { "date": "2026-06-17", "entry": "Added getAllAuditRecords() to dataService.js — dashboard reads all records across sessions (viewing is session-less); fixed null-session IDBKeyRange crash with a guard." },
+        { "date": "2026-06-17", "entry": "Added store-stamping to saveAuditRecord — records now filter by store; untagged legacy records default to Store 100." },
+        { "date": "2026-06-17", "entry": "Added in-memory demo mode to the dashboard (Demo Store 1/2/3, never persisted, starts OFF) with amber toggle + warning banner." },
+        { "date": "2026-06-17", "entry": "Reordered nav so activity precedes store pick (login→flow_pick; audit→store picker→audit_home; view→dashboard direct); removed 'Save session' from audit_home in favor of auto-save-per-rail + 'View data' exit." },
+        { "date": "2026-06-17", "entry": "Carry-forward cf-qc-view-data RESOLVED — View-Data dashboard built (data_dashboard.html)." }
+      ]
+    },
+    {
+      "id": "site-survey-tool",
+      "name": "Site Survey Tool",
+      "serves": "Multi-product, ESL-first",
+      "status": "in_progress",
+      "owner": "Clay (PM)",
+      "supporting": ["JB (partner)"],
+      "link": null,
+      "next_milestone": "Prove ARKit / capture spine — go/no-go checkpoint (gates the internal-build-vs-buy thesis)",
+      "next_milestone_due": "2026-07-03",
+      "blockers": [],
+      "environment": {
+        "primary_device": "Personal iPhone 15 Pro (LiDAR-equipped) — the dev/test device, via Xcode sideload",
+        "work_phone": "Excluded from dev/test (likely MDM-managed)",
+        "os": "iOS 26.4",
+        "build_target": "Xcode iOS 26.5 SDK",
+        "deployment_target": "iOS 17",
+        "signing": "Free Apple ID — 7-day provisioning profile; re-run from Xcode to renew",
+        "setup_gauntlet": "Cleared: signing, Developer Mode, device trust, camera permission, iOS 17 deployment target",
+        "distribution_trigger": "$99/yr Apple Developer account + TestFlight, once the tool is validated, to distribute to additional testers",
+        "capture_rig": "Clamp mount on the cart child-seat bar; phone at ~45° shooting left-side shelving. Mount angle = a fixed design parameter for the planned cart holder. Confirmed load-bearing, not optional — the measurement operating envelope depends on it."
+      },
+      "validation": {
+        "tag_count": "101 detected vs 104 actual on real fixtures (97%)",
+        "section_detection": "3 sections found for 3 walked; shelf-level detection functioning",
+        "length_within_session": "Tight within a session (~1–2 in spread)",
+        "length_cross_session": "Varies with standoff distance and camera angle — same setup gave 8-inch session-to-session swings when the mount drifted off 45°",
+        "method_comparison": "Raycast method drift-stable (shrugged off a 31.6-inch path deviation); camera-travel method inflated under drift. Built a shelf-derived aisle axis (from shelf-plane facing, not the walked path) so both length measures project onto a drift-immune reference — pending morning straight-vs-drift walk comparison.",
+        "key_insight": "'Rigid breaks, flexible works' — measurement must tolerate cart/angle wobble, not assume a fixed 45°.",
+        "operating_envelope": "Min standoff bounded by camera FOV (can't capture an 81-inch top shelf below ~42 inches at 45°); max bounded by precision degrading with distance. Fixed-angle production cart mount is load-bearing.",
+        "next_problem": "Shelf-edge definition (landing dots on the lip where tags live) is the next major problem after length."
+      },
+      "notes": "ARKit is the foundation of the internal build (scene-reconstruction mesh + LiDAR, NOT RoomPlan — its furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we own the interpretation step). Polycam / Matterport are build-vs-buy ALTERNATIVES, not a fallback — if ARKit can't prove out, escalate the build-vs-buy decision. ARKit testing is planned work, not a threat, so the project is in_progress (not at-risk). Hardware dependency accepted: usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android) — per-device cost trivial vs solution-architect time. Direction deck (7 slides, RF Slate) + working v0.0.01 demo presented to the technical group, well received; key challenge = prove the tool measures fixtures to the accuracy we need (±0.5 inch target, error bands, honest pass/fail across shelf bay width, shelf height, gondola length/depth, aisle width; tiered T0 methodology → T1 controlled accuracy → T2 real store aisle → T3 derived counts). Built AisleMeasure — a native ARKit + LiDAR app with (a) a tap-to-measure validation mode (labeled measurements, CSV error-table export vs the ±0.5 inch target) and (b) a walk-the-aisle auto-capture mode (Vision-based ESL tag counting with 3D dedup, LiDAR-mesh shelf-level detection, per-section width/shelf/tag breakdown, drift estimate, CSV export). Section segmentation (bay-boundary detection) is the first iteration area — v1 infers boundaries from tag-density gaps and under-segments butted bays (tracked as cf-sitesurvey-segmentation). Paired with an expectation-vs-reality validation workbook mirroring both CSV exports (pre-walk thresholds, auto-computed error + pass/fail, per-failure-mode cause tracking: Vision / mesh / segmentation / tracking). AisleMeasure is building AND running on the iPhone 15 Pro (LiDAR-equipped, iOS 26.4) via free Apple ID signing against the Xcode iOS 26.5 SDK — the free-ID profile lasts 7 days, so it's re-run from Xcode to renew; fine for dev/test on the device on hand. Distribution path: a $99/yr Apple Developer account + TestFlight is the flagged trigger for pushing the build to additional testers, pulled once the tool is validated (not before). Dev/test runs on Clay's personal iPhone 15 Pro via Xcode sideload — the work phone is excluded (likely MDM-managed). Capture validation (real fixtures): the LiDAR mesh captures dense, clean geometry at cart working distance, and the mesh depth-color gradient cleanly separates the near target run from the far aisle. Added orientation gating — the app learns the run's facing direction from vertical shelf-panel mesh normals and rejects perpendicular cross-aisle geometry that depth gating alone can't exclude; built with a discard/file-separately switch so the same partition logic can feed future whole-store stitching. Capture rig defined: clamp mount on the cart child-seat bar, phone at ~45° shooting left-side shelving (mount angle is a fixed design parameter for the planned cart holder, to remove camera-orientation uncertainty). Setup gauntlet cleared (signing, Developer Mode, device trust, camera permission, iOS 17 deployment target). Core detectors validated on real fixtures: tag count 101 vs 104 actual (97%), shelf-level + section detection working (3 sections found for 3 walked). Breakthrough: the near-plane gate was REMOVED entirely — it was rejecting up to 100% of detections on wrong assumptions about the diagonal cart-mount geometry, the root saboteur on both the tag and shelf pipelines. All detection moved off the main thread (fixed the camera freeze); tag positions now come from LiDAR depth unprojection rather than thread-unsafe ARView raycast. Debug overlay added (live detection boxes, shelf-candidate dots, per-stage diagnostic counters) plus a gating on/off toggle — this instrumentation is what let every failure be diagnosed by sight instead of guessed at. UI: length shown in feet-and-inches; summarize step backgrounded with a working spinner; total shelf count made cumulative across sections (BOM-relevant) rather than distinct heights; world-space boundary bar (raycast at a fixed left-third line) lets the operator mark a deliberate start/stop span to measure against a tape; side still hardcoded LEFT pending real UI. Length findings: within-session readings are tight (~1–2 in) but accuracy varies with standoff distance and camera angle (8-inch session-to-session swings when the mount drifted off 45°). KEY INSIGHT — 'rigid breaks, flexible works': measurement must tolerate cart/angle wobble, not assume a fixed 45°. The raycast method proved drift-stable (shrugged off a 31.6-inch path deviation) while camera-travel inflated under drift; built a shelf-derived aisle axis (from shelf-plane facing, not the walked path, so it's drift-immune) onto which both length measures project — pending a morning straight-vs-drift walk comparison. Operating envelope: min standoff bounded by camera FOV (can't capture an 81-inch top shelf below ~42 inches at 45°), max by precision degrading with distance — so a fixed-angle production cart mount is load-bearing, not optional. Shelf-edge definition (landing dots on the lip where tags live) is flagged as the next major problem after length. Open carry-forwards: tag detector counts any tag-shaped rectangle (barcode/signage false-positives), deferred to a detection-refinement pass (cf-sitesurvey-tag-detector); section segmentation still inferred from tag-density gaps — works on clean runs, untested on butted bays (cf-sitesurvey-segmentation); a ~13-inch systematic short-read offset on straight walks remains uncharacterized (cf-sitesurvey-length-offset). (MeshWalk was the earlier minimal mesh-viewer prototype.) Built a standalone timeline drill-down (matches the QC/GT Gantt format); new deck element: orange diamond = go/no-go checkpoint. Capture-screen animation fixed (walk-to-dot rides the perspective line to the aisle vanishing point; perspective easing; DOT_START/DOT_PERSP tunable). Phased 6-week runway: general design DONE (wk of 6/15); Prove ARKit / capture spine → go/no-go checkpoint ~7/3 (the highest-leverage decision — gates both downstream phases and the entire internal-build-vs-buy thesis); Data + RF ~6/29–7/15; align derived outputs with the broader team ~7/13–7/22; in-store demo committed wk of 7/27. Build sequence: 1 Capture spine → 2 Data + RF → 3 Derived outputs → 4 Demo store; backlog tracked separately.",
+      "roadmap": [
+        { "step": 1, "name": "Capture spine", "detail": "ARKit scene-reconstruction mesh, cart-mount pose stability, frame + dot-stitch loop" },
+        { "step": 2, "name": "Data + RF", "detail": "observation/interpretation schema, BLE + WiFi sampling on the pose, checkpoint + confidence pass" },
+        { "step": 3, "name": "Derived outputs", "detail": "fixture geometry → counts, semantic aisle labeling v1, Studio Evo Maps export path" },
+        { "step": 4, "name": "Demo store", "detail": "end-to-end run in one store, ground-truth error check, polish capture UX" }
+      ],
+      "backlog": [
+        "Semantic-OCR aisle-label normalization across languages and retailer vernaculars",
+        "Retailer privacy + interior-imagery handling",
+        "Passive cart-mount physical design (possibly 3D-printable)",
+        "Graceful degradation for non-grid layouts, multi-level stores, blocked aisles, reflective freezer runs, resumable sessions",
+        "Anchor-tag placement left deliberately undefined — to be settled empirically by the tool's own RF data"
+      ],
+      "phases": [
+        { "name": "General design", "status": "done", "window": "wk of 6/15" },
+        { "name": "Prove ARKit / capture spine", "status": "in_progress", "checkpoint": "~2026-07-03 go/no-go", "note": "highest-leverage decision; gates both downstream phases and the internal-build-vs-buy thesis" },
+        { "name": "Data + RF", "status": "planned", "window": "~2026-06-29 to 2026-07-15" },
+        { "name": "Align derived outputs with broader team", "status": "planned", "window": "~2026-07-13 to 2026-07-22" },
+        { "name": "In-store demo", "status": "committed", "window": "wk of 2026-07-27", "note": "6-week runway" }
+      ],
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." },
+        { "date": "2026-06-17", "entry": "Capture-screen walk-to-dot animation fixed — dot now rides the perspective line from the centered reticle out to the aisle's vanishing point (off-screen right, near eye level), no longer floating on the wrong shelf." },
+        { "date": "2026-06-17", "entry": "Per-dot drift corrected — added perspective easing (dot hangs back when far, rushes in on arrival like a fixed world point), shortened per-dot travel, re-anchored stops to their landing frame so the last dot lands in-frame; DOT_START and DOT_PERSP exposed as tunable constants." },
+        { "date": "2026-06-17", "entry": "Rebuilt the 7-slide direction deck in the RF Slate palette; reframed the capture flow from concept to working v0.0.01; added phone-screenshot drop slots on the capture slide for device mockups; built to stand alone if distributed." },
+        { "date": "2026-06-17", "entry": "Capture framework settled — build directly on ARKit scene-reconstruction mesh + LiDAR, NOT RoomPlan (RoomPlan's furniture taxonomy and ~2,000 sq ft single-scan ceiling don't fit retail fixtures at store scale; we want to own the interpretation step)." },
+        { "date": "2026-06-17", "entry": "Hardware dependency confirmed — usable LiDAR + ARKit only on iPhone Pro / iPad Pro (no standard iPhone, no Android); stated as a deliberate, accepted tradeoff (per-device cost trivial vs solution-architect time)." },
+        { "date": "2026-06-17", "entry": "Presented the direction deck + v0.0.01 demo to the technical group; both well received; key challenge raised = proving the tool actually measures the fixtures we need to the accuracy we need." },
+        { "date": "2026-06-17", "entry": "Committed to a hands-on ARKit LiDAR capture test (iPhone 16 Pro + M4 MacBook Air); built a minimal mesh-viewer app (MeshWalk) to walk an aisle, visualize the scene mesh, and spot-check measurements against a tape measure." },
+        { "date": "2026-06-17", "entry": "BLOCKER: work MacBook locked, gating the MeshWalk build; chasing IT unlock + Xcode install + personal-Apple-ID signing on one ticket. Polycam + Apple Measure staged on the phone as a no-Mac fallback (same ARKit + LiDAR stack)." },
+        { "date": "2026-06-17", "entry": "Defined the measurement-validation methodology: ground truth (tape) vs tool across fixture dimensions (shelf bay width, shelf height, gondola length/depth, aisle width), reported as error bands against a ±0.5 inch target, with honest pass/fail rather than a polished claim." },
+        { "date": "2026-06-17", "entry": "Validation structured in tiers: Tier 0 methodology (no dependencies), Tier 1 dimensional accuracy on a controlled/fallback capture, Tier 2 real store aisle, Tier 3 derived counts (facings, adaptors) if dimensions pass." },
+        { "date": "2026-06-17", "entry": "Day-by-day plan to a Wed-AM presentation: Wed clear blockers (IT ticket + install fallback apps), Thu build MeshWalk or fall back to Polycam, Fri first real store aisle capture + ground-truth sheet (critical day), Mon analyze into an error table + optional second pass, Tue build the validation deck with real data." },
+        { "date": "2026-06-17", "entry": "DATE: measurement-proof / validation results due Tuesday night 6/23, presenting first thing Wednesday morning 6/24 (first committed Site Survey date)." },
+        { "date": "2026-06-17", "entry": "RISK: the plan has one fragile point — store capture must happen Friday 6/19; if the Mac unlock slips, capture proceeds Friday with Polycam regardless, because the validation question is about the sensor, not our code." },
+        { "date": "2026-06-17", "entry": "ROADMAP build sequence set (4 steps): 1) Capture spine — ARKit mesh, cart-mount pose stability, frame+dot-stitch loop; 2) Data + RF — observation/interpretation schema, BLE+WiFi sampling on the pose, checkpoint+confidence pass; 3) Derived outputs — fixture geometry→counts, semantic aisle labeling v1, Studio Evo Maps export path; 4) Demo store — end-to-end run in one store, ground-truth error check, polish capture UX." },
+        { "date": "2026-06-17", "entry": "BACKLOG/future logged: semantic-OCR aisle-label normalization across languages/vernaculars; retailer privacy + interior-imagery handling; passive cart-mount physical design (possibly 3D-printable); graceful degradation (non-grid layouts, multi-level, blocked aisles, reflective freezer runs, resumable sessions); anchor-tag placement left deliberately undefined, to be settled empirically by the tool's own RF data." },
+        { "date": "2026-06-17", "entry": "Build-vs-buy settled: build on raw ARKit, not an existing scanner engine (e.g. Polycam). Existing scanners are export-only / not embeddable — routing capture through one would impose their UX + interpretation on a retail-survey job, lose the single-walk geometry+RF capture, and make a consumer app's pricing/format/existence a load-bearing dependency. Same Apple sensor + pose either way; interpretation and capture UX are the actual product and stay in-house. Polycam remains only a no-Mac validation fallback." },
+        { "date": "2026-06-18", "entry": "Built AisleMeasure — a native ARKit + LiDAR tap-to-measure validation app for fixture dimensional-accuracy testing against the ±0.5 inch target, with labeled measurements and CSV error-table export." },
+        { "date": "2026-06-18", "entry": "Extended AisleMeasure with a walk-the-aisle auto-capture mode: Vision-based ESL tag counting with 3D dedup, LiDAR-mesh shelf-level detection, per-section width/shelf/tag breakdown, a drift estimate, and CSV export." },
+        { "date": "2026-06-18", "entry": "Flagged section segmentation (bay-boundary detection) as the first area needing iteration — v1 infers boundaries from tag-density gaps and will under-segment butted bays. Logged as carry-forward cf-sitesurvey-segmentation." },
+        { "date": "2026-06-18", "entry": "Built an expectation-vs-reality validation workbook mirroring both AisleMeasure CSV exports — pre-walk conditions/thresholds set before the walk, auto-computed error and pass/fail, and per-failure-mode cause tracking (Vision / mesh / segmentation / tracking)." },
+        { "date": "2026-06-18", "entry": "Delivery: AisleMeasure packaged as a sideloadable Xcode project with a free-Apple-ID signing guide; now awaiting iPhone 16 Pro arrival, then an Xcode build (expect compile errors to clear) before the first store walk. Blocker reframed from the locked MacBook to device arrival + build; Polycam fallback retained." },
+        { "date": "2026-06-18", "entry": "Status corrected at_risk → in_progress — ARKit testing is planned work, not a threat. Removed the at-risk framing and the Polycam-fallback language from the overview; device-arrival → Xcode-build is now a near-term gate in notes, not a blocker." },
+        { "date": "2026-06-18", "entry": "Reframed Polycam/Matterport as build-vs-buy ALTERNATIVES, not a fallback. ARKit is the foundation of the internal build; if ARKit can't prove out → escalate the build-vs-buy decision. Supersedes the earlier 'Polycam validation fallback' framing." },
+        { "date": "2026-06-18", "entry": "Timeline restructured into phases (6-week runway): general design DONE (wk 6/15); Prove ARKit/capture spine → go/no-go ~7/3 (gates internal-build thesis); Data+RF ~6/29–7/15; align derived outputs w/ broader team ~7/13–7/22; in-store demo committed wk of 7/27. next_milestone reanchored from the 6/23 measurement-proof to the ~7/3 ARKit go/no-go." },
+        { "date": "2026-06-18", "entry": "Built a standalone timeline drill-down (matches the QC/GT Gantt format); new deck element: orange diamond = go/no-go checkpoint." },
+        { "date": "2026-06-18", "entry": "ARKit go/no-go ~7/3 flagged as the highest-leverage decision point — gates both downstream phases and the entire internal-build-vs-buy thesis." },
+        { "date": "2026-06-18", "entry": "Dev/test environment set: primary device = iPhone 15 Pro (LiDAR-equipped) on iOS 26.4, building against the Xcode iOS 26.5 SDK. Settles the device question — build proceeds on the iPhone 15 Pro on hand; supersedes the earlier 'awaiting iPhone 16 Pro arrival' note." },
+        { "date": "2026-06-18", "entry": "AisleMeasure now building AND running on the iPhone 15 Pro via free Apple ID signing (7-day provisioning profile; re-run from Xcode to renew). $99/yr Apple Developer account + TestFlight flagged as the trigger to distribute to additional testers, pulled once the tool is validated." },
+        { "date": "2026-06-18", "entry": "Known issue logged: the tag detector currently counts any tag-shaped rectangle, so it will false-positive on barcodes, shelf-talkers, and signage. Deferred to a detection-refinement pass after the core framework (plane gating, segmentation, walk-and-count) is validated. Tracked as carry-forward cf-sitesurvey-tag-detector." },
+        { "date": "2026-06-18", "entry": "Device clarified: AisleMeasure runs on Clay's personal iPhone 15 Pro (LiDAR) via Xcode sideload — the personal phone is the dev/test device; the work phone is excluded (likely MDM-managed)." },
+        { "date": "2026-06-18", "entry": "Capture validation: confirmed the LiDAR mesh captures dense, clean geometry of real retail fixtures at cart working distance; the mesh depth-color gradient cleanly separates the near target run from the far aisle." },
+        { "date": "2026-06-18", "entry": "Added orientation gating: the app learns the run's facing direction from vertical shelf-panel mesh normals and rejects perpendicular cross-aisle geometry that depth gating alone can't exclude. Built with a discard/file-separately switch so the same partition logic can feed future whole-store stitching." },
+        { "date": "2026-06-18", "entry": "Capture rig defined: clamp mount on the cart child-seat bar, phone at ~45° shooting left-side shelving; mount angle flagged as a fixed design parameter for the planned cart holder, to remove camera-orientation uncertainty." },
+        { "date": "2026-06-18", "entry": "Engineering: automated the near-plane band (removed the manual slider) and moved tag/shelf detection off the main thread to fix a camera freeze; capture screen decluttered, side hardcoded LEFT pending real UI." },
+        { "date": "2026-06-18", "entry": "Carry-forward reaffirmed: tag detector still counts any tag-shaped rectangle (barcode/signage false-positives) — remains open as cf-sitesurvey-tag-detector, deferred to the detection-refinement pass after core-framework validation." },
+        { "date": "2026-06-18", "entry": "AisleMeasure builds and runs on the iPhone 15 Pro via Xcode sideload — full setup gauntlet cleared (signing, Developer Mode, device trust, camera permission, iOS 17 deployment target)." },
+        { "date": "2026-06-18", "entry": "Core detectors validated on real fixtures: tag count 101 vs 104 actual (97%); shelf-level and section detection functioning (3 sections found for 3 walked)." },
+        { "date": "2026-06-18", "entry": "Removed the near-plane gate entirely — it was rejecting up to 100% of detections on wrong assumptions about the diagonal cart-mount geometry, and was the root saboteur on both the tag and shelf pipelines." },
+        { "date": "2026-06-18", "entry": "Refined orientation gating to reject perpendicular cross-aisle geometry past the aisle end, keeping the discard/file-separately switch reserved for future whole-store stitching." },
+        { "date": "2026-06-18", "entry": "Moved all detection off the main thread (fixed the camera freeze); tag positions now derive from LiDAR depth unprojection instead of thread-unsafe ARView raycast." },
+        { "date": "2026-06-18", "entry": "Added a debug overlay (live detection boxes, shelf-candidate dots, per-stage diagnostic counters) and a gating on/off toggle — the instrumentation that let every failure be diagnosed by sight rather than guessed at." },
+        { "date": "2026-06-18", "entry": "UI: switched length display to feet-and-inches; backgrounded the summarize step with a working spinner; made total shelf count cumulative across sections (BOM-relevant) rather than distinct heights." },
+        { "date": "2026-06-18", "entry": "Built a world-space boundary bar (raycast at a fixed left-third line) so the operator can mark a deliberate start/stop span and measure it against a tape." },
+        { "date": "2026-06-18", "entry": "Measurement validation findings: tag detection still over-counts (fires on any rectangle, not just ESL tags) — deferred to the detection-refinement pass; shelf-edge definition (landing dots on the lip where tags live) flagged as the next major problem after length." },
+        { "date": "2026-06-18", "entry": "KEY INSIGHT — 'rigid breaks, flexible works': measurement must tolerate cart/angle wobble, not assume a fixed 45°. Length is highly angle-sensitive — the same setup gave 8-inch session-to-session swings when the mount drifted off 45°." },
+        { "date": "2026-06-18", "entry": "Length validation: within-session readings are tight (~1–2 in spread), but accuracy varies with standoff distance and camera angle. The raycast method proved drift-stable (shrugged off a 31.6-inch path deviation) while the camera-travel method inflated under drift." },
+        { "date": "2026-06-18", "entry": "Built a shelf-derived aisle axis (drift-immune, taken from shelf-plane facing rather than the walked path) so both length measures project onto a stable reference; pending morning validation with a straight-vs-drift walk comparison." },
+        { "date": "2026-06-18", "entry": "Operating-envelope thinking: min standoff is bounded by camera FOV (can't capture an 81-inch top shelf below ~42 inches at 45°), max by precision degrading with distance — fixed-angle production cart mount confirmed as load-bearing, not optional." },
+        { "date": "2026-06-18", "entry": "New carry-forward cf-sitesurvey-length-offset: a ~13-inch systematic short-read offset on straight walks remains uncharacterized. Reaffirmed open: tag-detector barcode/signage false-positives (cf-sitesurvey-tag-detector) and tag-density-gap section segmentation untested on butted bays (cf-sitesurvey-segmentation)." }
+      ]
+    },
+    {
+      "id": "esl-maintenance-app",
+      "name": "ESL Maintenance App",
+      "serves": "ESL service at Sainsbury's",
+      "status": "blocked",
+      "owner": "Clay",
+      "supporting": ["Jessie (ESL data pull — gating input)"],
+      "link": null,
+      "next_milestone": "App built from existing framework once Jessie's data lands",
+      "next_milestone_due": "2026-06-19",
+      "blockers": [
+        "Waiting on Jessie's ESL data pull — start immediately when received"
+      ],
+      "notes": "Quick build: copying framework from an existing app. Target end of week of 6/15. Status flips to in_progress the day data arrives.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. Blocked on data; target 6/19." }
+      ]
+    }
+  ],
+
+  "carry_forwards": [
+    {
+      "id": "cf-camera-behind-glass",
+      "item": "Definitive answer on camera-behind-glass scope (Sainsbury's Captana pilot)",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "resolved",
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-blink-id-corrective-action",
+      "item": "Blink ID corrective-action follow-up (Sainsbury's)",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "resolved",
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-blink-id-reliability",
+      "item": "Blink ID reliability escalation — random, non-reproducible ESL misses with no command acknowledgement, retry, or event-level traceability",
+      "opened": "TBD — backfill actual open date",
+      "weeks_open": null,
+      "status": "resolved",
+      "owner": "Nick (RMA/escalations) + Clay",
+      "resolution": "Closed per Clay 6/15 — taken off Clay's plate.",
+      "resolution_date": "2026-06-15",
+      "rule": "Active escalation. Carries forward weekly until resolved."
+    },
+    {
+      "id": "cf-qc-inspection-checklist",
+      "item": "QC inspection-checklist wording for Warehouse + Wire Frame adapters provisional — pending team/engineering confirmation (third adapter unreleased). Standard adapter checks confirmed 6/16.",
+      "opened": "2026-06-16",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM) + team/engineering",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-derived-severity",
+      "item": "QC derived_severity rules undefined — the logic mapping inspection answers to a severity outcome is not yet specified.",
+      "opened": "2026-06-17",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-view-data",
+      "item": "QC View Data dashboard not built — the read/review surface over saved inspection sessions.",
+      "opened": "2026-06-17",
+      "weeks_open": 0,
+      "status": "resolved",
+      "owner": "Clay (PM)",
+      "resolution": "Built data_dashboard.html — columnar cross-filter View-Data dashboard (defect donuts, per-adapter cards, completion bar, store/zone/adapter filters, CSV export) reading all records across sessions.",
+      "resolution_date": "2026-06-17",
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-qc-backend-decision",
+      "item": "QC backend hosting decision (Azure vs Supabase) pending the Azure tenant answer (resource-group/tenant). Gates the 'hosted' part of v1 scope.",
+      "opened": "2026-06-16",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-sitesurvey-segmentation",
+      "item": "Site Survey AisleMeasure — section segmentation (bay-boundary detection) is the first area needing iteration. v1 infers boundaries from tag-density gaps and will under-segment butted bays; affects per-section width/shelf/tag breakdowns.",
+      "opened": "2026-06-18",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-sitesurvey-tag-detector",
+      "item": "Site Survey AisleMeasure — tag detector currently counts any tag-shaped rectangle, so it will false-positive on barcodes, shelf-talkers, and signage. Deferred to a detection-refinement pass after the core framework (plane gating, segmentation, walk-and-count) is validated.",
+      "opened": "2026-06-18",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    },
+    {
+      "id": "cf-sitesurvey-length-offset",
+      "item": "Site Survey AisleMeasure — a ~13-inch systematic short-read offset on straight walks is still uncharacterized. Within-session length readings are tight (~1–2 in spread), but a consistent short-read bias remains; root cause not yet isolated.",
+      "opened": "2026-06-18",
+      "weeks_open": 0,
+      "status": "open",
+      "owner": "Clay (PM)",
+      "resolution": null,
+      "rule": "Carries forward weekly until resolved. Cannot be deleted — only resolved with date + resolution note."
+    }
+  ],
+
+  "recurring_deliverables": [
+    {
+      "name": "Weekly leadership slide",
+      "standard": "Thaddeus directive: single slide, max 200 words, delete unused boxes, relevance over completeness",
+      "cadence": "weekly"
+    },
+    {
+      "name": "Weekly recap email",
+      "standard": "Subject format: Weekly Recap | [Date] | Product Implementation. SharePoint links left as [LINK] placeholders.",
+      "cadence": "weekly"
+    }
+  ],
+
+  "operating_principles": [
+    "Deployment-to-results: every performance result tied to a specific deployment config (this config = this performance = this cost)",
+    "Unresolved gaps carry forward every week without exception, flagged until nauseating",
+    "Track timelines by owner, commitment, and outcome — not by who is nominally in charge"
+  ],
+
+  "portfolio_risks": [
+    {
+      "id": "risk-eric-pipeline-bandwidth",
+      "risk": "Eric's data pipeline plus his post-6/22 bandwidth is the shared dependency across Companion Validation, QC Tool data pull, and Maintenance monitoring/alerting.",
+      "impact": "Single biggest portfolio risk — manage Eric's queue deliberately.",
+      "owner": "Clay (PM)",
+      "opened": "2026-06-15",
+      "status": "open"
+    }
+  ],
+
+  "archived_projects": [
+    {
+      "id": "gt-tool-v2",
+      "name": "GT Tool v2",
+      "serves": "Captana (Sainsbury's pilot — 4 UK stores)",
+      "status": "withdrawn",
+      "owner": "Clay (PM)",
+      "supporting": ["Connor (stakeholder — recent improvements delivered for him)"],
+      "link": "https://claywhite3.github.io/GT/",
+      "next_milestone": "Scope decision: build v2 vs adopt/adapt existing France tool",
+      "next_milestone_due": "2026-06-16",
+      "blockers": [
+        "Parked pending France lead reply (expected 6/16) — France may already run a tool in use; v2 may become adopt/adapt rather than build."
+      ],
+      "notes": "Parked and deprioritized — decoupled from the Sainsbury's push; lower priority (Walmart always wins). Prior 6/26 build target is on hold pending the scope decision. v1 live and filterable by time, location, camera spacing. Outcome = eliminate manual image-checking.",
+      "archived_date": "2026-06-17",
+      "archived_reason": "Request withdrawn — dropped from active tracker; archived for the record.",
+      "changelog": [
+        { "date": "2026-06-11", "entry": "Tracker initialized. v2 goal set for 6/26." },
+        { "date": "2026-06-15", "entry": "GT v2 parked pending France lead reply (expected 6/16) — possible adopt/adapt vs build. Decoupled from Sainsbury's; deprioritized (Walmart priority). Prior 6/26 build target on hold. Status → blocked. Outcome framed: eliminate manual image-checking." },
+        { "date": "2026-06-17", "entry": "Project withdrawn — request withdrawn. Dropped from active tracker and dashboard; archived here for the record." }
+      ]
+    }
+  ]
+}

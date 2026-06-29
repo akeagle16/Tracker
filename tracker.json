@@ -95,13 +95,37 @@
           "status": "established",
           "title": "Product-agnostic survey schema",
           "detail": "Survey schema is deliberately product-agnostic as a forcing function — it captures the space, not any one product's needs. Product-specific requirements are deferred to an additive layer that references the survey rather than being baked into capture."
+        },
+        {
+          "id": "decision-2-three-bucket-model",
+          "date": "2026-06-29",
+          "status": "locked",
+          "title": "Three-bucket data model (declared / observed / interpreted)",
+          "detail": "Every captured value sorts into one of three buckets: declared (asserted by a human up front), observed (raw sensor/marker sighting), or interpreted (derived/reconciled). Bucket assignment decided by a field-sort test. Multi-pass fusion keeps ALL passes as immutable observations and reconciles them into a single interpretation — observations are never overwritten."
+        },
+        {
+          "id": "assumption-ledger-a1-a5",
+          "date": "2026-06-29",
+          "status": "established",
+          "title": "Schema assumption ledger A1–A5",
+          "detail": "Ledger commits the schema SHAPE while explicitly parking the algorithms: A1 marker sightings, A2 frame-to-frame alignment, A3 segmented sessions, A4 sibling-reading interpretations, A5 fusion. Each assumption fixes what the schema must hold without committing to how it's computed."
+        },
+        {
+          "id": "two-marker-break-marker-workflow",
+          "date": "2026-06-29",
+          "status": "adopted",
+          "title": "Two-marker break-marker workflow",
+          "detail": "Session resume / re-localization uses a two-marker break-marker workflow (kit decals + training). De-risks Decision 4 versioning by reusing the same alignment mechanism against a permanent anchor."
         }
       ],
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." },
         { "date": "2026-06-29", "entry": "Locked schema Decision 1 — spatial hierarchy: Retailer→Store→Floor→Zone→optional Aisle→Section(=bay), optional shelf-level addressing, bottom=1 shelf indexing stored as an attribute." },
         { "date": "2026-06-29", "entry": "Defined three-tier data-model north-star (survey → requirement → deployment plan); anchor-tag placement scoped as deployment-layer interpretation, out of capture scope." },
-        { "date": "2026-06-29", "entry": "Established product-agnostic survey schema as a deliberate forcing function; product requirements deferred to an additive layer referencing the survey." }
+        { "date": "2026-06-29", "entry": "Established product-agnostic survey schema as a deliberate forcing function; product requirements deferred to an additive layer referencing the survey." },
+        { "date": "2026-06-29", "entry": "Locked schema Decision 2 — three-bucket model (declared/observed/interpreted) sorted by field-sort test; multi-pass fusion keeps all passes as immutable observations, reconciles into one interpretation." },
+        { "date": "2026-06-29", "entry": "Established schema assumption ledger A1–A5 (marker sightings, frame-to-frame alignment, segmented sessions, sibling-reading interpretations, fusion) — commits schema shape while parking algorithms." },
+        { "date": "2026-06-29", "entry": "Adopted two-marker break-marker workflow for session resume/re-localization (kit decals + training); de-risks Decision 4 versioning via same alignment mechanism with permanent anchor." }
       ]
     },
     {

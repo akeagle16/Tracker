@@ -24,10 +24,11 @@
       "next_milestone": "Validation module complete",
       "next_milestone_due": "2026-06-19",
       "blockers": [],
-      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing.",
+      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing. tutorial.html (TopstockInstall repo) video-player UX reworked 6/29 — see changelog.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
-        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." }
+        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
+        { "date": "2026-06-29", "entry": "tutorial.html video-player UX reworked: App usage split into three clips (happy path, flagging a rail, summary page); menu regrouped into two phase dividers (Using the App / Physical Install) with adapters nested as a pick-one sub-group; number badges removed. Bottom control bar replaced with paused-state custom controls — video loads paused, center play triangle + Menu/Next corner pills appear when paused and hide during playback (tap video to toggle); native controls disabled. Fixed PWA bottom-bar cutoff (100vh → dvh/flex)." }
       ]
     },
     {

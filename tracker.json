@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-11",
+    "last_updated": "2026-06-29",
     "dashboard_url": "TBD — GitHub Pages dashboard generated from this file"
   },
 
@@ -73,9 +73,35 @@
       "next_milestone": "Plan + timeline drafted (planning work happens in that project; timeline TBD until plan exists)",
       "next_milestone_due": null,
       "blockers": [],
-      "notes": "Discovery phase: researching comparable market tools and documenting the current highly manual process before designing a replacement. TopStock Site Survey Documentation session held 6/11.",
+      "notes": "Discovery phase: researching comparable market tools and documenting the current highly manual process before designing a replacement. TopStock Site Survey Documentation session held 6/11. Schema design underway — see design_decisions.",
+      "design_decisions": [
+        {
+          "id": "decision-1-spatial-hierarchy",
+          "date": "2026-06-29",
+          "status": "locked",
+          "title": "Spatial hierarchy",
+          "detail": "Locked hierarchy: Retailer → Store → Floor → Zone → optional Aisle → Section (= bay). Shelf-level addressing is optional. Shelf indexing convention: bottom shelf = 1, stored as an explicit attribute (not inferred)."
+        },
+        {
+          "id": "three-tier-data-model",
+          "date": "2026-06-29",
+          "status": "defined",
+          "title": "Three-tier data-model north-star",
+          "detail": "Data model is three layers: survey (what's physically there) → requirement (what a product needs) → deployment plan (how a product maps onto the surveyed space). Anchor-tag placement is deployment-layer interpretation and is explicitly out of survey capture scope."
+        },
+        {
+          "id": "product-agnostic-survey",
+          "date": "2026-06-29",
+          "status": "established",
+          "title": "Product-agnostic survey schema",
+          "detail": "Survey schema is deliberately product-agnostic as a forcing function — it captures the space, not any one product's needs. Product-specific requirements are deferred to an additive layer that references the survey rather than being baked into capture."
+        }
+      ],
       "changelog": [
-        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." }
+        { "date": "2026-06-11", "entry": "Tracker initialized. In planning; no committed dates yet." },
+        { "date": "2026-06-29", "entry": "Locked schema Decision 1 — spatial hierarchy: Retailer→Store→Floor→Zone→optional Aisle→Section(=bay), optional shelf-level addressing, bottom=1 shelf indexing stored as an attribute." },
+        { "date": "2026-06-29", "entry": "Defined three-tier data-model north-star (survey → requirement → deployment plan); anchor-tag placement scoped as deployment-layer interpretation, out of capture scope." },
+        { "date": "2026-06-29", "entry": "Established product-agnostic survey schema as a deliberate forcing function; product requirements deferred to an additive layer referencing the survey." }
       ]
     },
     {

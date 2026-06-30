@@ -138,6 +138,13 @@
           "status": "flagged",
           "title": "Blind-entry review",
           "detail": "Blind-entry review — capture the corrected value BEFORE revealing the machine guess — flagged as data-integrity-by-design and a retail-first review-UX edge. Prevents anchoring the human to the machine's answer."
+        },
+        {
+          "id": "re-localization-ritual",
+          "date": "2026-06-29",
+          "status": "designed",
+          "title": "Re-localization ritual",
+          "detail": "One trained procedure — marker + AR ghost-overlay confirmation + a short directional walk — serves three jobs at once: session resume, partial re-survey, and live change / new-store detection. Lives in the capture-UX layer; requires no schema change. Open operational question: where persistent anchors get physically placed in the field."
         }
       ],
       "changelog": [
@@ -150,7 +157,8 @@
         { "date": "2026-06-29", "entry": "Adopted two-marker break-marker workflow for session resume/re-localization (kit decals + training); de-risks Decision 4 versioning via same alignment mechanism with permanent anchor." },
         { "date": "2026-06-29", "entry": "Locked schema Decision 3 — human verdict is a durable 4th layer that references and outranks interpretations without editing them; verdicts can correct-with-value as ground truth; recording kept separate from gated promotion to training." },
         { "date": "2026-06-29", "entry": "Established ground-truth promotion principle: weight by independence not volume; consensus trustworthy only if corrections are independent; schema stores source provenance so independence is computable later (ledger A6–A8)." },
-        { "date": "2026-06-29", "entry": "Flagged blind-entry review (capture corrected value before revealing machine guess) as data-integrity-by-design and a retail-first review-UX edge." }
+        { "date": "2026-06-29", "entry": "Flagged blind-entry review (capture corrected value before revealing machine guess) as data-integrity-by-design and a retail-first review-UX edge." },
+        { "date": "2026-06-29", "entry": "Designed re-localization ritual (marker + AR ghost-overlay confirmation + short directional walk) as one trained procedure serving session resume, partial re-survey, and live change/new-store detection; capture-UX layer, no schema change. Flagged persistent-anchor field placement as an open operational question." }
       ]
     },
     {

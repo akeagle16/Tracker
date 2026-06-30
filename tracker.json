@@ -117,6 +117,27 @@
           "status": "adopted",
           "title": "Two-marker break-marker workflow",
           "detail": "Session resume / re-localization uses a two-marker break-marker workflow (kit decals + training). De-risks Decision 4 versioning by reusing the same alignment mechanism against a permanent anchor."
+        },
+        {
+          "id": "decision-3-human-verdict-layer",
+          "date": "2026-06-29",
+          "status": "locked",
+          "title": "Human verdict as durable 4th layer",
+          "detail": "Human verdict is a durable fourth layer that references and outranks interpretations without ever editing them. A verdict can correct-with-value and stands as ground truth. Recording a verdict is kept separate from the gated promotion of that verdict into training data."
+        },
+        {
+          "id": "ground-truth-promotion-principle",
+          "date": "2026-06-29",
+          "status": "established",
+          "title": "Ground-truth promotion — weight by independence, not volume",
+          "detail": "Governing principle for promoting verdicts to ground truth: weight by independence, not volume. Consensus is trustworthy only if the corrections are independent. Schema stores source provenance so independence is computable later (ledger A6–A8)."
+        },
+        {
+          "id": "blind-entry-review",
+          "date": "2026-06-29",
+          "status": "flagged",
+          "title": "Blind-entry review",
+          "detail": "Blind-entry review — capture the corrected value BEFORE revealing the machine guess — flagged as data-integrity-by-design and a retail-first review-UX edge. Prevents anchoring the human to the machine's answer."
         }
       ],
       "changelog": [
@@ -126,7 +147,10 @@
         { "date": "2026-06-29", "entry": "Established product-agnostic survey schema as a deliberate forcing function; product requirements deferred to an additive layer referencing the survey." },
         { "date": "2026-06-29", "entry": "Locked schema Decision 2 — three-bucket model (declared/observed/interpreted) sorted by field-sort test; multi-pass fusion keeps all passes as immutable observations, reconciles into one interpretation." },
         { "date": "2026-06-29", "entry": "Established schema assumption ledger A1–A5 (marker sightings, frame-to-frame alignment, segmented sessions, sibling-reading interpretations, fusion) — commits schema shape while parking algorithms." },
-        { "date": "2026-06-29", "entry": "Adopted two-marker break-marker workflow for session resume/re-localization (kit decals + training); de-risks Decision 4 versioning via same alignment mechanism with permanent anchor." }
+        { "date": "2026-06-29", "entry": "Adopted two-marker break-marker workflow for session resume/re-localization (kit decals + training); de-risks Decision 4 versioning via same alignment mechanism with permanent anchor." },
+        { "date": "2026-06-29", "entry": "Locked schema Decision 3 — human verdict is a durable 4th layer that references and outranks interpretations without editing them; verdicts can correct-with-value as ground truth; recording kept separate from gated promotion to training." },
+        { "date": "2026-06-29", "entry": "Established ground-truth promotion principle: weight by independence not volume; consensus trustworthy only if corrections are independent; schema stores source provenance so independence is computable later (ledger A6–A8)." },
+        { "date": "2026-06-29", "entry": "Flagged blind-entry review (capture corrected value before revealing machine guess) as data-integrity-by-design and a retail-first review-UX edge." }
       ]
     },
     {

@@ -9,7 +9,7 @@
       "Cristina — frontend",
       "Zel — beta testing + physical inspection / Gen1 daily walks"
     ],
-    "last_updated": "2026-06-25",
+    "last_updated": "2026-07-01",
     "dashboard_url": "https://akeagle16.github.io/Tracker/"
   },
 
@@ -94,7 +94,9 @@
         { "date": "2026-06-25", "entry": "DATE: deploy wall confirmed Fri 7/3 — all features anchored; Walmart approval gates the deploy column. next_milestone moved from the 6/23 first-store deployment to the 7/3 deploy wall; Validation re-anchored 6/23 → 7/3 to the wall (6/23 first-store-deployment outcome not yet recorded — pending confirmation)." },
         { "date": "2026-06-25", "entry": "Weekly deck TSC_Weekly rebuilt to 6/24: Slide 2 (Feature Stages) regenerated via build_slide2.js with a priority-callout banner + 6-row grid; Slide 3 MS Account cell grey → green; title date 6/17 → 6/24." },
         { "date": "2026-06-25", "entry": "val_aisle.html (Validation): reworked the add-section flow to build structured section objects rendered through a single render path (renderSectionCard() / applyDemoData()) — fixes the thin-object bug and the sub-section bug (now one parent rail + additionalSections chips, not N flat slots). Replaced the count text field with 2/4 cards + divided bars. Added a direction step (ascending/descending with rendered chip order)." },
-        { "date": "2026-06-25", "entry": "Added an in-app video tutorial flow (tutorial.html): chapter menu + player with branching adapter selection (Battery Cover → adapter chooser → Attach Rail), per-video exit options (Next / Jump to Install / Home), and a missing-file fallback. Added a play button on flow_pick.html linking into it. Awaiting clips (.mp4): usage, clear, plug, cover, standard, warehouse, basket, rail, cleanup — usage.mp4 confirmed playing." }
+        { "date": "2026-06-25", "entry": "Added an in-app video tutorial flow (tutorial.html): chapter menu + player with branching adapter selection (Battery Cover → adapter chooser → Attach Rail), per-video exit options (Next / Jump to Install / Home), and a missing-file fallback. Added a play button on flow_pick.html linking into it. Awaiting clips (.mp4): usage, clear, plug, cover, standard, warehouse, basket, rail, cleanup — usage.mp4 confirmed playing." },
+        { "date": "2026-07-01", "entry": "val_aisle.html — Run Test: removed the fake 2.4s test simulation. Tap now sets per-rail testsRunning_ state (session-persisted) and grays the button to 'Test Running' (disabled, clock icon); card status/color/pills unchanged (last-known data). Refresh re-renders gray while in flight. New top-right slide-in toast ('Test started — up to 20 min / runs in background'), stacks and auto-dismisses. Applies to pending + has-issues sections at every Run Test button (any zone/aisle, including sections added later; change lives in the one shared render path + shared click handler); each rail tracks its own running state independently." },
+        { "date": "2026-07-01", "entry": "val_zone.html — Cleanup only, no behavior change: removed dead runAisleTest (unreachable since the data-driven rebuild), its icons/CSS, and a duplicated delete/toast function block. Add/delete aisle verified working after removal." }
       ]
     },
     {

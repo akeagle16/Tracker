@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-11",
+    "last_updated": "2026-07-01",
     "dashboard_url": "TBD — GitHub Pages dashboard generated from this file"
   },
 
@@ -27,7 +27,10 @@
       "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
-        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." }
+        { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
+        { "date": "2026-07-01", "entry": "Install module (Warehouse adapter): rebuilt instructions_adapter_warehouse.html to match Standard page structure (hero + 3 step-cards) with Warehouse steps from user guide (peel tape / push onto shelving / press firmly); step images left as external slots with placeholder fallbacks for repo drop." },
+        { "date": "2026-07-01", "entry": "Install module (Standard adapter): updated instructions_adapter_standard.html to 4 steps per current user guide (slide left / push tight / insert rivets / push flush), single-column scroll layout, dropped 'Flat on Shelf' step; new image slots standard-slide/tight/rivets/flush.jpg." },
+        { "date": "2026-07-01", "entry": "Install module: both adapter hero images repointed to existing shelf-page parts images (parts-adapter-standard.jpg, parts-adapter-warehouse.jpg) so heroes render without new asset drops." }
       ]
     },
     {

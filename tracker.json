@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Clay White — Director of Product Implementation, VusionGroup",
     "scope": "Digital tools that enable VusionGroup products (TopStock Rail, Captana, ESL)",
-    "last_updated": "2026-06-29",
+    "last_updated": "2026-07-02",
     "dashboard_url": "TBD — GitHub Pages dashboard generated from this file"
   },
 
@@ -21,14 +21,42 @@
         { "name": "Validation (install validation)", "status": "in_progress", "due": "2026-06-19" },
         { "name": "Maintenance", "status": "in_progress", "due": "2026-07-03" }
       ],
+      "open_items": [
+        {
+          "id": "val-bug-display-not-complete",
+          "area": "Validation Flow",
+          "title": "BUG: Display not showing Complete",
+          "stage": "Back End → Sandbox (push expected today)",
+          "state": "active",
+          "priority": "top",
+          "detail": "Clay validates in sandbox today (7/2); gates the prod push."
+        },
+        {
+          "id": "val-aisle-name-section-display",
+          "area": "Validation Flow",
+          "title": "Aisle name on add/delete section display",
+          "stage": "Design",
+          "state": "active",
+          "detail": "Show parent aisle name in the add/delete section UI."
+        },
+        {
+          "id": "tutorials-video-guides-discussion",
+          "area": "Tutorials",
+          "title": "Video guides in app — team discussion",
+          "stage": "Design (pre-work)",
+          "state": "active",
+          "detail": "Talk to team about updating the app with video guides. Outcome decides whether this becomes build work."
+        }
+      ],
       "next_milestone": "Validation module complete",
       "next_milestone_due": "2026-06-19",
       "blockers": [],
-      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing. tutorial.html (TopstockInstall repo) video-player UX reworked 6/29 — see changelog.",
+      "notes": "Training/install video v1 filmed in Dallas (week of 6/8); v2 pending install-app feedback. VPN access coordination for 3rd-party contractors ongoing. tutorial.html (TopstockInstall repo) video-player UX reworked 6/29 — see changelog. TOP PRIORITY (7/2): Validation 'Display not showing Complete' bug in sandbox today, gating prod push. See open_items.",
       "changelog": [
         { "date": "2026-06-11", "entry": "Tracker initialized. Install + Demo flows marked done." },
         { "date": "2026-06-11", "entry": "Maintenance module flipped to in_progress (work started early; due 7/3 unchanged)." },
-        { "date": "2026-06-29", "entry": "tutorial.html video-player UX reworked: App usage split into three clips (happy path, flagging a rail, summary page); menu regrouped into two phase dividers (Using the App / Physical Install) with adapters nested as a pick-one sub-group; number badges removed. Bottom control bar replaced with paused-state custom controls — video loads paused, center play triangle + Menu/Next corner pills appear when paused and hide during playback (tap video to toggle); native controls disabled. Fixed PWA bottom-bar cutoff (100vh → dvh/flex)." }
+        { "date": "2026-06-29", "entry": "tutorial.html video-player UX reworked: App usage split into three clips (happy path, flagging a rail, summary page); menu regrouped into two phase dividers (Using the App / Physical Install) with adapters nested as a pick-one sub-group; number badges removed. Bottom control bar replaced with paused-state custom controls — video loads paused, center play triangle + Menu/Next corner pills appear when paused and hide during playback (tap video to toggle); native controls disabled. Fixed PWA bottom-bar cutoff (100vh → dvh/flex)." },
+        { "date": "2026-07-02", "entry": "Logged active Validation Flow items: TOP PRIORITY bug 'Display not showing Complete' (Back End → Sandbox, push expected today; Clay validates in sandbox, gates prod push); 'Aisle name on add/delete section display' (Design). Logged Tutorials pre-work item: 'Video guides in app' team discussion (Design) to decide whether it becomes build work." }
       ]
     },
     {
